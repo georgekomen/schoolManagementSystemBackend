@@ -1,0 +1,9 @@
+spring:
+  jpa:
+    hibernate.ddl-auto: create
+  datasource:
+    url:  jdbc:mysql://35.200.178.58:3306/arafatproject
+    username: root
+    password: arafat_001
+server:
+  port: 5000
