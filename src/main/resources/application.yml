@@ -10,3 +10,4 @@ spring:
     password: arafat_001
 server:
   port: 5000
+logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
