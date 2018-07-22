@@ -1,4 +1,4 @@
-FROM java:8
+FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 MAINTAINER George komen <gkkomensi@gmail.com>
 # ADD build/libs/arafatproject-0.0.1-SNAPSHOT.jar app.jar
