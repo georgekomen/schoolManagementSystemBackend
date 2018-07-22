@@ -1,8 +1,11 @@
 spring:
   jpa:
-    hibernate.ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+     ddl-auto: create
   datasource:
-    url:  jdbc:mysql://35.200.178.58:3306/arafatproject
+    url:  jdbc:mysql://35.200.178.58:3306/gpstrackerproject
+    driverClassName: com.mysql.jdbc.Driver
     username: root
     password: arafat_001
 server:
