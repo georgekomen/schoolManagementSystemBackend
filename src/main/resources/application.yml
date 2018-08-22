@@ -4,10 +4,10 @@ spring:
     hibernate:
      ddl-auto: create
   datasource:
-    url:  jdbc:mysql://35.200.178.58:3306/gpstrackerproject
+    url:  jdbc:mysql://35.229.104.163:9003
     driverClassName: com.mysql.jdbc.Driver
     username: root
-    password: arafat_001
+    password: my-secret-pw
 server:
   port: 5000
 logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
