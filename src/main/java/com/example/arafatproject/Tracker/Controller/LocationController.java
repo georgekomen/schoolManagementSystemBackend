@@ -1,9 +1,9 @@
-package com.example.arafatproject.Controller;
+package com.example.arafatproject.Tracker.Controller;
 
 import java.util.Date;
 
-import com.example.arafatproject.domain.Location;
-import com.example.arafatproject.service.LocationService;
+import com.example.arafatproject.Tracker.Service.LocationService;
+import com.example.arafatproject.Tracker.Domain.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -1,6 +1,6 @@
-package com.example.arafatproject.repository;
+package com.example.arafatproject.Tracker.Repository;
 
-import com.example.arafatproject.domain.Location;
+import com.example.arafatproject.Tracker.Domain.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LocationRepository extends JpaRepository<Location, Long> {

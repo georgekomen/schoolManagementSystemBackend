@@ -1,9 +1,9 @@
-package com.example.arafatproject.service;
+package com.example.arafatproject.Tracker.Service;
 
 import java.util.Date;
 
-import com.example.arafatproject.domain.Location;
-import com.example.arafatproject.repository.LocationRepository;
+import com.example.arafatproject.Tracker.Domain.Location;
+import com.example.arafatproject.Tracker.Repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

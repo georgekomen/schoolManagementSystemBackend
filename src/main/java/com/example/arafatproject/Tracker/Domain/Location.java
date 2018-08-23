@@ -1,4 +1,4 @@
-package com.example.arafatproject.domain;
+package com.example.arafatproject.Tracker.Domain;
 
 import java.util.Date;
 import javax.persistence.Column;
