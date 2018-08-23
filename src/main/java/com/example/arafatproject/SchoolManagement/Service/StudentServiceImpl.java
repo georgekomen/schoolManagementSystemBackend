@@ -21,15 +21,22 @@ public class StudentServiceImpl implements StudentService {
     private Storage storage = StorageOptions.getDefaultInstance().getService();
 
     @Override
-    public String uploadFingerprint(Long studentId, String fingerType, MultipartFile file) throws IOException {
-        List<Acl> acls = new ArrayList<>();
-        acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
-        Blob blob =
-                storage.create(
-                        BlobInfo.newBuilder(bucketName, "fingerprints/" + studentId.toString() + "/" + fingerType).setAcl(acls).build(),
-                        file.getInputStream());
+    public String uploadFingerprint(Long studentId, String fingerType, String action, MultipartFile file) throws IOException {
+        switch (action) {
+            case "enroll":
+                List<Acl> acls = new ArrayList<>();
+                acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
+                Blob blob =
+                        storage.create(
+                                BlobInfo.newBuilder(bucketName, "fingerprints/" + studentId.toString() + "/" + fingerType).setAcl(acls).build(),
+                                file.getInputStream());
 
-        // return the public download link
-        return blob.getMediaLink();
+                // return the public download link
+                return blob.getMediaLink();
+            case "verify":
+                return "";
+            default:
+                throw new IllegalArgumentException("Action not recognized");
+        }
     }
 }

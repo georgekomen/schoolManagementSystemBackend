@@ -16,8 +16,8 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping(value = "fingerprint/{studentId}/{fingerType}", method = RequestMethod.POST)
-    public String uploadFingerprint(@PathVariable("fingerType") String fingerType, @PathVariable("studentId") Long studentId, MultipartFile file) throws IOException {
-        return studentService.uploadFingerprint(studentId, fingerType, file);
+    @RequestMapping(value = "fingerprint/{studentId}/{fingerType}/{action}", method = RequestMethod.POST)
+    public String uploadFingerprint(@PathVariable("fingerType") String fingerType, @PathVariable("action") String action, @PathVariable("studentId") Long studentId, MultipartFile file) throws IOException {
+        return studentService.uploadFingerprint(studentId, fingerType, action, file);
     }
 }
