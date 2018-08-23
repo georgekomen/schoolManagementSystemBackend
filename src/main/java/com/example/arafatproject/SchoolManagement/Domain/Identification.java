@@ -11,7 +11,7 @@ public class Identification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long student_id;
-    private String type;
+    private String type; //rightThumb, leftThumb, rightIndex, leftIndex, parentPhonenumber
     private String value;
 
     public Identification(Long student_id, String type, String value) {

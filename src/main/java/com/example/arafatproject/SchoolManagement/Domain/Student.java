@@ -21,7 +21,7 @@ public class Student {
     @CreatedDate
     private Date admission_date;
     private String name;
-    private String gender;
+    private String gender; //M, F
     @Nullable
     private Long studentId;
     private Long schoolId;
