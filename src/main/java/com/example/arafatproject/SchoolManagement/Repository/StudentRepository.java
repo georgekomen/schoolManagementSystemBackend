@@ -1,4 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Repository;
 
-public interface StudentRepository {
+import com.example.arafatproject.SchoolManagement.Domain.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StudentRepository extends JpaRepository<Student, Long> {
 }

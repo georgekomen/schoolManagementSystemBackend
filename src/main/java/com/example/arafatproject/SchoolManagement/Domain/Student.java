@@ -25,8 +25,7 @@ public class Student {
     @Nullable
     private Long studentId;
 
-    public Student(Long id, Date admission_date, String name, String gender, Long studentId) {
-        this.id = id;
+    public Student(Date admission_date, String name, String gender, Long studentId) {
         this.admission_date = admission_date;
         this.name = name;
         this.gender = gender;

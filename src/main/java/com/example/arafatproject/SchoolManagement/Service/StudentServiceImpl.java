@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.arafatproject.SchoolManagement.Domain.Identification;
+import com.example.arafatproject.SchoolManagement.Repository.IdentificationRepository;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobInfo;
@@ -16,12 +18,16 @@ import com.google.cloud.storage.StorageOptions;
 import com.machinezoo.sourceafis.FingerprintMatcher;
 import com.machinezoo.sourceafis.FingerprintTemplate;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class StudentServiceImpl implements StudentService {
+
+    @Autowired
+    private IdentificationRepository identificationRepository;
 
     @Value("${bucketName}")
     private String bucketName;
@@ -37,13 +43,17 @@ public class StudentServiceImpl implements StudentService {
                         storage.create(
                                 BlobInfo.newBuilder(bucketName, "fingerprints/" + studentId.toString() + "/" + fingerType).setAcl(acls).build(),
                                 file.getInputStream());
+                // add to student identifications
+                Identification identification = new Identification(studentId, fingerType, blob.getMediaLink());
+                identificationRepository.save(identification);
 
                 // return the public download link
                 return blob.getMediaLink();
             case "verify":
                 Double matchIndex;
                 try {
-                    URL url = new URL("https://www.googleapis.com/download/storage/v1/b/komenfiles/o/fingerprints%2F2%2Fthumb?generation=1535047223258820&alt=media");
+                    Identification identification1 = identificationRepository.findByStudentIdAndIDtype(studentId, fingerType);
+                    URL url = new URL(identification1.getValue());
                     try (InputStream templateInputStream = url.openStream();
                          InputStream imageInputStream = file.getInputStream();
                          ByteArrayOutputStream baos = new ByteArrayOutputStream()) {

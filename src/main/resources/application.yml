@@ -4,7 +4,7 @@ spring:
     hibernate:
      ddl-auto: create
   datasource:
-    url:  jdbc:mysql://35.229.104.163:9003
+    url:  jdbc:mysql://35.229.104.163:9003/arafatproject
     driverClassName: com.mysql.jdbc.Driver
     username: root
     password: my-secret-pw
