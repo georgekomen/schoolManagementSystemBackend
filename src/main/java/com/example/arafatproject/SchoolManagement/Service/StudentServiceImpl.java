@@ -20,14 +20,13 @@ public class StudentServiceImpl implements StudentService {
     private String bucketName;
     private Storage storage = StorageOptions.getDefaultInstance().getService();
 
-
     @Override
-    public String uploadFingerprint(Long studentId, MultipartFile file) throws IOException {
+    public String uploadFingerprint(Long studentId, String fingerType, MultipartFile file) throws IOException {
         List<Acl> acls = new ArrayList<>();
         acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
         Blob blob =
                 storage.create(
-                        BlobInfo.newBuilder(bucketName, file.getOriginalFilename()).setAcl(acls).build(),
+                        BlobInfo.newBuilder(bucketName, "fingerprints/" + studentId.toString() + "/" + fingerType).setAcl(acls).build(),
                         file.getInputStream());
 
         // return the public download link

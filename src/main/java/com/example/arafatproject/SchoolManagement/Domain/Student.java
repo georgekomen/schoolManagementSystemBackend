@@ -21,16 +21,14 @@ public class Student {
     @CreatedDate
     private Date admission_date;
     private String name;
-    private String fingerprint_right_thumb;
     private String gender;
     @Nullable
     private Long studentId;
 
-    public Student(Long id, Date admission_date, String name, String fingerprint_right_thumb, String gender, Long studentId) {
+    public Student(Long id, Date admission_date, String name, String gender, Long studentId) {
         this.id = id;
         this.admission_date = admission_date;
         this.name = name;
-        this.fingerprint_right_thumb = fingerprint_right_thumb;
         this.gender = gender;
         this.studentId = studentId;
     }
@@ -61,14 +59,6 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getFingerprint_right_thumb() {
-        return fingerprint_right_thumb;
-    }
-
-    public void setFingerprint_right_thumb(String fingerprint_right_thumb) {
-        this.fingerprint_right_thumb = fingerprint_right_thumb;
     }
 
     public String getGender() {
