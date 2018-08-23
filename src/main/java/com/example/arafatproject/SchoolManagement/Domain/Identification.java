@@ -10,12 +10,12 @@ public class Identification {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long studentId;
+    private Long student_id;
     private String type;
     private String value;
 
-    public Identification(Long studentId, String type, String value) {
-        this.studentId = studentId;
+    public Identification(Long student_id, String type, String value) {
+        this.student_id = student_id;
         this.type = type;
         this.value = value;
     }
@@ -47,11 +47,11 @@ public class Identification {
         this.id = id;
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public Long getStudent_id() {
+        return student_id;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setStudent_id(Long student_id) {
+        this.student_id = student_id;
     }
 }

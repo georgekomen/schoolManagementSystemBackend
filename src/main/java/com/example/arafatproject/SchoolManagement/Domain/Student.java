@@ -24,12 +24,14 @@ public class Student {
     private String gender;
     @Nullable
     private Long studentId;
+    private Long schoolId;
 
-    public Student(Date admission_date, String name, String gender, Long studentId) {
+    public Student(Date admission_date, String name, String gender, Long studentId, Long schoolId) {
         this.admission_date = admission_date;
         this.name = name;
         this.gender = gender;
         this.studentId = studentId;
+        this.schoolId = schoolId;
     }
 
     public Student(){
@@ -74,5 +76,13 @@ public class Student {
 
     public void setStudentId(Long studentId) {
         this.studentId = studentId;
+    }
+
+    public Long getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
     }
 }
