@@ -7,11 +7,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.Student;
 import com.example.arafatproject.SchoolManagement.Repository.IdentificationRepository;
 import com.example.arafatproject.SchoolManagement.Repository.StudentRepository;
+import com.google.api.gax.rpc.NotFoundException;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobInfo;
@@ -19,7 +21,6 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import com.machinezoo.sourceafis.FingerprintMatcher;
 import com.machinezoo.sourceafis.FingerprintTemplate;
-import javassist.NotFoundException;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,8 +42,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public String uploadFingerprint(Long studentId, Long schoolId, String fingerType, String action, MultipartFile file) throws IOException {
-        Student student = studentRepository.findByStudentIdAndSchoolId(schoolId, studentId);
-        if (student.getId().equals(0L)) throw new IllegalArgumentException("Student not found");
+        Optional<Student> student = studentRepository.findByStudentIdAndSchoolId(schoolId, studentId);
+        if (!student.isPresent()) {
+            throw new IllegalArgumentException("student not found");
+        }
         switch (action) {
             case "enroll":
                 List<Acl> acls = new ArrayList<>();
@@ -52,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
                                 BlobInfo.newBuilder(bucketName, schoolId.toString() + "/fingerprints/" + studentId.toString() + "/" + fingerType).setAcl(acls).build(),
                                 file.getInputStream());
                 // add to student identifications
-                Identification identification = new Identification(student.getId(), fingerType, blob.getMediaLink());
+                Identification identification = new Identification(student.get().getId(), fingerType, blob.getMediaLink());
                 identificationRepository.save(identification);
 
                 // return the public download link
@@ -60,7 +63,7 @@ public class StudentServiceImpl implements StudentService {
             case "verify":
                 Double matchIndex;
                 try {
-                    Identification identification1 = identificationRepository.findByStudentIdAndIDtype(student.getId(), fingerType);
+                    Identification identification1 = identificationRepository.findByStudentIdAndIDtype(student.get().getId(), fingerType);
                     URL url = new URL(identification1.getValue());
                     try (InputStream templateInputStream = url.openStream();
                          InputStream imageInputStream = file.getInputStream();
