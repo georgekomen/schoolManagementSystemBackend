@@ -11,3 +11,5 @@ spring:
 server:
   port: 5000
 logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+
+bucketName: komenfiles

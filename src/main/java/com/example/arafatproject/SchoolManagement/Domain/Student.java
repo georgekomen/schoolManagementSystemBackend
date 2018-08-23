@@ -9,6 +9,7 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.lang.Nullable;
 
 @Entity
 public class Student {
@@ -22,13 +23,16 @@ public class Student {
     private String name;
     private String fingerprint_right_thumb;
     private String gender;
+    @Nullable
+    private Long studentId;
 
-    public Student(Long id, Date admission_date, String name, String fingerprint_right_thumb, String gender) {
+    public Student(Long id, Date admission_date, String name, String fingerprint_right_thumb, String gender, Long studentId) {
         this.id = id;
         this.admission_date = admission_date;
         this.name = name;
         this.fingerprint_right_thumb = fingerprint_right_thumb;
         this.gender = gender;
+        this.studentId = studentId;
     }
 
     public Student(){
@@ -73,5 +77,13 @@ public class Student {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
     }
 }
