@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Group {
+public class _Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,11 +16,11 @@ public class Group {
     private String course_id;
     private Date date_created;
 
-    public Group() {
+    public _Group() {
 
     }
 
-    public Group(String name, Long school_id, String course_id, Date date_created) {
+    public _Group(String name, Long school_id, String course_id, Date date_created) {
         this.name = name;
         this.school_id = school_id;
         this.course_id = course_id;
