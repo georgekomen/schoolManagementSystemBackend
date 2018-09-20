@@ -13,7 +13,6 @@ import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.Student;
 import com.example.arafatproject.SchoolManagement.Repository.IdentificationRepository;
 import com.example.arafatproject.SchoolManagement.Repository.StudentRepository;
-import com.google.api.gax.rpc.NotFoundException;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobInfo;
@@ -89,7 +88,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student newStudent(Student student) {
-        Student student1 = new Student(student.getAdmission_date(), student.getName(), student.getGender(), student.getStudentId(), student.getSchoolId());
+        Student student1 = new Student(student.getAdmission_date(), student.getName(), student.getGender(), student.getStudent_admission_number(), student.getSchoolId());
         return studentRepository.save(student1);
     }
 }

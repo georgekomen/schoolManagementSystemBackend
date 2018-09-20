@@ -23,14 +23,14 @@ public class Student {
     private String name;
     private String gender; //M, F
     @Nullable
-    private Long studentId;
+    private Long student_admission_number;
     private Long schoolId;
 
-    public Student(Date admission_date, String name, String gender, Long studentId, Long schoolId) {
+    public Student(Date admission_date, String name, String gender, Long student_admission_number, Long schoolId) {
         this.admission_date = admission_date;
         this.name = name;
         this.gender = gender;
-        this.studentId = studentId;
+        this.student_admission_number = student_admission_number;
         this.schoolId = schoolId;
     }
 
@@ -70,12 +70,12 @@ public class Student {
         this.gender = gender;
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public Long getStudent_admission_number() {
+        return student_admission_number;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setStudent_admission_number(Long student_admission_number) {
+        this.student_admission_number = student_admission_number;
     }
 
     public Long getSchoolId() {
