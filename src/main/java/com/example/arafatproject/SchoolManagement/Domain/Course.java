@@ -12,5 +12,38 @@ public class Course {
     private Long id;
     private String name;
     private Long school_id;
+
+    public Course() {
+
+    }
+
+    public Course(String name, Long school_id) {
+        this.name = name;
+        this.school_id = school_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getSchool_id() {
+        return school_id;
+    }
+
+    public void setSchool_id(Long school_id) {
+        this.school_id = school_id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     //course_id & date created has a common invoice
 }
