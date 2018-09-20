@@ -40,7 +40,7 @@ public class StudentServiceImpl implements StudentService {
     private Storage storage = StorageOptions.getDefaultInstance().getService();
 
     @Override
-    public String uploadFingerprint(Long studentId, Long schoolId, String fingerType, String action, MultipartFile file) throws IOException {
+    public String uploadFingerprint(Long studentId, Long schoolId, Identification.IdentificationType fingerType, String action, MultipartFile file) throws IOException {
         Optional<Student> student = studentRepository.findByStudentIdAndSchoolId(schoolId, studentId);
         if (!student.isPresent()) {
             throw new IllegalArgumentException("student not found");

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IdentificationRepository extends JpaRepository<Identification, Long> {
     @Query("select id1 from Identification id1 where id1.student_id = ?1 and id1.type = ?2")
-    Identification findByStudentIdAndIDtype(Long student_id, String fingerType);
+    Identification findByStudentIdAndIDtype(Long student_id, Identification.IdentificationType fingerType);
 }

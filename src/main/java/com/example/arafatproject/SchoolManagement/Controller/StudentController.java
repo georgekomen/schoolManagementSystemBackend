@@ -2,6 +2,7 @@ package com.example.arafatproject.SchoolManagement.Controller;
 
 import java.io.IOException;
 
+import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.Student;
 import com.example.arafatproject.SchoolManagement.Service.StudentService;
 import com.example.arafatproject.Utils.AfricasTalking;
@@ -20,7 +21,7 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping(value = "fingerprint/{studentId}/{schoolId}/{fingerType}/{action}", method = RequestMethod.POST)
-    public String uploadFingerprint(@PathVariable("fingerType") String fingerType, @PathVariable("action") String action, @PathVariable("schoolId") Long schoolId, @PathVariable("studentId") Long studentId, MultipartFile file) throws IOException {
+    public String uploadFingerprint(@PathVariable("fingerType") Identification.IdentificationType fingerType, @PathVariable("action") String action, @PathVariable("schoolId") Long schoolId, @PathVariable("studentId") Long studentId, MultipartFile file) throws IOException {
         return studentService.uploadFingerprint(studentId, schoolId, fingerType, action, file);
     }
 
