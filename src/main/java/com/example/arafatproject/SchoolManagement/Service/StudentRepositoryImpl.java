@@ -3,7 +3,9 @@ package com.example.arafatproject.SchoolManagement.Service;
 import com.example.arafatproject.SchoolManagement.Domain.StudentPayments;
 import com.example.arafatproject.SchoolManagement.Repository.StudentPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentRepositoryImpl implements StudentPaymentService {
     @Autowired
     private StudentPaymentRepository studentRepository;
