@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Course {
@@ -11,15 +13,18 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private Long school_id;
+
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    private School school;
 
     public Course() {
 
     }
 
-    public Course(String name, Long school_id) {
+    public Course(String name, School school) {
         this.name = name;
-        this.school_id = school_id;
+        this.school = school;
     }
 
     public String getName() {
@@ -30,12 +35,12 @@ public class Course {
         this.name = name;
     }
 
-    public Long getSchool_id() {
-        return school_id;
+    public School getSchool() {
+        return school;
     }
 
-    public void setSchool_id(Long school_id) {
-        this.school_id = school_id;
+    public void setSchool(School school_id) {
+        this.school = school_id;
     }
 
     public Long getId() {
@@ -45,5 +50,4 @@ public class Course {
     public void setId(Long id) {
         this.id = id;
     }
-    //course_id & date created has a common invoice
 }

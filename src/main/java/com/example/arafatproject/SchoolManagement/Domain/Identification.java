@@ -6,32 +6,38 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Identification {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long student_id;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student_id;
+
     @Enumerated(EnumType.STRING)
     private IdentificationType type;
-    private String value;
+    private String identification_value;
 
-    public Identification(Long student_id, IdentificationType type, String value) {
+    public Identification(Student student_id, IdentificationType type, String identification_value) {
         this.student_id = student_id;
         this.type = type;
-        this.value = value;
+        this.identification_value = identification_value;
     }
 
     public Identification() {
     }
 
-    public String getValue() {
-        return value;
+    public String getIdentification_value() {
+        return identification_value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setIdentification_value(String identification_value) {
+        this.identification_value = identification_value;
     }
 
     public IdentificationType getType() {
@@ -50,11 +56,11 @@ public class Identification {
         this.id = id;
     }
 
-    public Long getStudent_id() {
+    public Student getStudent_id() {
         return student_id;
     }
 
-    public void setStudent_id(Long student_id) {
+    public void setStudent_id(Student student_id) {
         this.student_id = student_id;
     }
 

@@ -40,8 +40,8 @@ public class StudentServiceImpl implements StudentService {
     private Storage storage = StorageOptions.getDefaultInstance().getService();
 
     @Override
-    public String uploadFingerprint(Long studentId, Long schoolId, Identification.IdentificationType fingerType, String action, MultipartFile file) throws IOException {
-        Optional<Student> student = studentRepository.findByStudentIdAndSchoolId(schoolId, studentId);
+    public String uploadFingerprint(Long student_id, Identification.IdentificationType fingerType, String action, MultipartFile file) throws IOException {
+        Optional<Student> student = studentRepository.findById(student_id);
         if (!student.isPresent()) {
             throw new IllegalArgumentException("student not found");
         }
@@ -51,10 +51,10 @@ public class StudentServiceImpl implements StudentService {
                 acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
                 Blob blob =
                         storage.create(
-                                BlobInfo.newBuilder(bucketName, schoolId.toString() + "/fingerprints/" + studentId.toString() + "/" + fingerType).setAcl(acls).build(),
+                                BlobInfo.newBuilder(bucketName, student.get().getSchool().getId().toString() + "/fingerprints/" + student_id.toString() + "/" + fingerType).setAcl(acls).build(),
                                 file.getInputStream());
                 // add to student identifications
-                Identification identification = new Identification(student.get().getId(), fingerType, blob.getMediaLink());
+                Identification identification = new Identification(student.get(), fingerType, blob.getMediaLink());
                 identificationRepository.save(identification);
 
                 // return the public download link
@@ -63,7 +63,7 @@ public class StudentServiceImpl implements StudentService {
                 Double matchIndex;
                 try {
                     Identification identification1 = identificationRepository.findByStudentIdAndIDtype(student.get().getId(), fingerType);
-                    URL url = new URL(identification1.getValue());
+                    URL url = new URL(identification1.getIdentification_value());
                     try (InputStream templateInputStream = url.openStream();
                          InputStream imageInputStream = file.getInputStream();
                          ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
@@ -88,7 +88,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student newStudent(Student student) {
-        Student student1 = new Student(student.getAdmission_date(), student.getName(), student.getGender(), student.getStudent_admission_number(), student.getSchoolId());
+        Student student1 = new Student(student.getAdmission_date(), student.getName(), student.getGender(), student.getStudent_admission_number(), student.getSchool());
         return studentRepository.save(student1);
     }
 }

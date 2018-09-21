@@ -12,8 +12,8 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public _Group newGroup(_Group group) {
-        _Group group1 = new _Group(group.getName(), group.getSchool_id(), group.getCourse_id(),
-                group.getDate_created(), group.getInvoice_id());
+        _Group group1 = new _Group(group.getName(), group.getSchool(), group.getCourse(),
+                group.getDate_created(), group.getInvoice());
 
         return groupRepository.save(group1);
     }

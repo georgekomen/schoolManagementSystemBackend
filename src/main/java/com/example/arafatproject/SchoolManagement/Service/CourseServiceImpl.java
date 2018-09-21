@@ -12,7 +12,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course newCourse(Course course) {
-        Course course1 = new Course(course.getName(), course.getSchool_id());
+        Course course1 = new Course(course.getName(), course.getSchool());
         return courseRepository.save(course1);
     }
 }

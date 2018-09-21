@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class _Group {
@@ -12,21 +15,31 @@ public class _Group {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private Long school_id;
-    private String course_id;//many to one
+
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    private School school;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+
     private Date date_created;
-    private Long invoice_id;//one to many
+
+    @OneToOne
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;//one to many
 
     public _Group() {
 
     }
 
-    public _Group(String name, Long school_id, String course_id, Date date_created, Long invoice_id) {
+    public _Group(String name, School school, Course course, Date date_created, Invoice invoice) {
         this.name = name;
-        this.school_id = school_id;
-        this.course_id = course_id;
+        this.school = school;
+        this.course = course;
         this.date_created = date_created;
-        this.invoice_id = invoice_id;
+        this.invoice = invoice;
     }
 
     public Long getId() {
@@ -45,20 +58,20 @@ public class _Group {
         this.name = name;
     }
 
-    public Long getSchool_id() {
-        return school_id;
+    public School getSchool() {
+        return school;
     }
 
-    public void setSchool_id(Long school_id) {
-        this.school_id = school_id;
+    public void setSchool(School school_id) {
+        this.school = school_id;
     }
 
-    public String getCourse_id() {
-        return course_id;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourse_id(String course_id) {
-        this.course_id = course_id;
+    public void setCourse(Course course_id) {
+        this.course = course_id;
     }
 
     public Date getDate_created() {
@@ -69,11 +82,11 @@ public class _Group {
         this.date_created = date_created;
     }
 
-    public Long getInvoice_id() {
-        return invoice_id;
+    public Invoice getInvoice() {
+        return invoice;
     }
 
-    public void setInvoice_id(Long invoice_id) {
-        this.invoice_id = invoice_id;
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 }

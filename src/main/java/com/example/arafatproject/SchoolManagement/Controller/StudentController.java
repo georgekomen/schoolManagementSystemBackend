@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.Student;
 import com.example.arafatproject.SchoolManagement.Service.StudentService;
-import com.example.arafatproject.Utils.AfricasTalking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +19,9 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping(value = "fingerprint/{studentId}/{schoolId}/{fingerType}/{action}", method = RequestMethod.POST)
-    public String uploadFingerprint(@PathVariable("fingerType") Identification.IdentificationType fingerType, @PathVariable("action") String action, @PathVariable("schoolId") Long schoolId, @PathVariable("studentId") Long studentId, MultipartFile file) throws IOException {
-        return studentService.uploadFingerprint(studentId, schoolId, fingerType, action, file);
+    @RequestMapping(value = "fingerprint/{student_id}/{fingerType}/{action}", method = RequestMethod.POST)
+    public String uploadFingerprint(@PathVariable("fingerType") Identification.IdentificationType fingerType, @PathVariable("action") String action, @PathVariable("student_id") Long student_id, MultipartFile file) throws IOException {
+        return studentService.uploadFingerprint(student_id, fingerType, action, file);
     }
 
     @RequestMapping(value = "new", method = RequestMethod.POST)
