@@ -13,7 +13,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public Invoice newInvoice(Invoice invoice) {
         Invoice invoice1 = new Invoice(invoice.getDate_created(),
-                invoice.getCourse_id(), invoice.getInvoice_amount());
+                invoice.getCourse(), invoice.getInvoice_amount());
 
         return invoiceRepository.save(invoice1);
     }

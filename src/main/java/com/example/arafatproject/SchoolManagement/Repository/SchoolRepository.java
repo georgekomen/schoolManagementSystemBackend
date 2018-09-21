@@ -14,7 +14,5 @@ import org.springframework.stereotype.Repository;
 public interface SchoolRepository extends JpaRepository<School, Long>, PagingAndSortingRepository<School, Long> {
 
     List<School> findByName(@Param("name") String name);
-
-    //List<Person> findByLastName(@Param("name") String name);
-    //localhost:8080/people/search/findByLastName?name=Baggins
+    //localhost:5000/schooldata/search/findByName?name=school
 }

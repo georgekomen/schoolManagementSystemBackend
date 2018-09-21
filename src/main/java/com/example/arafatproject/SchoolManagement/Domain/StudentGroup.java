@@ -62,7 +62,7 @@ public class StudentGroup {
         return group1;
     }
 
-    public void setGroup(_Group group_id) {
-        this.group1 = group_id;
+    public void setGroup(_Group group) {
+        this.group1 = group;
     }
 }

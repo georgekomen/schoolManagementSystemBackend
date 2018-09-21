@@ -39,8 +39,8 @@ public class Course {
         return school;
     }
 
-    public void setSchool(School school_id) {
-        this.school = school_id;
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     public Long getId() {

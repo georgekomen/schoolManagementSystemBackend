@@ -17,14 +17,14 @@ public class Identification {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private Student student_id;
+    private Student student;
 
     @Enumerated(EnumType.STRING)
     private IdentificationType type;
     private String identification_value;
 
-    public Identification(Student student_id, IdentificationType type, String identification_value) {
-        this.student_id = student_id;
+    public Identification(Student student, IdentificationType type, String identification_value) {
+        this.student = student;
         this.type = type;
         this.identification_value = identification_value;
     }
@@ -56,12 +56,12 @@ public class Identification {
         this.id = id;
     }
 
-    public Student getStudent_id() {
-        return student_id;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudent_id(Student student_id) {
-        this.student_id = student_id;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public enum IdentificationType {

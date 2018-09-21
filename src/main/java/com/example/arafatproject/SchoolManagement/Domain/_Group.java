@@ -62,16 +62,16 @@ public class _Group {
         return school;
     }
 
-    public void setSchool(School school_id) {
-        this.school = school_id;
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     public Course getCourse() {
         return course;
     }
 
-    public void setCourse(Course course_id) {
-        this.course = course_id;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Date getDate_created() {
