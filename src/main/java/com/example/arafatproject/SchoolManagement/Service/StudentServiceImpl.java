@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Controller.StudentController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
@@ -41,21 +40,17 @@ public class StudentServiceImpl implements StudentService {
     private Storage storage = StorageOptions.getDefaultInstance().getService();
 
     @Override
-    public String uploadFingerprint(Long student_id, Identification.IdentificationType fingerType, StudentController.ActionType action, MultipartFile file) throws IOException {
-        Optional<Student> student = studentRepository.findById(student_id);
-        if (!student.isPresent()) {
-            throw new IllegalArgumentException("student not found");
-        }
+    public String uploadFingerprint(Student student, Identification.IdentificationType fingerType, StudentController.ActionType action, MultipartFile file) throws IOException {
         switch (action) {
             case Enroll:
                 List<Acl> acls = new ArrayList<>();
                 acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
                 Blob blob =
                         storage.create(
-                                BlobInfo.newBuilder(bucketName, student.get().getSchool().getId().toString() + "/fingerprints/" + student_id.toString() + "/" + fingerType).setAcl(acls).build(),
+                                BlobInfo.newBuilder(bucketName, student.getSchool().getId().toString() + "/fingerprints/" + student.toString() + "/" + fingerType).setAcl(acls).build(),
                                 file.getInputStream());
                 // add to student identifications
-                Identification identification = new Identification(student.get(), fingerType, blob.getMediaLink());
+                Identification identification = new Identification(student, fingerType, blob.getMediaLink());
                 identificationRepository.save(identification);
 
                 // return the public download link
@@ -63,7 +58,7 @@ public class StudentServiceImpl implements StudentService {
             case Verify:
                 Double matchIndex;
                 try {
-                    Identification identification1 = identificationRepository.findByStudentIdAndIDtype(student.get(), fingerType);
+                    Identification identification1 = identificationRepository.findByStudentIdAndIDtype(student, fingerType);
                     URL url = new URL(identification1.getIdentification_value());
                     try (InputStream templateInputStream = url.openStream();
                          InputStream imageInputStream = file.getInputStream();

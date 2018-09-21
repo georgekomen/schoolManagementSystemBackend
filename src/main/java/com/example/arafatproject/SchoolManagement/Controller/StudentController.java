@@ -23,9 +23,9 @@ public class StudentController {
     public String uploadFingerprint(
             @PathVariable("fingerType") Identification.IdentificationType fingerType,
             @PathVariable("action") ActionType action,
-            @PathVariable("student_id") Long student_id,
+            @PathVariable("student_id") Student student,
             MultipartFile file) throws IOException {
-        return studentService.uploadFingerprint(student_id, fingerType, action, file);
+        return studentService.uploadFingerprint(student, fingerType, action, file);
     }
 
     @RequestMapping(value = "new", method = RequestMethod.POST)
