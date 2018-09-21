@@ -11,9 +11,9 @@ public class StudentGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long student_id;
+    private Long student_id;//one to one
     private Date date_joined;
-    private Long group_id;
+    private Long group_id;//one to many
 
 
     public StudentGroup(Long student_id, Date date_joined, Long group_id) {

@@ -12,7 +12,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Date date_created;
-    private Long course_id;
+    private Long course_id;//many to one
     private Long invoice_amount;
 
     public Invoice() {
