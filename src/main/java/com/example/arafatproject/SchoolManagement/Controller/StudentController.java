@@ -20,13 +20,22 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping(value = "fingerprint/{student_id}/{fingerType}/{action}", method = RequestMethod.POST)
-    public String uploadFingerprint(@PathVariable("fingerType") Identification.IdentificationType fingerType, @PathVariable("action") String action, @PathVariable("student_id") Long student_id, MultipartFile file) throws IOException {
+    public String uploadFingerprint(
+            @PathVariable("fingerType") Identification.IdentificationType fingerType,
+            @PathVariable("action") ActionType action,
+            @PathVariable("student_id") Long student_id,
+            MultipartFile file) throws IOException {
         return studentService.uploadFingerprint(student_id, fingerType, action, file);
     }
 
     @RequestMapping(value = "new", method = RequestMethod.POST)
     public Student newStudent(@RequestBody Student student) {
         return studentService.newStudent(student);
+    }
+
+    public enum ActionType {
+        Verify,
+        Enroll
     }
 
 }

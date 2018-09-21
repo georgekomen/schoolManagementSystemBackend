@@ -3,6 +3,8 @@ package com.example.arafatproject.SchoolManagement.Domain;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,9 @@ public class Student {
     private Date admission_date;
 
     private String name;
-    private String gender; //M, F
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Nullable
     private Long student_admission_number;
@@ -34,7 +38,7 @@ public class Student {
     @JoinColumn(name = "school_id")
     private School school;
 
-    public Student(Date admission_date, String name, String gender, Long student_admission_number, School school) {
+    public Student(Date admission_date, String name, Gender gender, Long student_admission_number, School school) {
         this.admission_date = admission_date;
         this.name = name;
         this.gender = gender;
@@ -70,11 +74,11 @@ public class Student {
         this.name = name;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -92,5 +96,9 @@ public class Student {
 
     public void setSchool(School school) {
         this.school = school;
+    }
+
+    public enum Gender {
+        Male, Female
     }
 }
