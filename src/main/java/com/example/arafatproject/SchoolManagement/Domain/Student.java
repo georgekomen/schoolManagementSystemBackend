@@ -36,7 +36,7 @@ public class Student implements Serializable {
     @Nullable
     private Long student_admission_number;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
 
