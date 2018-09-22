@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -30,11 +31,16 @@ public class StudentGroup implements Serializable {
     @JoinColumn(name = "group_id")
     private _Group group1;
 
+    @OneToOne
+    @JoinColumn(name = "exam_id")
+    private Exam exam;
 
-    public StudentGroup(Student student, Date date_joined, _Group group) {
+
+    public StudentGroup(Student student, Date date_joined, _Group group, Exam exam) {
         this.student = student;
         this.date_joined = date_joined;
         this.group1 = group;
+        this.exam = exam;
     }
 
     public StudentGroup() {
@@ -70,5 +76,13 @@ public class StudentGroup implements Serializable {
 
     public void setGroup(_Group group) {
         this.group1 = group;
+    }
+
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
     }
 }
