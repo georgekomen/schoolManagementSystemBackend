@@ -70,6 +70,7 @@ public class Identification implements Serializable {
         FINGERPRINT_INDEX_LEFT,
         FINGERPRINT_THUMB_RIGHT,
         FINGERPRINT_THUMB_LEFT,
-        ADMISSION_NUMBER
+        ADMISSION_NUMBER,
+        NATIONAL_ID
     }
 }

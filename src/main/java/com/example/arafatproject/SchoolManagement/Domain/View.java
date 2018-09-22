@@ -4,7 +4,15 @@ public interface View {
     interface All {
     }
 
-    interface StudentDetails extends All {
+    interface UserDetails extends All {
+
+    }
+
+    interface StudentDetails extends UserDetails {
+
+    }
+
+    interface EmployeeDetails extends UserDetails {
 
     }
 }

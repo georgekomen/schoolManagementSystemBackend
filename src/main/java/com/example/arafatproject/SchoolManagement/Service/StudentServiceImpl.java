@@ -85,7 +85,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student newStudent(Student student) {
-        Student student1 = new Student(student.getAdmission_date(), student.getName(), student.getGender(), student.getSchool());
+        Student student1 = new Student(student.getFirst_name(), student.getMiddle_name(), student.getLast_name(),
+                student.getAdmission_date(), student.getGender(), student.getSchool());
         return studentRepository.save(student1);
     }
 

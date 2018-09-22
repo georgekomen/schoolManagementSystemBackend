@@ -1,8 +1,5 @@
 package com.example.arafatproject.SchoolManagement.Domain;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,39 +8,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class User {
-    @JsonView(View.StudentDetails.class)
+    @JsonView(View.UserDetails.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonView(View.StudentDetails.class)
-    private String name;
+    @JsonView(View.UserDetails.class)
+    private String first_name;
 
-    @JsonView(View.StudentDetails.class)
+    @JsonView(View.UserDetails.class)
+    private String middle_name;
+
+    @JsonView(View.UserDetails.class)
+    private String last_name;
+
+    @JsonView(View.UserDetails.class)
     @Enumerated(EnumType.STRING)
     private Student.Gender gender;
 
-    @JsonView(View.StudentDetails.class)
+    @JsonView(View.UserDetails.class)
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
 
-    @JsonView(View.StudentDetails.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private Set<StudentGroup> studentGroups = new HashSet<>();
-
-    @JsonView(View.StudentDetails.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private Set<StudentPayment> studentPayments = new HashSet<>();
-
-    public User(String name, Student.Gender gender, School school) {
-        this.name = name;
+    public User(String first_name, String middle_name, String last_name, Gender gender, School school) {
+        this.first_name = first_name;
+        this.middle_name = middle_name;
+        this.last_name = last_name;
         this.gender = gender;
         this.school = school;
     }
@@ -60,12 +56,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
     public Student.Gender getGender() {
@@ -82,6 +78,22 @@ public class User {
 
     public void setSchool(School school) {
         this.school = school;
+    }
+
+    public String getMiddle_name() {
+        return middle_name;
+    }
+
+    public void setMiddle_name(String middle_name) {
+        this.middle_name = middle_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public enum Gender {
