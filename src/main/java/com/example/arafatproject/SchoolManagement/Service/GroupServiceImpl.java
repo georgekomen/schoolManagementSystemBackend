@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.List;
+
 import com.example.arafatproject.SchoolManagement.Domain._Group;
 import com.example.arafatproject.SchoolManagement.Repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +18,10 @@ public class GroupServiceImpl implements GroupService {
                 group.getDate_created(), group.getExpected_end_date(), group.getInvoice());
 
         return groupRepository.save(group1);
+    }
+
+    @Override
+    public List<_Group> getAllGroups() {
+        return groupRepository.findAll();
     }
 }

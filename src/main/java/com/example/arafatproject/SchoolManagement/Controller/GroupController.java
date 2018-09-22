@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
+import java.util.List;
+
 import com.example.arafatproject.SchoolManagement.Domain._Group;
 import com.example.arafatproject.SchoolManagement.Service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +19,10 @@ public class GroupController {
     @RequestMapping(value = "new", method = RequestMethod.POST)
     public _Group newGroup(@RequestBody _Group group) {
         return groupService.newGroup(group);
+    }
+
+    @RequestMapping(value = "fetchall", method = RequestMethod.GET)
+    public List<_Group> getAllGroups(){
+        return groupService.getAllGroups();
     }
 }

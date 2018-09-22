@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
+import java.util.List;
+
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,11 @@ public class CourseController {
     @RequestMapping(value = "new", method = RequestMethod.POST)
     public Course newCourse(@RequestBody Course course) {
         return courseService.newCourse(course);
+    }
+
+    @RequestMapping(value = "fetchall", method = RequestMethod.GET)
+    public List<Course> getAllCourses() {
+        return courseService.getAllCourses();
     }
 
 }

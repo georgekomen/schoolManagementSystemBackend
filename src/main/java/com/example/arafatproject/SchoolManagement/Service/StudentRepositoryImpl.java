@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.List;
+
 import com.example.arafatproject.SchoolManagement.Domain.StudentPayment;
 import com.example.arafatproject.SchoolManagement.Repository.StudentPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +19,10 @@ public class StudentRepositoryImpl implements StudentPaymentService {
                 studentPayment.getStudent(), studentPayment.getStudentGroup());
 
         return studentRepository.save(studentPayment1);
+    }
+
+    @Override
+    public List<StudentPayment> getAllStudentPayments() {
+        return studentRepository.findAll();
     }
 }

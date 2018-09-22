@@ -37,7 +37,7 @@ public class StudentController {
     }
 
     @JsonView(View.StudentDetails.class)
-    @RequestMapping(value = "new", method = RequestMethod.GET)
+    @RequestMapping(value = "fetchall", method = RequestMethod.GET)
     public List<Student> getStudentDetails() {
         return studentService.getStudentDetails();
     }

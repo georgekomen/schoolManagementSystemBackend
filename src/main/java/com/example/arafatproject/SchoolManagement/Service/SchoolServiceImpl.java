@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.List;
+
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,5 +16,10 @@ public class SchoolServiceImpl implements SchoolService {
     public School newschool(School school) {
         School school1 = new School(school.getName(), school.getDate_registered());
         return schoolRepository.save(school1);
+    }
+
+    @Override
+    public List<School> getAllSchools() {
+        return schoolRepository.findAll();
     }
 }

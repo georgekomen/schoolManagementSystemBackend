@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
+import java.util.List;
+
 import com.example.arafatproject.SchoolManagement.Domain.StudentPayment;
 import com.example.arafatproject.SchoolManagement.Service.StudentPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +19,10 @@ public class StudentPaymentController {
     @RequestMapping(value = "new", method = RequestMethod.POST)
     public StudentPayment newPayment(@RequestBody StudentPayment studentPayment) {
         return studentPaymentService.newPayment(studentPayment);
+    }
+
+    @RequestMapping(value = "fetchall", method = RequestMethod.GET)
+    public List<StudentPayment> getAllStudentPayments() {
+        return studentPaymentService.getAllStudentPayments();
     }
 }

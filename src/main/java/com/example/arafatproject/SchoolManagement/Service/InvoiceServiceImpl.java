@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.List;
+
 import com.example.arafatproject.SchoolManagement.Domain.Invoice;
 import com.example.arafatproject.SchoolManagement.Repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +18,10 @@ public class InvoiceServiceImpl implements InvoiceService {
                 invoice.getCourse(), invoice.getInvoice_amount(), invoice.getSchool());
 
         return invoiceRepository.save(invoice1);
+    }
+
+    @Override
+    public List<Invoice> getAllInvoices() {
+        return invoiceRepository.findAll();
     }
 }
