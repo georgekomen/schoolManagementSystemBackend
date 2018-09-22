@@ -16,17 +16,17 @@ public class ExamController {
     @Autowired
     private ExamService examService;
 
-    @RequestMapping(value = "new", method = RequestMethod.POST)
+    @RequestMapping(value = "new_exam", method = RequestMethod.POST)
     public Exam newExam(@RequestBody Exam exam) {
         return examService.newExam(exam);
     }
 
-    @RequestMapping(value = "new", method = RequestMethod.POST)
+    @RequestMapping(value = "new_exam_subject", method = RequestMethod.POST)
     public ExamSubject newExam(@RequestBody ExamSubject examSubject) {
         return examService.newExamSubject(examSubject);
     }
 
-    @RequestMapping(value = "new", method = RequestMethod.POST)
+    @RequestMapping(value = "new_exam_subject_result", method = RequestMethod.POST)
     public SubjectExamResult newExam(@RequestBody SubjectExamResult subjectExamResult) {
         return examService.newExamSubjectResult(subjectExamResult);
     }
