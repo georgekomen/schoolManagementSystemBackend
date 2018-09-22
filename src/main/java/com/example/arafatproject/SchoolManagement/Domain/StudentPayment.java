@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-public class StudentPayments implements Serializable {
+public class StudentPayment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -87,11 +87,11 @@ public class StudentPayments implements Serializable {
         this.studentGroup = studentGroup;
     }
 
-    public StudentPayments() {
+    public StudentPayment() {
 
     }
 
-    public StudentPayments(PaymentMode payment_mode, Date payment_date, Double amount, Student student, StudentGroup studentGroup) {
+    public StudentPayment(PaymentMode payment_mode, Date payment_date, Double amount, Student student, StudentGroup studentGroup) {
         this.payment_mode = payment_mode;
         this.payment_date = payment_date;
         this.amount = amount;

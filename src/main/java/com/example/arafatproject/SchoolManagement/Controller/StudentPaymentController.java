@@ -1,6 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
-import com.example.arafatproject.SchoolManagement.Domain.StudentPayments;
+import com.example.arafatproject.SchoolManagement.Domain.StudentPayment;
 import com.example.arafatproject.SchoolManagement.Service.StudentPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +15,7 @@ public class StudentPaymentController {
     private StudentPaymentService studentPaymentService;
 
     @RequestMapping(value = "new", method = RequestMethod.POST)
-    public StudentPayments newPayment(@RequestBody StudentPayments studentPayments) {
-        return studentPaymentService.newPayment(studentPayments);
+    public StudentPayment newPayment(@RequestBody StudentPayment studentPayment) {
+        return studentPaymentService.newPayment(studentPayment);
     }
 }
