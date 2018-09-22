@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.Student;
 import com.example.arafatproject.SchoolManagement.Domain.View;
-import com.example.arafatproject.SchoolManagement.Service.StudentService;
+import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.StudentService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

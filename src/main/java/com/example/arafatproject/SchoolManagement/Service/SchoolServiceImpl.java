@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Repository.SchoolRepository;
+import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

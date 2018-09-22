@@ -6,6 +6,7 @@ import com.example.arafatproject.SchoolManagement.Domain.SubjectExamResult;
 import com.example.arafatproject.SchoolManagement.Repository.ExamRepository;
 import com.example.arafatproject.SchoolManagement.Repository.ExamSubjectRepository;
 import com.example.arafatproject.SchoolManagement.Repository.SubjectExamResultsRepository;
+import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.arafatproject.SchoolManagement.Service;
+package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.arafatproject.SchoolManagement.Service;
+package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
 import java.io.IOException;
 import java.util.List;

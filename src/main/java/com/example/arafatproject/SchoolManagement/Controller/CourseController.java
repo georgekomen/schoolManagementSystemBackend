@@ -3,7 +3,7 @@ package com.example.arafatproject.SchoolManagement.Controller;
 import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.Course;
-import com.example.arafatproject.SchoolManagement.Service.CourseService;
+import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
