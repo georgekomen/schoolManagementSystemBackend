@@ -28,7 +28,6 @@ public class Student implements Serializable {
     @JsonView(View.StudentDetails.class)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    @CreatedDate
     private Date admission_date;
 
     @JsonView(View.StudentDetails.class)
