@@ -50,6 +50,10 @@ public class Student implements Serializable {
 
     @JsonView(View.StudentDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private Set<StudentGroup> studentGroups = new HashSet<>();
+
+    @JsonView(View.StudentDetails.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private Set<StudentPayment> studentPayments = new HashSet<>();
 
     public Student(Date admission_date, String name, Gender gender, Long student_admission_number, School school) {
