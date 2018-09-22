@@ -26,15 +26,20 @@ public class Invoice implements Serializable {
     @JoinColumn(name = "course_id")
     private Course course;
 
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    private School school;
+
     private Long invoice_amount;
 
     public Invoice() {
     }
 
-    public Invoice(Date date_created, Course course, Long invoice_amount) {
+    public Invoice(Date date_created, Course course, Long invoice_amount, School school) {
         this.date_created = date_created;
         this.course = course;
         this.invoice_amount = invoice_amount;
+        this.school = school;
     }
 
     public Long getId() {
@@ -67,5 +72,13 @@ public class Invoice implements Serializable {
 
     public void setInvoice_amount(Long invoice_amount) {
         this.invoice_amount = invoice_amount;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 }
