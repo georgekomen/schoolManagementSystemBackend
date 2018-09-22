@@ -14,31 +14,49 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.lang.Nullable;
 
 @Entity
 public class Student implements Serializable {
+    @JsonView(View.StudentDetails.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(View.StudentDetails.class)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @CreatedDate
     private Date admission_date;
 
+    @JsonView(View.StudentDetails.class)
     private String name;
 
+    @JsonView(View.StudentDetails.class)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @JsonView(View.StudentDetails.class)
     @Nullable
     private Long student_admission_number;
 
+    @JsonView(View.StudentDetails.class)
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
+
+    @JsonView(View.StudentDetails.class)
+    public Double invoice() {
+        return 0D;
+    }
+
+    @JsonView(View.StudentDetails.class)
+    public Double payments() {
+        return 0D;
+    }
+
 
     public Student(Date admission_date, String name, Gender gender, Long student_admission_number, School school) {
         this.admission_date = admission_date;

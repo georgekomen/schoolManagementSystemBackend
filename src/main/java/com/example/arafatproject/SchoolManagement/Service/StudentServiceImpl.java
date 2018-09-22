@@ -87,4 +87,9 @@ public class StudentServiceImpl implements StudentService {
         Student student1 = new Student(student.getAdmission_date(), student.getName(), student.getGender(), student.getStudent_admission_number(), student.getSchool());
         return studentRepository.save(student1);
     }
+
+    @Override
+    public List<Student> getStudentDetails() {
+        return studentRepository.findAll();
+    }
 }
