@@ -31,11 +31,14 @@ public class EmployeeUser extends User {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date last_login;
 
+    @JsonView(View.EmployeeDetails.class)
     private Long login_attempts;
 
+    @JsonView(View.EmployeeDetails.class)
     @Enumerated(EnumType.STRING)
     private EmployeeStatus status;
 
+    @JsonView(View.EmployeeDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeUser")
     private Set<_Grant> grants = new HashSet<>();
 

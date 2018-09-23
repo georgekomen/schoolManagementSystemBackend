@@ -34,8 +34,10 @@ public class User {
     @JsonView(View.UserDetails.class)
     private String last_name;
 
+    @JsonView(View.EmployeeDetails.class)
     private String email;
 
+    @JsonView(View.EmployeeDetails.class)
     private String phoneNumber;
 
     @JsonView(View.UserDetails.class)
@@ -47,6 +49,7 @@ public class User {
     @JoinColumn(name = "school_id")
     private School school;
 
+    @JsonView(View.UserDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Identification> identifications = new HashSet<>();
 

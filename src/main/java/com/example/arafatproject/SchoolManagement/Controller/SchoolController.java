@@ -2,6 +2,8 @@ package com.example.arafatproject.SchoolManagement.Controller;
 
 import java.util.List;
 
+import com.example.arafatproject.SchoolManagement.Domain.Admission;
+import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +28,25 @@ public class SchoolController {
     public List<School> getSchools(Pageable pageable) {
         return schoolService.getAllSchools(pageable);
     }
+
+    @RequestMapping(value = "new_admission", method = RequestMethod.POST)
+    public Admission newAdmission(@RequestBody Admission admission) {
+        return schoolService.newAdmission(admission);
+    }
+
+    @RequestMapping(value = "new_admission_course", method = RequestMethod.POST)
+    public AdmissionCourse newAdmission(@RequestBody AdmissionCourse admissionCourse) {
+        return schoolService.newAdmissionCourse(admissionCourse);
+    }
+
+    @RequestMapping(value = "get_admissions", method = RequestMethod.GET)
+    public List<Admission> getAdmissions(Pageable pageable) {
+        return schoolService.getAdmissions(pageable);
+    }
+
+    @RequestMapping(value = "get_admissions_courses", method = RequestMethod.GET)
+    public List<AdmissionCourse> getAdmissionCourses(Pageable pageable) {
+        return schoolService.getAdmissionCourses(pageable);
+    }
+
 }

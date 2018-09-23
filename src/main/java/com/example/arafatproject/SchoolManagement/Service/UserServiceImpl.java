@@ -92,8 +92,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Student newStudent(Student student) {
         Student student1 = new Student(student.getFirst_name(), student.getMiddle_name(), student.getLast_name(),
-                student.getAdmission_date(), student.getGender(), student.getSchool(), student.getPhoneNumber(),
-                student.getEmail());
+                student.getGender(), student.getSchool(), student.getPhoneNumber(),
+                student.getEmail(), student.getCourse(), student.getAdmission());
         return studentRepository.save(student1);
     }
 

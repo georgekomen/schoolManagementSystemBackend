@@ -21,8 +21,6 @@ public class _Group implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
-
     @Enumerated(EnumType.STRING)
     private Term term;
 
@@ -44,17 +42,16 @@ public class _Group implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date expected_end_date;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "invoice_id")
-    private Invoice invoice;//one to many
+    private Invoice invoice;
 
     public _Group() {
 
     }
 
-    public _Group(String name, School school, Course course, Date date_created,
+    public _Group(School school, Course course, Date date_created,
                   Date expected_end_date, Invoice invoice, Term term, String academicYear) {
-        this.name = name;
         this.school = school;
         this.course = course;
         this.date_created = date_created;
@@ -70,14 +67,6 @@ public class _Group implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public School getSchool() {

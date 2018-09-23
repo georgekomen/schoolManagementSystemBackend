@@ -49,7 +49,7 @@ public class UserController {
         return userService.newEmployee(employeeUser);
     }
 
-    @JsonView(View.StudentDetails.class)
+    @JsonView(View.EmployeeDetails.class)
     @RequestMapping(value = "get_employees", method = RequestMethod.GET)
     public List<EmployeeUser> getEmployees(Pageable pageable) {
         return userService.getEmployees(pageable);
