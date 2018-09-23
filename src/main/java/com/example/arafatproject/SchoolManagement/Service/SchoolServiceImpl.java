@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
+import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Repository.AdmissionCourseRepository;
 import com.example.arafatproject.SchoolManagement.Repository.AdmissionRepository;
+import com.example.arafatproject.SchoolManagement.Repository.CourseRepository;
 import com.example.arafatproject.SchoolManagement.Repository.SchoolRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Autowired
     private AdmissionRepository admissionRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Override
     public School newschool(School school) {
@@ -53,5 +58,16 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public List<AdmissionCourse> getAdmissionCourses(Pageable pageable) {
         return admissionCourseRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public Course newCourse(Course course) {
+        Course course1 = new Course(course.getName(), course.getSchool());
+        return courseRepository.save(course1);
+    }
+
+    @Override
+    public List<Course> getAllCourses(Pageable pageable) {
+        return courseRepository.findAll(pageable).getContent();
     }
 }

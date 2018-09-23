@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
+import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +50,13 @@ public class SchoolController {
         return schoolService.getAdmissionCourses(pageable);
     }
 
+    @RequestMapping(value = "new_course", method = RequestMethod.POST)
+    public Course newCourse(@RequestBody Course course) {
+        return schoolService.newCourse(course);
+    }
+
+    @RequestMapping(value = "get_courses", method = RequestMethod.GET)
+    public List<Course> getAllCourses(Pageable pageable) {
+        return schoolService.getAllCourses(pageable);
+    }
 }
