@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @JsonView(View.StudentDetails.class)
-    @RequestMapping(value = "fetchall", method = RequestMethod.GET)
+    @RequestMapping(value = "get_students", method = RequestMethod.GET)
     public List<Student> getStudentDetails() {
         return userService.getStudentDetails();
     }
@@ -46,6 +46,12 @@ public class UserController {
     @RequestMapping(value = "new_employee", method = RequestMethod.POST)
     public EmployeeUser newStudent(@RequestBody EmployeeUser employeeUser) {
         return userService.newEmployee(employeeUser);
+    }
+
+    @JsonView(View.StudentDetails.class)
+    @RequestMapping(value = "get_employees", method = RequestMethod.GET)
+    public List<EmployeeUser> getEmployees() {
+        return userService.getEmployees();
     }
 
     public enum ActionType {

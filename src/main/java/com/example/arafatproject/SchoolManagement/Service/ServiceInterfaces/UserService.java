@@ -17,4 +17,6 @@ public interface UserService {
     List<Student> getStudentDetails();
 
     EmployeeUser newEmployee(EmployeeUser employeeUser);
+
+    List<EmployeeUser> getEmployees();
 }

@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.LoginCreds;
@@ -51,5 +52,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public _Grant newGrant(_Grant grant) {
         _Grant grant1 = new _Grant(grant.getName(), grant.getEmployeeUser(), grant.getPermission());
         return grantRepository.save(grant1);
+    }
+
+    @Override
+    public List<Permission> getPermissions() {
+        return permissionRepository.findAll();
+    }
+
+    @Override
+    public List<_Grant> getGrants() {
+        return grantRepository.findAll();
     }
 }

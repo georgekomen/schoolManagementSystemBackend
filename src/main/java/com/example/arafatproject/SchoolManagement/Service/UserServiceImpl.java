@@ -109,4 +109,9 @@ public class UserServiceImpl implements UserService {
                 employeeUser.getPhoneNumber(), employeeUser.getEmail());
         return employeeRepository.save(employeeUser1);
     }
+
+    @Override
+    public List<EmployeeUser> getEmployees() {
+        return employeeRepository.findAll();
+    }
 }

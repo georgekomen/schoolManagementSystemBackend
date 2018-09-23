@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.LoginCreds;
@@ -27,6 +28,16 @@ public class AuthenticationController {
     @RequestMapping(value = "new_permission", method = RequestMethod.POST)
     public Permission newPermission(@RequestBody Permission permission) {
         return authenticationService.newPermission(permission);
+    }
+
+    @RequestMapping(value = "get_permissions", method = RequestMethod.GET)
+    public List<Permission> getPermissions() {
+        return authenticationService.getPermissions();
+    }
+
+    @RequestMapping(value = "get_grants", method = RequestMethod.GET)
+    public List<_Grant> getGrants() {
+        return authenticationService.getGrants();
     }
 
     @RequestMapping(value = "new_grant", method = RequestMethod.POST)

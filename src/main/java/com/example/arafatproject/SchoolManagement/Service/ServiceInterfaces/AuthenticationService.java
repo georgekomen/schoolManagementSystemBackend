@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.LoginCreds;
@@ -13,4 +14,8 @@ public interface AuthenticationService {
     Permission newPermission(Permission permission);
 
     _Grant newGrant(_Grant grant);
+
+    List<Permission> getPermissions();
+
+    List<_Grant> getGrants();
 }
