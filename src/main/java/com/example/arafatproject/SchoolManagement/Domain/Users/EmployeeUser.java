@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.View;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -38,6 +39,7 @@ public class EmployeeUser extends User {
     @Enumerated(EnumType.STRING)
     private EmployeeStatus status;
 
+    @JsonBackReference
     @JsonView(View.EmployeeDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeUser")
     private Set<_Grant> grants = new HashSet<>();

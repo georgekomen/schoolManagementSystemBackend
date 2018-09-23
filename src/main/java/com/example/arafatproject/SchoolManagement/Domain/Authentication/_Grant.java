@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class _Grant {
@@ -21,6 +22,7 @@ public class _Grant {
     @JoinColumn(name = "user_id")
     private EmployeeUser employeeUser;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "permission_id")
     private Permission permission;

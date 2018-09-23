@@ -15,6 +15,7 @@ import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.StudentGroup;
 import com.example.arafatproject.SchoolManagement.Domain.StudentPayment;
 import com.example.arafatproject.SchoolManagement.Domain.View;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -24,10 +25,12 @@ public class Student extends User implements Serializable {
     @JoinColumn(name = "admission_id")
     private Admission admission;
 
+    @JsonBackReference
     @JsonView(View.StudentDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private Set<StudentGroup> studentGroups = new HashSet<>();
 
+    @JsonBackReference
     @JsonView(View.StudentDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private Set<StudentPayment> studentPayments = new HashSet<>();

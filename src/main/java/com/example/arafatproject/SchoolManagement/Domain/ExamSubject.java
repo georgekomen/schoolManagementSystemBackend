@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class ExamSubject {
     @Id
@@ -17,6 +19,7 @@ public class ExamSubject {
 
     private Long pass_mark;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "exam_id")
     private Exam exam;

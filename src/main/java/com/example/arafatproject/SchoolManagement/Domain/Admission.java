@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -27,6 +28,7 @@ public class Admission {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date admission_date;
 
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "admission")
     private Set<AdmissionCourse> admissionCourses = new HashSet<>();
 

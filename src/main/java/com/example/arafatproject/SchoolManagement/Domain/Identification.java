@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.example.arafatproject.SchoolManagement.Domain.Users.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Identification implements Serializable {
@@ -18,6 +19,7 @@ public class Identification implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
