@@ -3,6 +3,7 @@ package com.example.arafatproject.SchoolManagement.Controller;
 import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.Invoice;
+import com.example.arafatproject.SchoolManagement.Domain.StudentPayment;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -25,5 +26,15 @@ public class InvoiceController {
     @RequestMapping(value = "get_invoices", method = RequestMethod.GET)
     public List<Invoice> getAllInvoices(Pageable pageable) {
         return invoiceService.getAllInvoices(pageable);
+    }
+
+    @RequestMapping(value = "new_student_payment", method = RequestMethod.POST)
+    public StudentPayment newPayment(@RequestBody StudentPayment studentPayment) {
+        return invoiceService.newPayment(studentPayment);
+    }
+
+    @RequestMapping(value = "get_student_payments", method = RequestMethod.GET)
+    public List<StudentPayment> getAllStudentPayments(Pageable pageable) {
+        return invoiceService.getAllStudentPayments(pageable);
     }
 }
