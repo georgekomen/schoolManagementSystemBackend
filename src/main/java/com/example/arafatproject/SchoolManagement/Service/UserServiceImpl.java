@@ -54,8 +54,9 @@ public class UserServiceImpl implements UserService {
                 acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
                 Blob blob =
                         storage.create(
-                                BlobInfo.newBuilder(bucketName, student.getSchool().getId().toString() + "/fingerprints/" + student.toString() + "/" + fingerType).setAcl(acls).build(),
-                                file.getInputStream());
+                                BlobInfo.newBuilder(bucketName, student.getSchool().getId().toString() +
+                                        "/fingerprints/" + student.getId().toString() + "/" +
+                                        fingerType).setAcl(acls).build(), file.getInputStream());
                 // add to student identifications
                 Identification identification = new Identification(student, fingerType, blob.getMediaLink());
                 identificationRepository.save(identification);
