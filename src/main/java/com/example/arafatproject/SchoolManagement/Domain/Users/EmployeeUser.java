@@ -1,4 +1,4 @@
-package com.example.arafatproject.SchoolManagement.Domain.Authentication;
+package com.example.arafatproject.SchoolManagement.Domain.Users;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -8,8 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
 import com.example.arafatproject.SchoolManagement.Domain.School;
-import com.example.arafatproject.SchoolManagement.Domain.User;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -34,7 +34,7 @@ public class EmployeeUser extends User {
     private boolean status;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeUser")
-    private Set<Grant> grants = new HashSet<>();
+    private Set<_Grant> grants = new HashSet<>();
 
     public EmployeeUser() {
 

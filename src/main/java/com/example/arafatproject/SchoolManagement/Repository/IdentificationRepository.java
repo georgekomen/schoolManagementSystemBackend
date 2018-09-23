@@ -1,7 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Repository;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
-import com.example.arafatproject.SchoolManagement.Domain.Student;
+import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

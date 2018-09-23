@@ -8,12 +8,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.arafatproject.SchoolManagement.Controller.StudentController;
+import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
-import com.example.arafatproject.SchoolManagement.Domain.Student;
+import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.example.arafatproject.SchoolManagement.Repository.IdentificationRepository;
-import com.example.arafatproject.SchoolManagement.Repository.StudentRepository;
-import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.StudentService;
+import com.example.arafatproject.SchoolManagement.Repository.Users.StudentRepository;
+import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobInfo;
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class StudentServiceImpl implements StudentService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private IdentificationRepository identificationRepository;
@@ -41,7 +41,7 @@ public class StudentServiceImpl implements StudentService {
     private Storage storage = StorageOptions.getDefaultInstance().getService();
 
     @Override
-    public String uploadFingerprint(Student student, Identification.IdentificationType fingerType, StudentController.ActionType action, MultipartFile file) throws IOException {
+    public String uploadFingerprint(Student student, Identification.IdentificationType fingerType, UserController.ActionType action, MultipartFile file) throws IOException {
         switch (action) {
             case Enroll:
                 List<Acl> acls = new ArrayList<>();

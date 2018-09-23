@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
+
 @Entity
 public class Identification implements Serializable {
     @Id

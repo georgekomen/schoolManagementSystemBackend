@@ -1,4 +1,4 @@
-package com.example.arafatproject.SchoolManagement.Domain;
+package com.example.arafatproject.SchoolManagement.Domain.Users;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +9,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.example.arafatproject.SchoolManagement.Domain.School;
+import com.example.arafatproject.SchoolManagement.Domain.StudentGroup;
+import com.example.arafatproject.SchoolManagement.Domain.StudentPayment;
+import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 

@@ -1,6 +1,6 @@
-package com.example.arafatproject.SchoolManagement.Repository;
+package com.example.arafatproject.SchoolManagement.Repository.Users;
 
-import com.example.arafatproject.SchoolManagement.Domain.Student;
+import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

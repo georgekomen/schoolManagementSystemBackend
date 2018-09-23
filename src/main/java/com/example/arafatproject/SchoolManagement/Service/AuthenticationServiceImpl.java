@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
 import com.example.arafatproject.SchoolManagement.Repository.Authentication.GrantRepository;
 import com.example.arafatproject.SchoolManagement.Repository.Authentication.PermissionRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.AuthenticationService;
@@ -13,5 +14,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     private PermissionRepository permissionRepository;
-    
+
+    @Override
+    public EmployeeUser login() {
+        return null;
+    }
 }

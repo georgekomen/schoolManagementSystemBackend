@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity

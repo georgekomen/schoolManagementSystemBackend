@@ -7,8 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
+
 @Entity
-public class Grant {
+public class _Grant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -23,13 +25,13 @@ public class Grant {
     @JoinColumn(name = "permission_id")
     private Permission permission;
 
-    public Grant(String name, EmployeeUser employeeUser, Permission permission) {
+    public _Grant(String name, EmployeeUser employeeUser, Permission permission) {
         this.name = name;
         this.employeeUser = employeeUser;
         this.permission = permission;
     }
 
-    public Grant() {
+    public _Grant() {
 
     }
 

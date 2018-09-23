@@ -1,4 +1,4 @@
-package com.example.arafatproject.SchoolManagement.Domain;
+package com.example.arafatproject.SchoolManagement.Domain.Users;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.example.arafatproject.SchoolManagement.Domain.School;
+import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
