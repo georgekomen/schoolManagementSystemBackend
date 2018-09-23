@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,13 +17,13 @@ public class SchoolController {
     @Autowired
     private SchoolService schoolService;
 
-    @RequestMapping(value = "new", method = RequestMethod.POST)
+    @RequestMapping(value = "new_school", method = RequestMethod.POST)
     public School newSchool(@RequestBody School school) {
         return schoolService.newschool(school);
     }
 
-    @RequestMapping(value = "fetchall", method = RequestMethod.GET)
-    public List<School> getSchools() {
-        return schoolService.getAllSchools();
+    @RequestMapping(value = "get_schools", method = RequestMethod.GET)
+    public List<School> getSchools(Pageable pageable) {
+        return schoolService.getAllSchools(pageable);
     }
 }

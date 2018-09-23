@@ -1,10 +1,13 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
+import java.util.List;
+
 import com.example.arafatproject.SchoolManagement.Domain.Exam;
 import com.example.arafatproject.SchoolManagement.Domain.ExamSubject;
 import com.example.arafatproject.SchoolManagement.Domain.SubjectExamResult;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,5 +32,10 @@ public class ExamController {
     @RequestMapping(value = "new_exam_subject_result", method = RequestMethod.POST)
     public SubjectExamResult newExam(@RequestBody SubjectExamResult subjectExamResult) {
         return examService.newExamSubjectResult(subjectExamResult);
+    }
+
+    @RequestMapping(value = "get_exams", method = RequestMethod.GET)
+    public List<Exam> getExams(Pageable pageable) {
+        return examService.getExams(pageable);
     }
 }

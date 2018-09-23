@@ -6,6 +6,7 @@ import com.example.arafatproject.SchoolManagement.Domain._Group;
 import com.example.arafatproject.SchoolManagement.Repository.GroupRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,7 +24,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<_Group> getAllGroups() {
-        return groupRepository.findAll();
+    public List<_Group> getAllGroups(Pageable pageable) {
+        return groupRepository.findAll(pageable).getContent();
     }
 }

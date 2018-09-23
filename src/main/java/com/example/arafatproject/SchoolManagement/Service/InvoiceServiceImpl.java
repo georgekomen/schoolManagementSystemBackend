@@ -6,6 +6,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Invoice;
 import com.example.arafatproject.SchoolManagement.Repository.InvoiceRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +23,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public List<Invoice> getAllInvoices() {
-        return invoiceRepository.findAll();
+    public List<Invoice> getAllInvoices(Pageable pageable) {
+        return invoiceRepository.findAll(pageable).getContent();
     }
 }

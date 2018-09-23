@@ -10,6 +10,7 @@ import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,8 +40,8 @@ public class UserController {
 
     @JsonView(View.StudentDetails.class)
     @RequestMapping(value = "get_students", method = RequestMethod.GET)
-    public List<Student> getStudentDetails() {
-        return userService.getStudentDetails();
+    public List<Student> getStudentDetails(Pageable pageable) {
+        return userService.getStudentDetails(pageable);
     }
 
     @RequestMapping(value = "new_employee", method = RequestMethod.POST)
@@ -50,8 +51,8 @@ public class UserController {
 
     @JsonView(View.StudentDetails.class)
     @RequestMapping(value = "get_employees", method = RequestMethod.GET)
-    public List<EmployeeUser> getEmployees() {
-        return userService.getEmployees();
+    public List<EmployeeUser> getEmployees(Pageable pageable) {
+        return userService.getEmployees(pageable);
     }
 
     public enum ActionType {

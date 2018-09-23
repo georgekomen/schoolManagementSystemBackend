@@ -6,6 +6,7 @@ import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Repository.SchoolRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +21,7 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
-    public List<School> getAllSchools() {
-        return schoolRepository.findAll();
+    public List<School> getAllSchools(Pageable pageable) {
+        return schoolRepository.findAll(pageable).getContent();
     }
 }

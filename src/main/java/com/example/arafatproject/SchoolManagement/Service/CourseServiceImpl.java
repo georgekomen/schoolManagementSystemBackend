@@ -6,6 +6,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Repository.CourseRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +21,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+    public List<Course> getAllCourses(Pageable pageable) {
+        return courseRepository.findAll(pageable).getContent();
     }
 }

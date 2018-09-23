@@ -14,6 +14,7 @@ import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.Auth
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -55,12 +56,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public List<Permission> getPermissions() {
-        return permissionRepository.findAll();
+    public List<Permission> getPermissions(Pageable pageable) {
+        return permissionRepository.findAll(pageable).getContent();
     }
 
     @Override
-    public List<_Grant> getGrants() {
-        return grantRepository.findAll();
+    public List<_Grant> getGrants(Pageable pageable) {
+        return grantRepository.findAll(pageable).getContent();
     }
 }

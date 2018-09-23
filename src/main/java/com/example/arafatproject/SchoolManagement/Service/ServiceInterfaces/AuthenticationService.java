@@ -7,6 +7,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Authentication.LoginCre
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.Permission;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
+import org.springframework.data.domain.Pageable;
 
 public interface AuthenticationService {
     Optional<EmployeeUser> login(LoginCreds loginCreds);
@@ -15,7 +16,7 @@ public interface AuthenticationService {
 
     _Grant newGrant(_Grant grant);
 
-    List<Permission> getPermissions();
+    List<Permission> getPermissions(Pageable pageable);
 
-    List<_Grant> getGrants();
+    List<_Grant> getGrants(Pageable pageable);
 }

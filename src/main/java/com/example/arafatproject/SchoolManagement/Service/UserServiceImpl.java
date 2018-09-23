@@ -26,6 +26,7 @@ import com.machinezoo.sourceafis.FingerprintTemplate;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -97,8 +98,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Student> getStudentDetails() {
-        return studentRepository.findAll();
+    public List<Student> getStudentDetails(Pageable pageable) {
+        return studentRepository.findAll(pageable).getContent();
     }
 
     @Override
@@ -111,7 +112,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<EmployeeUser> getEmployees() {
-        return employeeRepository.findAll();
+    public List<EmployeeUser> getEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable).getContent();
     }
 }

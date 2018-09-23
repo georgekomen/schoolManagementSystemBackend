@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.List;
+
 import com.example.arafatproject.SchoolManagement.Domain.Exam;
 import com.example.arafatproject.SchoolManagement.Domain.ExamSubject;
 import com.example.arafatproject.SchoolManagement.Domain.SubjectExamResult;
@@ -8,6 +10,7 @@ import com.example.arafatproject.SchoolManagement.Repository.ExamSubjectReposito
 import com.example.arafatproject.SchoolManagement.Repository.SubjectExamResultsRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,5 +37,10 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public SubjectExamResult newExamSubjectResult(SubjectExamResult subjectExamResult) {
         return subjectExamResultsRepository.save(subjectExamResult);
+    }
+
+    @Override
+    public List<Exam> getExams(Pageable pageable) {
+        return examRepository.findAll(pageable).getContent();
     }
 }

@@ -9,6 +9,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,13 +32,13 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "get_permissions", method = RequestMethod.GET)
-    public List<Permission> getPermissions() {
-        return authenticationService.getPermissions();
+    public List<Permission> getPermissions(Pageable pageable) {
+        return authenticationService.getPermissions(pageable);
     }
 
     @RequestMapping(value = "get_grants", method = RequestMethod.GET)
-    public List<_Grant> getGrants() {
-        return authenticationService.getGrants();
+    public List<_Grant> getGrants(Pageable pageable) {
+        return authenticationService.getGrants(pageable);
     }
 
     @RequestMapping(value = "new_grant", method = RequestMethod.POST)
