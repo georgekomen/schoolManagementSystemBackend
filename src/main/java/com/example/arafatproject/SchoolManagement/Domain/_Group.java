@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class _Group implements Serializable {
@@ -21,6 +22,11 @@ public class _Group implements Serializable {
     private Long id;
 
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    private Term term;
+
+    private String academicYear;
 
     @ManyToOne
     @JoinColumn(name = "school_id")
@@ -46,13 +52,16 @@ public class _Group implements Serializable {
 
     }
 
-    public _Group(String name, School school, Course course, Date date_created, Date expected_end_date, Invoice invoice) {
+    public _Group(String name, School school, Course course, Date date_created,
+                  Date expected_end_date, Invoice invoice, Term term, String academicYear) {
         this.name = name;
         this.school = school;
         this.course = course;
         this.date_created = date_created;
         this.expected_end_date = expected_end_date;
         this.invoice = invoice;
+        this.term = term;
+        this.academicYear = academicYear;
     }
 
     public Long getId() {
@@ -109,5 +118,25 @@ public class _Group implements Serializable {
 
     public void setExpected_end_date(Date expected_end_date) {
         this.expected_end_date = expected_end_date;
+    }
+
+    public Term getTerm() {
+        return term;
+    }
+
+    public void setTerm(Term term) {
+        this.term = term;
+    }
+
+    public String getAcademicYear() {
+        return academicYear;
+    }
+
+    public void setAcademicYear(String academicYear) {
+        this.academicYear = academicYear;
+    }
+
+    public enum Term {
+        ONE, TWO, THREE
     }
 }

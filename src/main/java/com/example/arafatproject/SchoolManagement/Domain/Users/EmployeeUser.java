@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
@@ -13,6 +15,7 @@ import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 public class EmployeeUser extends User {
@@ -20,18 +23,19 @@ public class EmployeeUser extends User {
     private String password;
 
     @JsonView(View.EmployeeDetails.class)
-    @Column(columnDefinition = "DATETIME", nullable = false)
+    @Column(columnDefinition = "DATETIME", nullable = true)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date_created;
 
     @JsonView(View.EmployeeDetails.class)
-    @Column(columnDefinition = "DATETIME", nullable = false)
+    @Column(columnDefinition = "DATETIME", nullable = true)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date last_login;
 
     private Long login_attempts;
 
-    private boolean status;
+    @Enumerated(EnumType.STRING)
+    private EmployeeStatus status;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeUser")
     private Set<_Grant> grants = new HashSet<>();
@@ -40,7 +44,8 @@ public class EmployeeUser extends User {
 
     }
 
-    public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender, School school, String password, Date date_created, boolean status) {
+    public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender, School school,
+                        String password, Date date_created, EmployeeStatus status) {
         super(first_name, middle_name, last_name, gender, school);
         this.password = password;
         this.date_created = date_created;
@@ -79,11 +84,15 @@ public class EmployeeUser extends User {
         this.login_attempts = login_attempts;
     }
 
-    public boolean isStatus() {
+    public EmployeeStatus getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(EmployeeStatus status) {
         this.status = status;
+    }
+
+    public enum EmployeeStatus {
+        ACTIVE, INACTIVE
     }
 }

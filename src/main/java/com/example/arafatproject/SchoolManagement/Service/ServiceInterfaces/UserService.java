@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
+import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
 import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,4 +15,6 @@ public interface UserService {
     Student newStudent(Student student);
 
     List<Student> getStudentDetails();
+
+    EmployeeUser newEmployee(EmployeeUser employeeUser);
 }

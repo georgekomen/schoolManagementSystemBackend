@@ -10,8 +10,10 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
+import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
 import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.example.arafatproject.SchoolManagement.Repository.IdentificationRepository;
+import com.example.arafatproject.SchoolManagement.Repository.Users.EmployeeRepository;
 import com.example.arafatproject.SchoolManagement.Repository.Users.StudentRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import com.google.cloud.storage.Acl;
@@ -35,6 +37,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Value("${bucketName}")
     private String bucketName;
@@ -93,5 +98,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Student> getStudentDetails() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    public EmployeeUser newEmployee(EmployeeUser employeeUser) {
+        EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
+                employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getSchool(),
+                employeeUser.getPassword(), employeeUser.getDate_created(), employeeUser.getStatus()
+                );
+        return employeeRepository.save(employeeUser1);
     }
 }

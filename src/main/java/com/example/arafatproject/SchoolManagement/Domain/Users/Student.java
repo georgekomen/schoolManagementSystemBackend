@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Entity
 public class Student extends User implements Serializable {
     @JsonView(View.StudentDetails.class)
-    @Column(columnDefinition = "DATETIME", nullable = false)
+    @Column(columnDefinition = "DATETIME", nullable = true)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date admission_date;
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
+import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
 import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
@@ -31,7 +32,7 @@ public class UserController {
         return userService.uploadFingerprint(student, fingerType, action, file);
     }
 
-    @RequestMapping(value = "new", method = RequestMethod.POST)
+    @RequestMapping(value = "new_student", method = RequestMethod.POST)
     public Student newStudent(@RequestBody Student student) {
         return userService.newStudent(student);
     }
@@ -40,6 +41,11 @@ public class UserController {
     @RequestMapping(value = "fetchall", method = RequestMethod.GET)
     public List<Student> getStudentDetails() {
         return userService.getStudentDetails();
+    }
+
+    @RequestMapping(value = "new_employee", method = RequestMethod.POST)
+    public EmployeeUser newStudent(@RequestBody EmployeeUser employeeUser) {
+        return userService.newEmployee(employeeUser);
     }
 
     public enum ActionType {
