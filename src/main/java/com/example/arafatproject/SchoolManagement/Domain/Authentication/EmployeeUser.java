@@ -1,9 +1,16 @@
-package com.example.arafatproject.SchoolManagement.Domain;
+package com.example.arafatproject.SchoolManagement.Domain.Authentication;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
+import com.example.arafatproject.SchoolManagement.Domain.School;
+import com.example.arafatproject.SchoolManagement.Domain.User;
+import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -24,14 +31,20 @@ public class EmployeeUser extends User {
 
     private Long login_attempts;
 
+    private boolean status;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeUser")
+    private Set<Grant> grants = new HashSet<>();
+
     public EmployeeUser() {
 
     }
 
-    public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender, School school, String password, Date date_created) {
+    public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender, School school, String password, Date date_created, boolean status) {
         super(first_name, middle_name, last_name, gender, school);
         this.password = password;
         this.date_created = date_created;
+        this.status = status;
     }
 
     public String getPassword() {
@@ -64,5 +77,13 @@ public class EmployeeUser extends User {
 
     public void setLogin_attempts(Long login_attempts) {
         this.login_attempts = login_attempts;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
