@@ -21,7 +21,7 @@ public class StudentGroup implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "user_id")
     private Student student;
 
     @Column(columnDefinition = "DATETIME", nullable = false)

@@ -1,5 +1,8 @@
 package com.example.arafatproject.SchoolManagement.Domain.Users;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,7 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -29,6 +34,10 @@ public class User {
     @JsonView(View.UserDetails.class)
     private String last_name;
 
+    private String email;
+
+    private String phoneNumber;
+
     @JsonView(View.UserDetails.class)
     @Enumerated(EnumType.STRING)
     private Student.Gender gender;
@@ -38,12 +47,17 @@ public class User {
     @JoinColumn(name = "school_id")
     private School school;
 
-    public User(String first_name, String middle_name, String last_name, Gender gender, School school) {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Identification> identifications = new HashSet<>();
+
+    public User(String first_name, String middle_name, String last_name, Gender gender, School school, String phoneNumber, String email) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
+        this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.school = school;
+        this.email = email;
     }
 
     public User(){
@@ -96,6 +110,22 @@ public class User {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public enum Gender {

@@ -1,5 +1,8 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
+import java.util.Optional;
+
+import com.example.arafatproject.SchoolManagement.Domain.Authentication.LoginCreds;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.Permission;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
@@ -17,8 +20,8 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public EmployeeUser login() {
-        return authenticationService.login();
+    public Optional<EmployeeUser> login(@RequestBody LoginCreds loginCreds) {
+        return authenticationService.login(loginCreds);
     }
 
     @RequestMapping(value = "new_permission", method = RequestMethod.POST)

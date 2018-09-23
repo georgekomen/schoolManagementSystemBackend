@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
                 Double matchIndex;
                 try {
                     Identification identification1 = identificationRepository.findByStudentIdAndIDtype(student, fingerType);
-                    URL url = new URL(identification1.getIdentification_value());
+                    URL url = new URL(identification1.getValue());
                     try (InputStream templateInputStream = url.openStream();
                          InputStream imageInputStream = file.getInputStream();
                          ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
@@ -91,7 +91,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Student newStudent(Student student) {
         Student student1 = new Student(student.getFirst_name(), student.getMiddle_name(), student.getLast_name(),
-                student.getAdmission_date(), student.getGender(), student.getSchool());
+                student.getAdmission_date(), student.getGender(), student.getSchool(), student.getPhoneNumber(),
+                student.getEmail());
         return studentRepository.save(student1);
     }
 
@@ -104,8 +105,8 @@ public class UserServiceImpl implements UserService {
     public EmployeeUser newEmployee(EmployeeUser employeeUser) {
         EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
                 employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getSchool(),
-                employeeUser.getPassword(), employeeUser.getDate_created(), employeeUser.getStatus()
-                );
+                employeeUser.getPassword(), employeeUser.getDate_created(), employeeUser.getStatus(),
+                employeeUser.getPhoneNumber(), employeeUser.getEmail());
         return employeeRepository.save(employeeUser1);
     }
 }

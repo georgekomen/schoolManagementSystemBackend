@@ -15,7 +15,6 @@ import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 public class EmployeeUser extends User {
@@ -45,8 +44,8 @@ public class EmployeeUser extends User {
     }
 
     public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender, School school,
-                        String password, Date date_created, EmployeeStatus status) {
-        super(first_name, middle_name, last_name, gender, school);
+                        String password, Date date_created, EmployeeStatus status, String phone, String email) {
+        super(first_name, middle_name, last_name, gender, school, phone, email);
         this.password = password;
         this.date_created = date_created;
         this.status = status;

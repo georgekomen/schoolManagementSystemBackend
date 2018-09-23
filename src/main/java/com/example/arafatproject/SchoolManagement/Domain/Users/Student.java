@@ -43,8 +43,8 @@ public class Student extends User implements Serializable {
 
     }
 
-    public Student(String first_name, String middle_name, String last_name, Date admission_date, Student.Gender gender, School school) {
-        super(first_name, middle_name, last_name, gender, school);
+    public Student(String first_name, String middle_name, String last_name, Date admission_date, Student.Gender gender, School school, String phone, String email) {
+        super(first_name, middle_name, last_name, gender, school, phone, email);
         this.admission_date = admission_date;
     }
 }

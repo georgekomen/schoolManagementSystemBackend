@@ -33,7 +33,7 @@ public class StudentPayment implements Serializable {
     private Double amount;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "user_id")
     private Student student;
 
     @ManyToOne

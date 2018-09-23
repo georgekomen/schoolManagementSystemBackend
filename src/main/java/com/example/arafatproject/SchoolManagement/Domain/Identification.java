@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
+import com.example.arafatproject.SchoolManagement.Domain.Users.User;
 
 @Entity
 public class Identification implements Serializable {
@@ -19,28 +19,29 @@ public class Identification implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Enumerated(EnumType.STRING)
     private IdentificationType type;
-    private String identification_value;
 
-    public Identification(Student student, IdentificationType type, String identification_value) {
-        this.student = student;
+    private String value;
+
+    public Identification(User user, IdentificationType type, String value) {
+        this.user = user;
         this.type = type;
-        this.identification_value = identification_value;
+        this.value = value;
     }
 
     public Identification() {
     }
 
-    public String getIdentification_value() {
-        return identification_value;
+    public String getValue() {
+        return value;
     }
 
-    public void setIdentification_value(String identification_value) {
-        this.identification_value = identification_value;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public IdentificationType getType() {
@@ -59,12 +60,12 @@ public class Identification implements Serializable {
         this.id = id;
     }
 
-    public Student getStudent() {
-        return student;
+    public User getUser() {
+        return user;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUser(User User) {
+        this.user = User;
     }
 
     public enum IdentificationType {

@@ -18,7 +18,7 @@ public class _Grant {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "employee_user_id")
+    @JoinColumn(name = "user_id")
     private EmployeeUser employeeUser;
 
     @ManyToOne
