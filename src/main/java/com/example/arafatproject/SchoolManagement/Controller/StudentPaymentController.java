@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "studentpayment")
+@RequestMapping(value = "student_payment")
 public class StudentPaymentController {
     @Autowired
     private StudentPaymentService studentPaymentService;
