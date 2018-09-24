@@ -45,4 +45,9 @@ public class ExamController {
     public List<ExamSubject> getExamsSubjects(Pageable pageable) {
         return examService.getExamsSubjects(pageable);
     }
+
+    @RequestMapping(value = "get_exam_subjects_results", method = RequestMethod.GET)
+    public List<SubjectExamResult> getExamResults(Pageable pageable) {
+        return examService.getExamResults(pageable);
+    }
 }

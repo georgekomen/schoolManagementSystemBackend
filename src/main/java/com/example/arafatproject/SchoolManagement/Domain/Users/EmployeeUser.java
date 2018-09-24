@@ -15,11 +15,12 @@ import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class EmployeeUser extends User implements Serializable {
-
+    @JsonIgnore
     private String password;
 
     @JsonView(View.EmployeeDetails.class)

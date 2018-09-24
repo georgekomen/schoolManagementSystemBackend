@@ -17,4 +17,6 @@ public interface ExamService {
     List<Exam> getExams(Pageable pageable);
 
     List<ExamSubject> getExamsSubjects(Pageable pageable);
+
+    List<SubjectExamResult> getExamResults(Pageable pageable);
 }
