@@ -15,4 +15,6 @@ public interface ExamService {
     SubjectExamResult newExamSubjectResult(SubjectExamResult subjectExamResult);
 
     List<Exam> getExams(Pageable pageable);
+
+    List<ExamSubject> getExamsSubjects(Pageable pageable);
 }

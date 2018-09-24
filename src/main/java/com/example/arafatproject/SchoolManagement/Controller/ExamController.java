@@ -8,9 +8,11 @@ import com.example.arafatproject.SchoolManagement.Domain.SubjectExamResult;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,5 +39,10 @@ public class ExamController {
     @RequestMapping(value = "get_exams", method = RequestMethod.GET)
     public List<Exam> getExams(Pageable pageable) {
         return examService.getExams(pageable);
+    }
+
+    @RequestMapping(value = "get_exam_subjects", method = RequestMethod.GET)
+    public List<ExamSubject> getExamsSubjects(Pageable pageable) {
+        return examService.getExamsSubjects(pageable);
     }
 }

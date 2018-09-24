@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Domain.Users;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
-public class User {
+public class User implements Serializable {
     @JsonView(View.UserDetails.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Domain.Users;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
-public class EmployeeUser extends User {
+public class EmployeeUser extends User implements Serializable {
 
     private String password;
 
