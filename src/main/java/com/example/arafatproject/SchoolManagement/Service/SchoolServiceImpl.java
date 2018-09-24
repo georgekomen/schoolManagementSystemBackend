@@ -42,12 +42,16 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public Admission newAdmission(Admission admission) {
-        return admissionRepository.save(admission);
+        Admission admission1 = new Admission(admission.getDate_created(), admission.getAdmission_date(),
+                admission.getSchool());
+        return admissionRepository.save(admission1);
     }
 
     @Override
     public AdmissionCourse newAdmissionCourse(AdmissionCourse admissionCourse) {
-        return admissionCourseRepository.save(admissionCourse);
+        AdmissionCourse admissionCourse1 = new AdmissionCourse(admissionCourse.getAdmission(),
+                admissionCourse.getCourse());
+        return admissionCourseRepository.save(admissionCourse1);
     }
 
     @Override

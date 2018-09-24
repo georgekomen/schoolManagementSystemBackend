@@ -26,17 +26,25 @@ public class ExamServiceImpl implements ExamService {
 
     @Override
     public Exam newExam(Exam exam) {
-        return examRepository.save(exam);
+        Exam exam1 = new Exam(exam.getCourse(), exam.getSchool(), exam.getSitting_date());
+
+        return examRepository.save(exam1);
     }
 
     @Override
     public ExamSubject newExamSubject(ExamSubject examSubject) {
-        return examSubjectRepository.save(examSubject);
+        ExamSubject examSubject1 = new ExamSubject(examSubject.getName(), examSubject.getPass_mark(),
+                examSubject.getExam());
+
+        return examSubjectRepository.save(examSubject1);
     }
 
     @Override
     public SubjectExamResult newExamSubjectResult(SubjectExamResult subjectExamResult) {
-        return subjectExamResultsRepository.save(subjectExamResult);
+        SubjectExamResult subjectExamResult1 = new SubjectExamResult(subjectExamResult.getExamSubject(),
+                subjectExamResult.getStudent(),subjectExamResult.getResult_mark());
+
+        return subjectExamResultsRepository.save(subjectExamResult1);
     }
 
     @Override

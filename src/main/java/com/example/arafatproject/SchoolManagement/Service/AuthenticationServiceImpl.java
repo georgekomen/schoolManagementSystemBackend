@@ -52,6 +52,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public _Grant newGrant(_Grant grant) {
         _Grant grant1 = new _Grant(grant.getName(), grant.getEmployeeUser(), grant.getPermission());
+
         return grantRepository.save(grant1);
     }
 

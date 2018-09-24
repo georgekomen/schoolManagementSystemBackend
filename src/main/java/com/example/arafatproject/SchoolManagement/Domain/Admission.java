@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -27,6 +29,10 @@ public class Admission {
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date admission_date;
+
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    private School school;
 
     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "admission")
@@ -56,12 +62,21 @@ public class Admission {
         this.admission_date = admission_date;
     }
 
-    public Admission(Date date_created, Date admission_date) {
+    public Admission(Date date_created, Date admission_date, School school) {
         this.date_created = date_created;
         this.admission_date = admission_date;
+        this.school = school;
     }
 
     public Admission() {
 
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 }
