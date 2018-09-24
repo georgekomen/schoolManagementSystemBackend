@@ -6,9 +6,11 @@ import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
+import com.example.arafatproject.SchoolManagement.Domain._Group;
 import com.example.arafatproject.SchoolManagement.Repository.AdmissionCourseRepository;
 import com.example.arafatproject.SchoolManagement.Repository.AdmissionRepository;
 import com.example.arafatproject.SchoolManagement.Repository.CourseRepository;
+import com.example.arafatproject.SchoolManagement.Repository.GroupRepository;
 import com.example.arafatproject.SchoolManagement.Repository.SchoolRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private GroupRepository groupRepository;
 
     @Override
     public School newschool(School school) {
@@ -73,5 +78,19 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public List<Course> getAllCourses(Pageable pageable) {
         return courseRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public _Group newGroup(_Group group) {
+        _Group group1 = new _Group(group.getSchool(), group.getCourse(),
+                group.getDate_created(), group.getExpected_end_date(), group.getInvoice(),
+                group.getTerm(), group.getAcademicYear());
+
+        return groupRepository.save(group1);
+    }
+
+    @Override
+    public List<_Group> getAllGroups(Pageable pageable) {
+        return groupRepository.findAll(pageable).getContent();
     }
 }

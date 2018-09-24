@@ -6,6 +6,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
+import com.example.arafatproject.SchoolManagement.Domain._Group;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -58,5 +59,15 @@ public class SchoolController {
     @RequestMapping(value = "get_courses", method = RequestMethod.GET)
     public List<Course> getAllCourses(Pageable pageable) {
         return schoolService.getAllCourses(pageable);
+    }
+
+    @RequestMapping(value = "new_group", method = RequestMethod.POST)
+    public _Group newGroup(@RequestBody _Group group) {
+        return schoolService.newGroup(group);
+    }
+
+    @RequestMapping(value = "get_groups", method = RequestMethod.GET)
+    public List<_Group> getAllGroups(Pageable pageable){
+        return schoolService.getAllGroups(pageable);
     }
 }
