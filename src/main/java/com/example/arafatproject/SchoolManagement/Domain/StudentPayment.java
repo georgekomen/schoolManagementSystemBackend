@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 
 import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
@@ -33,12 +33,11 @@ public class StudentPayment implements Serializable {
 
     private Double amount;
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Student student;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "student_group_id")
     private StudentGroup studentGroup;

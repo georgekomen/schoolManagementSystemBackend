@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class _Grant implements Serializable {
@@ -23,7 +23,7 @@ public class _Grant implements Serializable {
     @JoinColumn(name = "user_id")
     private EmployeeUser employeeUser;
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "permission_id")
     private Permission permission;

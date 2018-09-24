@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -35,7 +34,6 @@ public class Exam implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date sitting_date;
 
-    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exam")
     private Set<ExamSubject> examSubject = new HashSet<>();
 

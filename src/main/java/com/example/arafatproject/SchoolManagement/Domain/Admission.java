@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -34,7 +33,6 @@ public class Admission {
     @JoinColumn(name = "school_id")
     private School school;
 
-    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "admission")
     private Set<AdmissionCourse> admissionCourses = new HashSet<>();
 

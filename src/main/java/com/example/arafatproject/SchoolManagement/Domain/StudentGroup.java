@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 
 import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class StudentGroup implements Serializable {
@@ -20,6 +21,7 @@ public class StudentGroup implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Student student;

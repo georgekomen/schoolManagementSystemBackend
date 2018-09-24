@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.View;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -51,7 +50,6 @@ public class User implements Serializable {
     @JoinColumn(name = "school_id")
     private School school;
 
-    @JsonBackReference
     @JsonView(View.UserDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Identification> identifications = new HashSet<>();
