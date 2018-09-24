@@ -2,8 +2,8 @@ package com.example.arafatproject.SchoolManagement.Controller;
 
 import java.util.List;
 
-import com.example.arafatproject.SchoolManagement.Domain.Invoice;
-import com.example.arafatproject.SchoolManagement.Domain.StudentPayment;
+import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
+import com.example.arafatproject.SchoolManagement.Domain.UserReceipt;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -19,22 +19,22 @@ public class InvoiceController {
     private InvoiceService invoiceService;
 
     @RequestMapping(value = "new_invoice", method = RequestMethod.POST)
-    public Invoice newInvoice(@RequestBody Invoice invoice) {
-        return invoiceService.newInvoice(invoice);
+    public UserInvoice newInvoice(@RequestBody UserInvoice userInvoice) {
+        return invoiceService.newInvoice(userInvoice);
     }
 
     @RequestMapping(value = "get_invoices", method = RequestMethod.GET)
-    public List<Invoice> getAllInvoices(Pageable pageable) {
+    public List<UserInvoice> getAllInvoices(Pageable pageable) {
         return invoiceService.getAllInvoices(pageable);
     }
 
-    @RequestMapping(value = "new_student_payment", method = RequestMethod.POST)
-    public StudentPayment newPayment(@RequestBody StudentPayment studentPayment) {
-        return invoiceService.newPayment(studentPayment);
+    @RequestMapping(value = "new_user_receipt", method = RequestMethod.POST)
+    public UserReceipt newPayment(@RequestBody UserReceipt userReceipt) {
+        return invoiceService.newPayment(userReceipt);
     }
 
-    @RequestMapping(value = "get_student_payments", method = RequestMethod.GET)
-    public List<StudentPayment> getAllStudentPayments(Pageable pageable) {
+    @RequestMapping(value = "get_user_receipts", method = RequestMethod.GET)
+    public List<UserReceipt> getAllStudentPayments(Pageable pageable) {
         return invoiceService.getAllStudentPayments(pageable);
     }
 }

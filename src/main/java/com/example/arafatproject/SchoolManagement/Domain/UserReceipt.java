@@ -12,13 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
+import com.example.arafatproject.SchoolManagement.Domain.Users.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-public class StudentPayment implements Serializable {
+public class UserReceipt implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -33,14 +33,18 @@ public class StudentPayment implements Serializable {
 
     private Double amount;
 
+    @Enumerated(EnumType.STRING)
+    private PayTo payTo;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "invoice_id")
+    private UserInvoice userInvoice;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Student student;
-
-    @ManyToOne
-    @JoinColumn(name = "student_group_id")
-    private StudentGroup studentGroup;
+    private User user;
 
     public Long getId() {
         return id;
@@ -74,35 +78,51 @@ public class StudentPayment implements Serializable {
         this.amount = amount;
     }
 
-    public Student getStudent() {
-        return student;
+    public User getUser() {
+        return user;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public StudentGroup getStudentGroup() {
-        return studentGroup;
-    }
 
-    public void setStudentGroup(StudentGroup studentGroup) {
-        this.studentGroup = studentGroup;
-    }
-
-    public StudentPayment() {
+    public UserReceipt() {
 
     }
 
-    public StudentPayment(PaymentMode payment_mode, Date payment_date, Double amount, Student student, StudentGroup studentGroup) {
+    public UserReceipt(PaymentMode payment_mode, Date payment_date, Double amount, PayTo payTo, User user,
+                       UserInvoice userInvoice) {
         this.payment_mode = payment_mode;
         this.payment_date = payment_date;
         this.amount = amount;
-        this.student = student;
-        this.studentGroup = studentGroup;
+        this.payTo = payTo;
+        this.user = user;
+        this.userInvoice = userInvoice;
+    }
+
+    public PayTo getPayTo() {
+        return payTo;
+    }
+
+    public void setPayTo(PayTo payTo) {
+        this.payTo = payTo;
+    }
+
+    public UserInvoice getUserInvoice() {
+        return userInvoice;
+    }
+
+    public void setUserInvoice(UserInvoice userInvoice) {
+        this.userInvoice = userInvoice;
     }
 
     public enum PaymentMode {
         Mpesa, Equity_bank, KCB_bank
+    }
+
+    public enum PayTo{
+        SCHOOL_TO_USER,
+        USER_TO_SCHOOL
     }
 }

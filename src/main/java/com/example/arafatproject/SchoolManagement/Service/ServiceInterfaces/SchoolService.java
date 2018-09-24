@@ -6,7 +6,8 @@ import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
-import com.example.arafatproject.SchoolManagement.Domain._Group;
+import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
+import com.example.arafatproject.SchoolManagement.Domain._Class;
 import org.springframework.data.domain.Pageable;
 
 public interface SchoolService {
@@ -26,7 +27,11 @@ public interface SchoolService {
 
     List<Course> getAllCourses(Pageable pageable);
 
-    _Group newGroup(_Group group);
+    _Class newClass(_Class class1);
 
-    List<_Group> getAllGroups(Pageable pageable);
+    List<_Class> getAllClasses(Pageable pageable);
+
+    StudentClass newStudentClass(StudentClass studentClass);
+
+    List<StudentClass> getStudentClasses(Pageable pageable);
 }

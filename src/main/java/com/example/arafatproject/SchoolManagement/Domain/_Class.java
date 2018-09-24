@@ -11,12 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class _Group implements Serializable {
+public class _Class implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -42,21 +41,16 @@ public class _Group implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date expected_end_date;
 
-    @ManyToOne
-    @JoinColumn(name = "invoice_id")
-    private Invoice invoice;
-
-    public _Group() {
+    public _Class() {
 
     }
 
-    public _Group(School school, Course course, Date date_created,
-                  Date expected_end_date, Invoice invoice, Term term, String academicYear) {
+    public _Class(School school, Course course, Date date_created,
+                  Date expected_end_date, Term term, String academicYear) {
         this.school = school;
         this.course = course;
         this.date_created = date_created;
         this.expected_end_date = expected_end_date;
-        this.invoice = invoice;
         this.term = term;
         this.academicYear = academicYear;
     }
@@ -91,14 +85,6 @@ public class _Group implements Serializable {
 
     public void setDate_created(Date date_created) {
         this.date_created = date_created;
-    }
-
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
     }
 
     public Date getExpected_end_date() {

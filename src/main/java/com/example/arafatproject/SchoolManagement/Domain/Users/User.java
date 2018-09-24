@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.School;
+import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -53,6 +54,11 @@ public class User implements Serializable {
     @JsonView(View.UserDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Identification> identifications = new HashSet<>();
+
+    @JsonView(View.UserDetails.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<UserInvoice> userInvoices = new HashSet<>();
+
 
     public User(String first_name, String middle_name, String last_name, Gender gender, School school, String phoneNumber, String email) {
         this.first_name = first_name;

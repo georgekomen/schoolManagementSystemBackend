@@ -6,7 +6,8 @@ import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
-import com.example.arafatproject.SchoolManagement.Domain._Group;
+import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
+import com.example.arafatproject.SchoolManagement.Domain._Class;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -61,13 +62,23 @@ public class SchoolController {
         return schoolService.getAllCourses(pageable);
     }
 
-    @RequestMapping(value = "new_group", method = RequestMethod.POST)
-    public _Group newGroup(@RequestBody _Group group) {
-        return schoolService.newGroup(group);
+    @RequestMapping(value = "new_class", method = RequestMethod.POST)
+    public _Class newClass(@RequestBody _Class class1) {
+        return schoolService.newClass(class1);
     }
 
-    @RequestMapping(value = "get_groups", method = RequestMethod.GET)
-    public List<_Group> getAllGroups(Pageable pageable){
-        return schoolService.getAllGroups(pageable);
+    @RequestMapping(value = "new_student_class", method = RequestMethod.POST)
+    public StudentClass newStudentClass(@RequestBody StudentClass studentClass) {
+        return schoolService.newStudentClass(studentClass);
+    }
+
+    @RequestMapping(value = "get_classes", method = RequestMethod.GET)
+    public List<_Class> getAllClasses(Pageable pageable){
+        return schoolService.getAllClasses(pageable);
+    }
+
+    @RequestMapping(value = "get_student_classes", method = RequestMethod.GET)
+    public List<StudentClass> getStudentClasses(Pageable pageable){
+        return schoolService.getStudentClasses(pageable);
     }
 }

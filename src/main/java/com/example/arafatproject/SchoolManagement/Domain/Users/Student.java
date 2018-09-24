@@ -12,8 +12,7 @@ import javax.persistence.OneToMany;
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
-import com.example.arafatproject.SchoolManagement.Domain.StudentGroup;
-import com.example.arafatproject.SchoolManagement.Domain.StudentPayment;
+import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -26,11 +25,7 @@ public class Student extends User implements Serializable {
 
     @JsonView(View.StudentDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private Set<StudentGroup> studentGroups = new HashSet<>();
-
-    @JsonView(View.StudentDetails.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private Set<StudentPayment> studentPayments = new HashSet<>();
+    private Set<StudentClass> studentClasses = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "course_id")

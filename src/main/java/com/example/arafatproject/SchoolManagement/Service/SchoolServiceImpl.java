@@ -6,12 +6,14 @@ import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
-import com.example.arafatproject.SchoolManagement.Domain._Group;
+import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
+import com.example.arafatproject.SchoolManagement.Domain._Class;
 import com.example.arafatproject.SchoolManagement.Repository.AdmissionCourseRepository;
 import com.example.arafatproject.SchoolManagement.Repository.AdmissionRepository;
 import com.example.arafatproject.SchoolManagement.Repository.CourseRepository;
-import com.example.arafatproject.SchoolManagement.Repository.GroupRepository;
+import com.example.arafatproject.SchoolManagement.Repository.ClassRepository;
 import com.example.arafatproject.SchoolManagement.Repository.SchoolRepository;
+import com.example.arafatproject.SchoolManagement.Repository.StudentClassRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +34,10 @@ public class SchoolServiceImpl implements SchoolService {
     private CourseRepository courseRepository;
 
     @Autowired
-    private GroupRepository groupRepository;
+    private ClassRepository classRepository;
+
+    @Autowired
+    private StudentClassRepository studentClassRepository;
 
     @Override
     public School newschool(School school) {
@@ -81,16 +86,28 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
-    public _Group newGroup(_Group group) {
-        _Group group1 = new _Group(group.getSchool(), group.getCourse(),
-                group.getDate_created(), group.getExpected_end_date(), group.getInvoice(),
-                group.getTerm(), group.getAcademicYear());
+    public _Class newClass(_Class class1) {
+        _Class class2 = new _Class(class1.getSchool(), class1.getCourse(),
+                class1.getDate_created(), class1.getExpected_end_date(),
+                class1.getTerm(), class1.getAcademicYear());
 
-        return groupRepository.save(group1);
+        return classRepository.save(class2);
     }
 
     @Override
-    public List<_Group> getAllGroups(Pageable pageable) {
-        return groupRepository.findAll(pageable).getContent();
+    public List<_Class> getAllClasses(Pageable pageable) {
+        return classRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public StudentClass newStudentClass(StudentClass studentClass) {
+        StudentClass studentClass1 = new StudentClass(studentClass.getStudent(), studentClass.getDate_joined(),
+                studentClass.getClass1());
+        return studentClassRepository.save(studentClass1);
+    }
+
+    @Override
+    public List<StudentClass> getStudentClasses(Pageable pageable) {
+        return studentClassRepository.findAll(pageable).getContent();
     }
 }

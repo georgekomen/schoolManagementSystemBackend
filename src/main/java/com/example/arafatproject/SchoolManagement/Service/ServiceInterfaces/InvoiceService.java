@@ -2,16 +2,16 @@ package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
 import java.util.List;
 
-import com.example.arafatproject.SchoolManagement.Domain.Invoice;
-import com.example.arafatproject.SchoolManagement.Domain.StudentPayment;
+import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
+import com.example.arafatproject.SchoolManagement.Domain.UserReceipt;
 import org.springframework.data.domain.Pageable;
 
 public interface InvoiceService {
-    Invoice newInvoice(Invoice invoice);
+    UserInvoice newInvoice(UserInvoice userInvoice);
 
-    List<Invoice> getAllInvoices(Pageable pageable);
+    List<UserInvoice> getAllInvoices(Pageable pageable);
 
-    StudentPayment newPayment(StudentPayment studentPayment);
+    UserReceipt newPayment(UserReceipt userReceipt);
 
-    List<StudentPayment> getAllStudentPayments(Pageable pageable);
+    List<UserReceipt> getAllStudentPayments(Pageable pageable);
 }

@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.Exam;
 import com.example.arafatproject.SchoolManagement.Domain.ExamSubject;
-import com.example.arafatproject.SchoolManagement.Domain.SubjectExamResult;
+import com.example.arafatproject.SchoolManagement.Domain.ExamSubjectResult;
+import com.example.arafatproject.SchoolManagement.Domain.StudentExam;
 import org.springframework.data.domain.Pageable;
 
 public interface ExamService {
@@ -12,11 +13,15 @@ public interface ExamService {
 
     ExamSubject newExamSubject(ExamSubject examSubject);
 
-    SubjectExamResult newExamSubjectResult(SubjectExamResult subjectExamResult);
+    ExamSubjectResult newExamSubjectResult(ExamSubjectResult examSubjectResult);
 
     List<Exam> getExams(Pageable pageable);
 
     List<ExamSubject> getExamsSubjects(Pageable pageable);
 
-    List<SubjectExamResult> getExamResults(Pageable pageable);
+    List<ExamSubjectResult> getExamResults(Pageable pageable);
+
+    StudentExam newStudentExam(StudentExam studentExam);
+
+    List<StudentExam> getStudentExams(Pageable pageable);
 }

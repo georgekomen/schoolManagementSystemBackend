@@ -2,6 +2,9 @@ package com.example.arafatproject.SchoolManagement.Domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,14 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class StudentGroup implements Serializable {
+public class StudentClass implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -31,22 +34,20 @@ public class StudentGroup implements Serializable {
     private Date date_joined;
 
     @ManyToOne
-    @JoinColumn(name = "group_id")
-    private _Group group1;
+    @JoinColumn(name = "class_id")
+    private _Class class1;
 
-    @OneToOne
-    @JoinColumn(name = "exam_id")
-    private Exam exam;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentClass")
+    private Set<StudentExam> studentExams = new HashSet<>();
 
 
-    public StudentGroup(Student student, Date date_joined, _Group group, Exam exam) {
+    public StudentClass(Student student, Date date_joined, _Class class1) {
         this.student = student;
         this.date_joined = date_joined;
-        this.group1 = group;
-        this.exam = exam;
+        this.class1 = class1;
     }
 
-    public StudentGroup() {
+    public StudentClass() {
     }
 
     public Long getId() {
@@ -73,19 +74,12 @@ public class StudentGroup implements Serializable {
         this.date_joined = date_joined;
     }
 
-    public _Group getGroup() {
-        return group1;
+    public _Class getClass1() {
+        return class1;
     }
 
-    public void setGroup(_Group group) {
-        this.group1 = group;
+    public void setClass1(_Class class1) {
+        this.class1 = class1;
     }
 
-    public Exam getExam() {
-        return exam;
-    }
-
-    public void setExam(Exam exam) {
-        this.exam = exam;
-    }
 }
