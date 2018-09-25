@@ -41,7 +41,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public School newschool(School school) {
-        School school1 = new School(school.getName(), school.getDate_registered());
+        School school1 = new School(school.getName());
         return schoolRepository.save(school1);
     }
 
@@ -52,7 +52,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public Admission newAdmission(Admission admission) {
-        Admission admission1 = new Admission(admission.getDate_created(), admission.getAdmission_date(),
+        Admission admission1 = new Admission(admission.getAdmission_date(),
                 admission.getSchool());
         return admissionRepository.save(admission1);
     }
@@ -87,8 +87,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public _Class newClass(_Class class1) {
-        _Class class2 = new _Class(class1.getSchool(), class1.getCourse(),
-                class1.getDate_created(), class1.getExpected_end_date(),
+        _Class class2 = new _Class(class1.getSchool(), class1.getCourse(), class1.getExpected_end_date(),
                 class1.getTerm(), class1.getAcademicYear());
 
         return classRepository.save(class2);

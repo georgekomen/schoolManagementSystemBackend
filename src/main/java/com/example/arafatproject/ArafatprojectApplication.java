@@ -5,12 +5,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.filter.CorsFilter;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+@EnableJpaAuditing
 @EnableSwagger2
 @SpringBootApplication
 @Import({RepositoryConfiguration.class})
@@ -27,6 +30,12 @@ public class ArafatprojectApplication {
 		loggingFilter.setIncludeQueryString(true);
 		loggingFilter.setIncludePayload(true);
 		return loggingFilter;
+	}
+
+	@Bean
+	public AuditorAware<String> auditorProvider(){
+		//should return name of logged in user
+		return null;
 	}
 
 	@Bean

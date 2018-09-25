@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -15,10 +16,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners({AuditingEntityListener.class})
 public class _Class implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,6 +43,8 @@ public class _Class implements Serializable {
     @JoinColumn(name = "course_id")
     private Course course;
 
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date_created;
@@ -52,11 +60,10 @@ public class _Class implements Serializable {
 
     }
 
-    public _Class(School school, Course course, Date date_created,
+    public _Class(School school, Course course,
                   Date expected_end_date, Term term, String academicYear) {
         this.school = school;
         this.course = course;
-        this.date_created = date_created;
         this.expected_end_date = expected_end_date;
         this.term = term;
         this.academicYear = academicYear;

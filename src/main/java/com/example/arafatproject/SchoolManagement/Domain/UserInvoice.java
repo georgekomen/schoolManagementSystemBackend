@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -15,17 +16,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.example.arafatproject.SchoolManagement.Domain.Users.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners({AuditingEntityListener.class})
 public class UserInvoice implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date_created;
@@ -46,8 +54,7 @@ public class UserInvoice implements Serializable {
     public UserInvoice() {
     }
 
-    public UserInvoice(Date date_created, Long invoice_amount, InvoiceTo invoiceTo, User user) {
-        this.date_created = date_created;
+    public UserInvoice(Long invoice_amount, InvoiceTo invoiceTo, User user) {
         this.invoice_amount = invoice_amount;
         this.invoiceTo = invoiceTo;
         this.user = user;
