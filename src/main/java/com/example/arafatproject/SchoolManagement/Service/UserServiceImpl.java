@@ -28,6 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -103,17 +106,37 @@ public class UserServiceImpl implements UserService {
         return studentRepository.findAll(pageable).getContent();
     }
 
+    @Transactional
     @Override
     public EmployeeUser newEmployee(EmployeeUser employeeUser) {
         EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
                 employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getSchool(),
                 employeeUser.getPassword(), employeeUser.getDate_created(), employeeUser.getStatus(),
                 employeeUser.getPhoneNumber(), employeeUser.getEmail());
-        return employeeRepository.save(employeeUser1);
+        EmployeeUser employeeUser2 = employeeRepository.save(employeeUser1);
+
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+            @Override
+            public void afterCommit() {
+                employeeUser2.getIdentifications().forEach(id -> {
+                    Identification identification = new Identification(id.getUser(), id.getType(), id.getValue());
+                    identificationRepository.saveAndFlush(identification);
+                });
+            }
+        });
+
+        return employeeUser2;
     }
 
     @Override
     public List<EmployeeUser> getEmployees(Pageable pageable) {
         return employeeRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public Identification newIdentification(Identification identification) {
+        Identification identification1 = new Identification(identification.getUser(), identification.getType(),
+                identification.getValue());
+        return identificationRepository.save(identification1);
     }
 }

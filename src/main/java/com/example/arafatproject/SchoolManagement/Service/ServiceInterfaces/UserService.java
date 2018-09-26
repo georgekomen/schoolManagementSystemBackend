@@ -20,4 +20,6 @@ public interface UserService {
     EmployeeUser newEmployee(EmployeeUser employeeUser);
 
     List<EmployeeUser> getEmployees(Pageable pageable);
+
+    Identification newIdentification(Identification identification);
 }

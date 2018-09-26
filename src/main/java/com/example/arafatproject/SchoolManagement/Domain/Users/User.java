@@ -138,6 +138,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public Set<Identification> getIdentifications() {
+        return identifications;
+    }
+
+    public void setIdentifications(Set<Identification> identifications) {
+        this.identifications = identifications;
+    }
+
     public enum Gender {
         Male, Female
     }

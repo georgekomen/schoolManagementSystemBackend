@@ -38,6 +38,11 @@ public class UserController {
         return userService.newStudent(student);
     }
 
+    @RequestMapping(value = "new_user_identification", method = RequestMethod.POST)
+    public Identification newIdentification(@RequestBody Identification identification) {
+        return userService.newIdentification(identification);
+    }
+
     @JsonView(View.StudentDetails.class)
     @RequestMapping(value = "get_students", method = RequestMethod.GET)
     public List<Student> getStudentDetails(Pageable pageable) {
