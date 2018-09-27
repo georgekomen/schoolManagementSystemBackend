@@ -171,6 +171,14 @@ public class User implements Serializable {
         this.identifications = identifications;
     }
 
+    public Set<UserInvoice> getUserInvoices() {
+        return userInvoices;
+    }
+
+    public void setUserInvoices(Set<UserInvoice> userInvoices) {
+        this.userInvoices = userInvoices;
+    }
+
     public enum Gender {
         Male, Female
     }
