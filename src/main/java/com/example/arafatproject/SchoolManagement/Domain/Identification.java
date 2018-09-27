@@ -12,9 +12,11 @@ import javax.persistence.ManyToOne;
 
 import com.example.arafatproject.SchoolManagement.Domain.Users.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Identification implements Serializable {
+    @JsonView(View.UserDetails.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -24,9 +26,11 @@ public class Identification implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonView(View.UserDetails.class)
     @Enumerated(EnumType.STRING)
     private IdentificationType type;
 
+    @JsonView(View.UserDetails.class)
     private String value;
 
     public Identification(User user, IdentificationType type, String value) {

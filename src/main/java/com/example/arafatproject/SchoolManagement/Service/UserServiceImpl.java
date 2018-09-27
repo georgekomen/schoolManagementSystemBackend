@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
@@ -28,9 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronizationAdapter;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -106,29 +104,21 @@ public class UserServiceImpl implements UserService {
         return studentRepository.findAll(pageable).getContent();
     }
 
-    @Transactional
     @Override
-    public EmployeeUser newEmployee(EmployeeUser employeeUser) {
+    public Optional<EmployeeUser> newEmployee(EmployeeUser employeeUser) {
         EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
                 employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getSchool(),
                 employeeUser.getPassword(), employeeUser.getDate_created(), employeeUser.getStatus(),
                 employeeUser.getPhoneNumber(), employeeUser.getEmail());
-        // save in db and create new user (it has no identifications at this point)
+
         EmployeeUser employeeUser2 = employeeRepository.save(employeeUser1);
-        // get identifications from employee1
-        employeeUser2.setIdentifications(employeeUser1.getIdentifications());
-        // save identifications
-        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
-            @Override
-            public void afterCommit() {
-                employeeUser2.getIdentifications().forEach(id -> {
-                    Identification identification = new Identification(id.getUser(), id.getType(), id.getValue());
-                    identificationRepository.saveAndFlush(identification);
-                });
-            }
+
+        employeeUser.getIdentifications().forEach(id -> {
+            Identification identification = new Identification(employeeUser2, id.getType(), id.getValue());
+            identificationRepository.save(identification);
         });
 
-        return employeeUser2;
+        return employeeRepository.findById(employeeUser2.getId());
     }
 
     @Override
