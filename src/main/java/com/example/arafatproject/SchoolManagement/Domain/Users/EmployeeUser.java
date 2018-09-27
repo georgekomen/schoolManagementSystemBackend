@@ -12,7 +12,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
-import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -23,11 +22,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class EmployeeUser extends User implements Serializable {
     @JsonIgnore
     private String password;
-
-    @JsonView(View.EmployeeDetails.class)
-    @Column(columnDefinition = "DATETIME", nullable = true)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date date_created;
 
     @JsonView(View.EmployeeDetails.class)
     @Column(columnDefinition = "DATETIME", nullable = true)
@@ -50,10 +44,9 @@ public class EmployeeUser extends User implements Serializable {
     }
 
     public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender, School school,
-                        String password, Date date_created, EmployeeStatus status, String phone, String email) {
+                        String password, EmployeeStatus status, String phone, String email) {
         super(first_name, middle_name, last_name, gender, school, phone, email);
         this.password = password;
-        this.date_created = date_created;
         this.status = status;
     }
 
@@ -63,14 +56,6 @@ public class EmployeeUser extends User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getDate_created() {
-        return date_created;
-    }
-
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
     }
 
     public Date getLast_login() {
@@ -95,6 +80,14 @@ public class EmployeeUser extends User implements Serializable {
 
     public void setStatus(EmployeeStatus status) {
         this.status = status;
+    }
+
+    public Set<_Grant> getGrants() {
+        return grants;
+    }
+
+    public void setGrants(Set<_Grant> grants) {
+        this.grants = grants;
     }
 
     public enum EmployeeStatus {

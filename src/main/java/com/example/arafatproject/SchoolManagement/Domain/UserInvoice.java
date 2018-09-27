@@ -100,6 +100,14 @@ public class UserInvoice implements Serializable {
         this.user = user;
     }
 
+    public Set<UserReceipt> getUserReceipts() {
+        return userReceipts;
+    }
+
+    public void setUserReceipts(Set<UserReceipt> userReceipts) {
+        this.userReceipts = userReceipts;
+    }
+
     public enum InvoiceTo {
         SCHOOL_TO_USER,
         USER_TO_SCHOOL

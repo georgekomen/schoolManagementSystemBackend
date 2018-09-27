@@ -58,4 +58,12 @@ public class Student extends User implements Serializable {
     public void setAdmission(Admission admission) {
         this.admission = admission;
     }
+
+    public Set<StudentClass> getStudentClasses() {
+        return studentClasses;
+    }
+
+    public void setStudentClasses(Set<StudentClass> studentClasses) {
+        this.studentClasses = studentClasses;
+    }
 }

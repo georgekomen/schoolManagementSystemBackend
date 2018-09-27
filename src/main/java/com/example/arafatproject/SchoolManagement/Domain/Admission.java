@@ -84,4 +84,12 @@ public class Admission {
     public void setSchool(School school) {
         this.school = school;
     }
+
+    public Set<AdmissionCourse> getAdmissionCourses() {
+        return admissionCourses;
+    }
+
+    public void setAdmissionCourses(Set<AdmissionCourse> admissionCourses) {
+        this.admissionCourses = admissionCourses;
+    }
 }

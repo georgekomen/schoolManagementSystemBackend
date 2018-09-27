@@ -77,4 +77,12 @@ public class StudentExam {
     public void setStudentClass(StudentClass studentClass) {
         this.studentClass = studentClass;
     }
+
+    public Set<ExamSubjectResult> getExamSubjectResults() {
+        return examSubjectResults;
+    }
+
+    public void setExamSubjectResults(Set<ExamSubjectResult> examSubjectResults) {
+        this.examSubjectResults = examSubjectResults;
+    }
 }

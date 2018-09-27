@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
     public Optional<EmployeeUser> newEmployee(EmployeeUser employeeUser) {
         EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
                 employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getSchool(),
-                employeeUser.getPassword(), employeeUser.getDate_created(), employeeUser.getStatus(),
+                employeeUser.getPassword(), employeeUser.getStatus(),
                 employeeUser.getPhoneNumber(), employeeUser.getEmail());
 
         EmployeeUser employeeUser2 = employeeRepository.save(employeeUser1);

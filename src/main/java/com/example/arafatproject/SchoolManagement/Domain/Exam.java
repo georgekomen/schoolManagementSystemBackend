@@ -80,4 +80,11 @@ public class Exam implements Serializable {
     }
 
 
+    public Set<ExamSubject> getExamSubject() {
+        return examSubject;
+    }
+
+    public void setExamSubject(Set<ExamSubject> examSubject) {
+        this.examSubject = examSubject;
+    }
 }

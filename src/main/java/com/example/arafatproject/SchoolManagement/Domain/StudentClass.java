@@ -82,4 +82,11 @@ public class StudentClass implements Serializable {
         this.class1 = class1;
     }
 
+    public Set<StudentExam> getStudentExams() {
+        return studentExams;
+    }
+
+    public void setStudentExams(Set<StudentExam> studentExams) {
+        this.studentExams = studentExams;
+    }
 }

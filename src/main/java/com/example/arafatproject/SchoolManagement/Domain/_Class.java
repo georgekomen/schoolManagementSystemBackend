@@ -125,6 +125,14 @@ public class _Class implements Serializable {
         this.academicYear = academicYear;
     }
 
+    public Set<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(Set<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
     public enum Term {
         ONE, TWO, THREE
     }
