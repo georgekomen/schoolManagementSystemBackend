@@ -61,8 +61,7 @@ public class User implements Serializable {
 
 
     public User(String first_name, String middle_name, String last_name,
-                Gender gender, School school, String phoneNumber, String email,
-                Set<Identification> identifications) {
+                Gender gender, School school, String phoneNumber, String email) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
@@ -70,7 +69,6 @@ public class User implements Serializable {
         this.gender = gender;
         this.school = school;
         this.email = email;
-        this.identifications = identifications;
     }
 
     public User(){

@@ -50,8 +50,8 @@ public class EmployeeUser extends User implements Serializable {
     }
 
     public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender, School school,
-                        String password, Date date_created, EmployeeStatus status, String phone, String email, Set<Identification> identifications ) {
-        super(first_name, middle_name, last_name, gender, school, phone, email, identifications);
+                        String password, Date date_created, EmployeeStatus status, String phone, String email) {
+        super(first_name, middle_name, last_name, gender, school, phone, email);
         this.password = password;
         this.date_created = date_created;
         this.status = status;

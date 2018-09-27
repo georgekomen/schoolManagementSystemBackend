@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
     public Student newStudent(Student student) {
         Student student1 = new Student(student.getFirst_name(), student.getMiddle_name(), student.getLast_name(),
                 student.getGender(), student.getSchool(), student.getPhoneNumber(),
-                student.getEmail(), student.getCourse(), student.getAdmission(), student.getIdentifications());
+                student.getEmail(), student.getCourse(), student.getAdmission());
         return studentRepository.save(student1);
     }
 
@@ -112,9 +112,12 @@ public class UserServiceImpl implements UserService {
         EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
                 employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getSchool(),
                 employeeUser.getPassword(), employeeUser.getDate_created(), employeeUser.getStatus(),
-                employeeUser.getPhoneNumber(), employeeUser.getEmail(), employeeUser.getIdentifications());
+                employeeUser.getPhoneNumber(), employeeUser.getEmail());
+        // save in db and create new user (it has no identifications at this point)
         EmployeeUser employeeUser2 = employeeRepository.save(employeeUser1);
-
+        // get identifications from employee1
+        employeeUser2.setIdentifications(employeeUser1.getIdentifications());
+        // save identifications
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
             @Override
             public void afterCommit() {
