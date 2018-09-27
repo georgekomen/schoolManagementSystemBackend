@@ -2,7 +2,6 @@ package com.example.arafatproject.SchoolManagement.Controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
@@ -50,8 +49,9 @@ public class UserController {
         return userService.getStudentDetails(pageable);
     }
 
+    @JsonView(View.EmployeeDetails.class)
     @RequestMapping(value = "new_employee", method = RequestMethod.POST)
-    public Optional<EmployeeUser> newStudent(@RequestBody EmployeeUser employeeUser) {
+    public EmployeeUser newStudent(@RequestBody EmployeeUser employeeUser) {
         return userService.newEmployee(employeeUser);
     }
 

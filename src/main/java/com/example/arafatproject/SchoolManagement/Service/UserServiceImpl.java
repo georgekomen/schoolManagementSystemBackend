@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
@@ -105,7 +104,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<EmployeeUser> newEmployee(EmployeeUser employeeUser) {
+    public EmployeeUser newEmployee(EmployeeUser employeeUser) {
         EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
                 employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getSchool(),
                 employeeUser.getPassword(), employeeUser.getStatus(),
@@ -117,8 +116,9 @@ public class UserServiceImpl implements UserService {
             Identification identification = new Identification(employeeUser2, id.getType(), id.getValue());
             identificationRepository.save(identification);
         });
+        employeeUser.setId(employeeUser2.getId());
 
-        return employeeRepository.findById(employeeUser2.getId());
+        return employeeUser;
     }
 
     @Override

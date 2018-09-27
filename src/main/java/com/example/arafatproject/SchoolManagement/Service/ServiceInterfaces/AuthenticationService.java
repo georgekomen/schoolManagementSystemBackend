@@ -19,4 +19,6 @@ public interface AuthenticationService {
     List<Permission> getPermissions(Pageable pageable);
 
     List<_Grant> getGrants(Pageable pageable);
+
+    List<_Grant> getUserGrants(Pageable pageable, Long userId);
 }

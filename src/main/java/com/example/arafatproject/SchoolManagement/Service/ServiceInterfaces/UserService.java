@@ -2,7 +2,6 @@ package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
@@ -18,7 +17,7 @@ public interface UserService {
 
     List<Student> getStudentDetails(Pageable pageable);
 
-    Optional<EmployeeUser> newEmployee(EmployeeUser employeeUser);
+    EmployeeUser newEmployee(EmployeeUser employeeUser);
 
     List<EmployeeUser> getEmployees(Pageable pageable);
 

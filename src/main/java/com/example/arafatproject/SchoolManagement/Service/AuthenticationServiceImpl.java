@@ -15,7 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import static com.example.arafatproject.SchoolManagement.Specifications.grantSpecification.getGrantBySpecification;
+import static org.springframework.data.jpa.domain.Specifications.where;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -64,5 +68,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public List<_Grant> getGrants(Pageable pageable) {
         return grantRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public List<_Grant> getUserGrants(Pageable pageable, Long userId) {
+        return grantRepository.findAll(where(getGrantBySpecification(userId)), pageable).getContent();
     }
 }
