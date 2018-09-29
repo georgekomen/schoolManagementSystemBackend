@@ -19,7 +19,7 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @RequestMapping(value = "new_invoice", method = RequestMethod.POST)
+    @RequestMapping(value = "new_user_invoice", method = RequestMethod.POST)
     public UserInvoice newInvoice(@RequestBody UserInvoice userInvoice) {
         return invoiceService.newInvoice(userInvoice);
     }
