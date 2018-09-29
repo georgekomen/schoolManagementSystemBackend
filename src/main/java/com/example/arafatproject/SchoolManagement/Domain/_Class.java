@@ -58,7 +58,7 @@ public class _Class implements Serializable {
     private Date end_date;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
-    private Set<Invoice> invoices = new HashSet<>();
+    private Set<ClassInvoice> classInvoices = new HashSet<>();
 
     public _Class() {
 
@@ -130,12 +130,12 @@ public class _Class implements Serializable {
         this.name = name;
     }
 
-    public Set<Invoice> getInvoices() {
-        return invoices;
+    public Set<ClassInvoice> getClassInvoices() {
+        return classInvoices;
     }
 
-    public void setInvoices(Set<Invoice> invoices) {
-        this.invoices = invoices;
+    public void setClassInvoices(Set<ClassInvoice> classInvoices) {
+        this.classInvoices = classInvoices;
     }
 
     public Date getStart_date() {

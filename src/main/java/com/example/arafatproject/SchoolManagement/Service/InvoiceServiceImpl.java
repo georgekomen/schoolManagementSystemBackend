@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.UserReceipt;
-import com.example.arafatproject.SchoolManagement.Repository.InvoiceRepository;
+import com.example.arafatproject.SchoolManagement.Repository.UserInvoiceRepository;
 import com.example.arafatproject.SchoolManagement.Repository.StudentPaymentRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
-    private InvoiceRepository invoiceRepository;
+    private UserInvoiceRepository userInvoiceRepository;
 
     @Autowired
     private StudentPaymentRepository studentRepository;
@@ -24,12 +24,12 @@ public class InvoiceServiceImpl implements InvoiceService {
         UserInvoice userInvoice1 = new UserInvoice(userInvoice.getInvoice_amount(),
                 userInvoice.getInvoiceTo(), userInvoice.getUser());
 
-        return invoiceRepository.save(userInvoice1);
+        return userInvoiceRepository.save(userInvoice1);
     }
 
     @Override
     public List<UserInvoice> getAllInvoices(Pageable pageable) {
-        return invoiceRepository.findAll(pageable).getContent();
+        return userInvoiceRepository.findAll(pageable).getContent();
     }
 
     @Override
