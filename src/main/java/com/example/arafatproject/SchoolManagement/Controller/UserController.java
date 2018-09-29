@@ -5,8 +5,7 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
-import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
-import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
+import com.example.arafatproject.SchoolManagement.Domain.User;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -25,20 +24,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "fingerprint/{studentId}/school/{schoolId}/{fingerType}/{action}",
+    @RequestMapping(value = "fingerprint/{userId}/school/{schoolId}/{fingerType}/{action}",
             method = RequestMethod.POST)
     public String uploadFingerprint(
             @PathVariable("fingerType") Identification.IdentificationType fingerType,
             @PathVariable("action") ActionType action,
-            @PathVariable("studentId") Long schoolId,
-            @PathVariable("schoolId") Student student,
+            @PathVariable("userId") Long schoolId,
+            @PathVariable("schoolId") User user,
             MultipartFile file) throws IOException {
-        return userService.uploadFingerprint(student, fingerType, action, file, schoolId);
-    }
-
-    @RequestMapping(value = "new_student", method = RequestMethod.POST)
-    public Student newStudent(@RequestBody Student student) {
-        return userService.newStudent(student);
+        return userService.uploadFingerprint(user, fingerType, action, file, schoolId);
     }
 
     @RequestMapping(value = "new_user_identification", method = RequestMethod.POST)
@@ -51,22 +45,16 @@ public class UserController {
         return userService.newUserSchool(userSchools);
     }
 
-    @JsonView(View.StudentDetails.class)
-    @RequestMapping(value = "get_students", method = RequestMethod.GET)
-    public List<Student> getStudentDetails(Pageable pageable) {
-        return userService.getStudentDetails(pageable);
+    @JsonView(View.EmployeeDetails.class)
+    @RequestMapping(value = "new_user", method = RequestMethod.POST)
+    public User newUsers(@RequestBody User user) {
+        return userService.newUser(user);
     }
 
     @JsonView(View.EmployeeDetails.class)
-    @RequestMapping(value = "new_employee", method = RequestMethod.POST)
-    public EmployeeUser newStudent(@RequestBody EmployeeUser employeeUser) {
-        return userService.newEmployee(employeeUser);
-    }
-
-    @JsonView(View.EmployeeDetails.class)
-    @RequestMapping(value = "get_employees", method = RequestMethod.GET)
-    public List<EmployeeUser> getEmployees(Pageable pageable) {
-        return userService.getEmployees(pageable);
+    @RequestMapping(value = "get_users", method = RequestMethod.GET)
+    public List<User> getUsers(Pageable pageable) {
+        return userService.getUsers(pageable);
     }
 
     public enum ActionType {

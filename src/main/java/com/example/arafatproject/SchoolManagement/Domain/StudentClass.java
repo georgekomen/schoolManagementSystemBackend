@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,7 +26,7 @@ public class StudentClass implements Serializable {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Student student;
+    private User user;
 
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -41,8 +40,8 @@ public class StudentClass implements Serializable {
     private Set<StudentExam> studentExams = new HashSet<>();
 
 
-    public StudentClass(Student student, Date date_joined, _Class class1) {
-        this.student = student;
+    public StudentClass(User user, Date date_joined, _Class class1) {
+        this.user = user;
         this.date_joined = date_joined;
         this.class1 = class1;
     }
@@ -58,12 +57,12 @@ public class StudentClass implements Serializable {
         this.id = id;
     }
 
-    public Student getStudent() {
-        return student;
+    public User getUser() {
+        return user;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getDate_joined() {

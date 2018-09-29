@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -21,8 +20,8 @@ public class StudentExam {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="student_id")
-    private Student student;
+    @JoinColumn(name="user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "exam_id")
@@ -36,8 +35,8 @@ public class StudentExam {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentExam")
     private Set<ExamSubjectResult> examSubjectResults = new HashSet<>();
 
-    public StudentExam(Student student, Exam exam, StudentClass studentClass) {
-        this.student = student;
+    public StudentExam(User user, Exam exam, StudentClass studentClass) {
+        this.user = user;
         this.exam = exam;
         this.studentClass = studentClass;
     }
@@ -46,12 +45,12 @@ public class StudentExam {
 
     }
 
-    public Student getStudent() {
-        return student;
+    public User getUser() {
+        return user;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Exam getExam() {

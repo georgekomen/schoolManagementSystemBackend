@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.LoginCreds;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.Permission;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
-import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
+import com.example.arafatproject.SchoolManagement.Domain.User;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +23,7 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public Optional<EmployeeUser> login(@RequestBody LoginCreds loginCreds) {
+    public Optional<User> login(@RequestBody LoginCreds loginCreds) {
         return authenticationService.login(loginCreds);
     }
 

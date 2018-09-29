@@ -1,4 +1,4 @@
-package com.example.arafatproject.SchoolManagement.Domain.Users;
+package com.example.arafatproject.SchoolManagement.Domain;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,15 +13,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.example.arafatproject.SchoolManagement.Domain.Identification;
-import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
-import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
-import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
-import com.example.arafatproject.SchoolManagement.Domain.View;
+import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -67,7 +65,32 @@ public class User implements Serializable {
 
     @JsonView(View.UserDetails.class)
     @Enumerated(EnumType.STRING)
-    private Student.Gender gender;
+    private Gender gender;
+
+    @JsonView(View.EmployeeDetails.class)
+    @Column(columnDefinition = "DATETIME", nullable = true)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date last_login;
+
+    @JsonView(View.EmployeeDetails.class)
+    private Long login_attempts;
+
+    @JsonView(View.EmployeeDetails.class)
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @JsonView(View.StudentDetails.class)
+    @ManyToOne
+    @JoinColumn(name = "admission_id")
+    private Admission admission;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+
+    @JsonView(View.EmployeeDetails.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<_Grant> grants = new HashSet<>();
 
     @JsonView(View.UserDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -81,15 +104,14 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<UserInvoice> userInvoices = new HashSet<>();
 
-
     @JsonView(View.StudentDetails.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<StudentClass> studentClasses = new HashSet<>();
 
 
-
     public User(String first_name, String middle_name, String last_name,
-                Gender gender, String phoneNumber, String email, Role role) {
+                Gender gender, String phoneNumber, String email, Role role,
+                Status status, Admission admission, Course course) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
@@ -97,6 +119,9 @@ public class User implements Serializable {
         this.gender = gender;
         this.email = email;
         this.role = role;
+        this.status = status;
+        this.admission = admission;
+        this.course = course;
     }
 
     public User(){
@@ -119,11 +144,11 @@ public class User implements Serializable {
         this.first_name = first_name;
     }
 
-    public Student.Gender getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Student.Gender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -175,6 +200,54 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public Date getLast_login() {
+        return last_login;
+    }
+
+    public void setLast_login(Date last_login) {
+        this.last_login = last_login;
+    }
+
+    public Long getLogin_attempts() {
+        return login_attempts;
+    }
+
+    public void setLogin_attempts(Long login_attempts) {
+        this.login_attempts = login_attempts;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Set<_Grant> getGrants() {
+        return grants;
+    }
+
+    public void setGrants(Set<_Grant> grants) {
+        this.grants = grants;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Admission getAdmission() {
+        return admission;
+    }
+
+    public void setAdmission(Admission admission) {
+        this.admission = admission;
+    }
+
     public Set<Identification> getIdentifications() {
         return identifications;
     }
@@ -217,6 +290,10 @@ public class User implements Serializable {
 
     public enum Gender {
         Male, Female
+    }
+
+    public enum Status {
+        ACTIVE, INACTIVE
     }
 
     public enum Role {

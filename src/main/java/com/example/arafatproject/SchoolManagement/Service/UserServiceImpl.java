@@ -11,12 +11,10 @@ import java.util.List;
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
-import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
-import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
+import com.example.arafatproject.SchoolManagement.Domain.User;
 import com.example.arafatproject.SchoolManagement.Repository.IdentificationRepository;
 import com.example.arafatproject.SchoolManagement.Repository.UserSchoolRepository;
-import com.example.arafatproject.SchoolManagement.Repository.Users.EmployeeRepository;
-import com.example.arafatproject.SchoolManagement.Repository.Users.StudentRepository;
+import com.example.arafatproject.SchoolManagement.Repository.UserRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
@@ -39,10 +37,7 @@ public class UserServiceImpl implements UserService {
     private IdentificationRepository identificationRepository;
 
     @Autowired
-    private StudentRepository studentRepository;
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private UserSchoolRepository userSchoolRepository;
@@ -52,7 +47,7 @@ public class UserServiceImpl implements UserService {
     private Storage storage = StorageOptions.getDefaultInstance().getService();
 
     @Override
-    public String uploadFingerprint(Student student, Identification.IdentificationType fingerType, UserController.ActionType action, MultipartFile file, Long schoolId) throws IOException {
+    public String uploadFingerprint(User user, Identification.IdentificationType fingerType, UserController.ActionType action, MultipartFile file, Long schoolId) throws IOException {
         switch (action) {
             case Enroll:
                 List<Acl> acls = new ArrayList<>();
@@ -60,10 +55,10 @@ public class UserServiceImpl implements UserService {
                 Blob blob =
                         storage.create(
                                 BlobInfo.newBuilder(bucketName, schoolId.toString() +
-                                        "/fingerprints/" + student.getId().toString() + "/" +
+                                        "/fingerprints/" + user.getId().toString() + "/" +
                                         fingerType).setAcl(acls).build(), file.getInputStream());
                 // add to student identifications
-                Identification identification = new Identification(student, fingerType, blob.getMediaLink());
+                Identification identification = new Identification(user, fingerType, blob.getMediaLink());
                 identificationRepository.save(identification);
 
                 // return the public download link
@@ -71,7 +66,7 @@ public class UserServiceImpl implements UserService {
             case Verify:
                 Double matchIndex;
                 try {
-                    Identification identification1 = identificationRepository.findByStudentIdAndIDtype(student, fingerType);
+                    Identification identification1 = identificationRepository.findByStudentIdAndIDtype(user, fingerType);
                     URL url = new URL(identification1.getValue());
                     try (InputStream templateInputStream = url.openStream();
                          InputStream imageInputStream = file.getInputStream();
@@ -96,44 +91,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Student newStudent(Student student) {
-        Student student1 = new Student(student.getFirst_name(), student.getMiddle_name(), student.getLast_name(),
-                student.getGender(), student.getPhoneNumber(),
-                student.getEmail(), student.getCourse(), student.getAdmission());
-        return studentRepository.save(student1);
-    }
+    public User newUser(User user) {
+        User user1 = new User(user.getFirst_name(), user.getMiddle_name(),
+                user.getLast_name(), user.getGender(),
+                user.getPhoneNumber(), user.getEmail(), user.getRole(),
+                user.getStatus(), user.getAdmission(), user.getCourse());
 
-    @Override
-    public List<Student> getStudentDetails(Pageable pageable) {
-        return studentRepository.findAll(pageable).getContent();
-    }
+        User user2 = userRepository.save(user1);
 
-    @Override
-    public EmployeeUser newEmployee(EmployeeUser employeeUser) {
-        EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
-                employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getStatus(),
-                employeeUser.getPhoneNumber(), employeeUser.getEmail(), employeeUser.getRole());
-
-        EmployeeUser employeeUser2 = employeeRepository.save(employeeUser1);
-
-        employeeUser.getIdentifications().forEach(id -> {
-            Identification identification = new Identification(employeeUser2, id.getType(), id.getValue());
+        user.getIdentifications().forEach(id -> {
+            Identification identification = new Identification(user2, id.getType(), id.getValue());
             identificationRepository.save(identification);
         });
 
-        employeeUser.getUserSchools().forEach(sch -> {
-            UserSchools userSchools = new UserSchools(UserSchools.Status.ACTIVE, employeeUser2, sch.getSchool());
+        user.getUserSchools().forEach(sch -> {
+            UserSchools userSchools = new UserSchools(UserSchools.Status.ACTIVE, user2, sch.getSchool());
             userSchoolRepository.save(userSchools);
         });
 
-        employeeUser.setId(employeeUser2.getId());
+        user.setId(user2.getId());
 
-        return employeeUser;
+        return user;
     }
 
     @Override
-    public List<EmployeeUser> getEmployees(Pageable pageable) {
-        return employeeRepository.findAll(pageable).getContent();
+    public List<User> getUsers(Pageable pageable) {
+        return userRepository.findAll(pageable).getContent();
     }
 
     @Override

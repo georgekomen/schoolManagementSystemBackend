@@ -6,11 +6,11 @@ import java.util.Optional;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.LoginCreds;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.Permission;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
-import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
+import com.example.arafatproject.SchoolManagement.Domain.User;
 import org.springframework.data.domain.Pageable;
 
 public interface AuthenticationService {
-    Optional<EmployeeUser> login(LoginCreds loginCreds);
+    Optional<User> login(LoginCreds loginCreds);
 
     Permission newPermission(Permission permission);
 

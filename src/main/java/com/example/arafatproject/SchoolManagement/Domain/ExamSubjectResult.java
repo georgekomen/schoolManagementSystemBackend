@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -23,8 +22,8 @@ public class ExamSubjectResult implements Serializable {
     private ExamSubject examSubject;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private Long result_mark;
 
@@ -33,9 +32,9 @@ public class ExamSubjectResult implements Serializable {
     @JoinColumn(name="student_exam_id")
     private StudentExam studentExam;
 
-    public ExamSubjectResult(ExamSubject examSubject, Student student, Long result_mark, StudentExam studentExam) {
+    public ExamSubjectResult(ExamSubject examSubject, User user, Long result_mark, StudentExam studentExam) {
         this.examSubject = examSubject;
-        this.student = student;
+        this.user = user;
         this.result_mark = result_mark;
         this.studentExam = studentExam;
     }
@@ -61,12 +60,12 @@ public class ExamSubjectResult implements Serializable {
         this.examSubject = examSubject;
     }
 
-    public Student getStudent() {
-        return student;
+    public User getUser() {
+        return user;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getResult_mark() {

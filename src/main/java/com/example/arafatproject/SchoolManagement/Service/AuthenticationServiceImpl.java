@@ -6,10 +6,10 @@ import java.util.Optional;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.LoginCreds;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication.Permission;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
-import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
+import com.example.arafatproject.SchoolManagement.Domain.User;
 import com.example.arafatproject.SchoolManagement.Repository.Authentication.GrantRepository;
 import com.example.arafatproject.SchoolManagement.Repository.Authentication.PermissionRepository;
-import com.example.arafatproject.SchoolManagement.Repository.Users.EmployeeRepository;
+import com.example.arafatproject.SchoolManagement.Repository.UserRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +30,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private PermissionRepository permissionRepository;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private UserRepository userRepository;
 
     @Override
-    public Optional<EmployeeUser> login(LoginCreds loginCreds) {
-        Optional<EmployeeUser> employeeUser = employeeRepository.findByContact(loginCreds.getUsername());
+    public Optional<User> login(LoginCreds loginCreds) {
+        Optional<User> employeeUser = userRepository.findByContact(loginCreds.getUsername());
         if(employeeUser.isPresent()){
             if (employeeUser.get().getPassword().equals(loginCreds.getPassword())) {
                 return employeeUser;
@@ -54,7 +54,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public _Grant newGrant(_Grant grant) {
-        _Grant grant1 = new _Grant(grant.getName(), grant.getEmployeeUser(), grant.getPermission(), grant.getSchool());
+        _Grant grant1 = new _Grant(grant.getName(), grant.getUser(), grant.getPermission(), grant.getSchool());
 
         return grantRepository.save(grant1);
     }
