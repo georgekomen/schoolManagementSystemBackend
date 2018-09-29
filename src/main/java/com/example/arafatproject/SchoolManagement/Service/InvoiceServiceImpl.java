@@ -2,8 +2,10 @@ package com.example.arafatproject.SchoolManagement.Service;
 
 import java.util.List;
 
+import com.example.arafatproject.SchoolManagement.Domain.ClassInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.UserReceipt;
+import com.example.arafatproject.SchoolManagement.Repository.ClassInvoiceRepository;
 import com.example.arafatproject.SchoolManagement.Repository.UserInvoiceRepository;
 import com.example.arafatproject.SchoolManagement.Repository.StudentPaymentRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
@@ -18,6 +20,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Autowired
     private StudentPaymentRepository studentRepository;
+
+    @Autowired
+    private ClassInvoiceRepository classInvoiceRepository;
 
     @Override
     public UserInvoice newInvoice(UserInvoice userInvoice) {
@@ -44,5 +49,12 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public List<UserReceipt> getAllStudentPayments(Pageable pageable) {
         return studentRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public ClassInvoice newClassInvoice(ClassInvoice classInvoice) {
+        ClassInvoice classInvoice1 = new ClassInvoice(classInvoice.getName(), classInvoice.getClass1(),
+                classInvoice.getInvoice_amount());
+        return classInvoiceRepository.save(classInvoice1);
     }
 }

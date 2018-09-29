@@ -2,6 +2,7 @@ package com.example.arafatproject.SchoolManagement.Controller;
 
 import java.util.List;
 
+import com.example.arafatproject.SchoolManagement.Domain.ClassInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.UserReceipt;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
@@ -21,6 +22,11 @@ public class InvoiceController {
     @RequestMapping(value = "new_invoice", method = RequestMethod.POST)
     public UserInvoice newInvoice(@RequestBody UserInvoice userInvoice) {
         return invoiceService.newInvoice(userInvoice);
+    }
+
+    @RequestMapping(value = "new_class_invoice", method = RequestMethod.POST)
+    public ClassInvoice newClassInvoice(@RequestBody ClassInvoice classInvoice) {
+        return invoiceService.newClassInvoice(classInvoice);
     }
 
     @RequestMapping(value = "get_invoices", method = RequestMethod.GET)

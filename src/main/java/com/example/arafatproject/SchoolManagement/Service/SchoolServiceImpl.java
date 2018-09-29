@@ -14,6 +14,7 @@ import com.example.arafatproject.SchoolManagement.Repository.CourseRepository;
 import com.example.arafatproject.SchoolManagement.Repository.ClassRepository;
 import com.example.arafatproject.SchoolManagement.Repository.SchoolRepository;
 import com.example.arafatproject.SchoolManagement.Repository.StudentClassRepository;
+import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +39,9 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Autowired
     private StudentClassRepository studentClassRepository;
+
+    @Autowired
+    private InvoiceService invoiceService;
 
     @Override
     public School newschool(School school) {
@@ -90,7 +94,14 @@ public class SchoolServiceImpl implements SchoolService {
         _Class class2 = new _Class(class1.getSchool(), class1.getCourse(), class1.getEnd_date(),
                 class1.getTerm(), class1.getName(), class1.getStart_date());
 
-        return classRepository.save(class2);
+        _Class class3 = classRepository.save(class2);
+
+        class1.getClassInvoices().forEach(ci -> {
+            ci.setClass1(class3);
+            invoiceService.newClassInvoice(ci);
+        });
+
+        return class3;
     }
 
     @Override
