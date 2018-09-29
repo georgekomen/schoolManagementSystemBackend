@@ -16,9 +16,11 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class StudentClass implements Serializable {
+    @JsonView(View.UserDetails.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -28,14 +30,17 @@ public class StudentClass implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonView(View.UserDetails.class)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date_joined;
 
+    @JsonView(View.UserDetails.class)
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;
 
+    @JsonView(View.UserDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentClass")
     private Set<StudentExam> studentExams = new HashSet<>();
 

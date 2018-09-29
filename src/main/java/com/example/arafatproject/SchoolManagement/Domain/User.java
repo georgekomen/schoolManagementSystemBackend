@@ -44,7 +44,7 @@ public class User implements Serializable {
     @JsonView(View.UserDetails.class)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(columnDefinition = "DATETIME", nullable = true)
+    @Column(columnDefinition = "DATETIME")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date_created;
 
@@ -68,7 +68,9 @@ public class User implements Serializable {
     private Gender gender;
 
     @JsonView(View.EmployeeDetails.class)
-    @Column(columnDefinition = "DATETIME", nullable = true)
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "DATETIME")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date last_login;
 
@@ -84,6 +86,7 @@ public class User implements Serializable {
     @JoinColumn(name = "admission_id")
     private Admission admission;
 
+    @JsonView(View.StudentDetails.class)
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
@@ -104,7 +107,7 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<UserInvoice> userInvoices = new HashSet<>();
 
-    @JsonView(View.StudentDetails.class)
+    @JsonView(View.UserDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<StudentClass> studentClasses = new HashSet<>();
 
@@ -297,13 +300,7 @@ public class User implements Serializable {
     }
 
     public enum Role {
-        PRINCIPAL,
-        DEPUTY_PRINCIPAL,
-        FINANCE_MANAGER,
-        HEAD_OF_DEPARTMENT,
-        DEPUTY_HEAD_OF_DEPARTMENT,
-        TEACHER,
-        CLASS_TEACHER,
-        STUDENT
+        PRINCIPAL, DEPUTY_PRINCIPAL, FINANCE_MANAGER, HEAD_OF_DEPARTMENT,
+        DEPUTY_HEAD_OF_DEPARTMENT, TEACHER, CLASS_TEACHER, STUDENT
     }
 }
