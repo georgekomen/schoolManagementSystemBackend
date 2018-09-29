@@ -18,10 +18,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
+import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -33,6 +35,9 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @JsonIgnore
+    private String password;
 
     @JsonView(View.UserDetails.class)
     @Enumerated(EnumType.STRING)
@@ -75,6 +80,12 @@ public class User implements Serializable {
     @JsonView(View.UserDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<UserInvoice> userInvoices = new HashSet<>();
+
+
+    @JsonView(View.StudentDetails.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private Set<StudentClass> studentClasses = new HashSet<>();
+
 
 
     public User(String first_name, String middle_name, String last_name,
@@ -132,6 +143,14 @@ public class User implements Serializable {
         this.last_name = last_name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -178,6 +197,14 @@ public class User implements Serializable {
 
     public void setUserSchools(Set<UserSchools> userSchools) {
         this.userSchools = userSchools;
+    }
+
+    public Set<StudentClass> getStudentClasses() {
+        return studentClasses;
+    }
+
+    public void setStudentClasses(Set<StudentClass> studentClasses) {
+        this.studentClasses = studentClasses;
     }
 
     public Role getRole() {

@@ -111,8 +111,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public EmployeeUser newEmployee(EmployeeUser employeeUser) {
         EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
-                employeeUser.getLast_name(), employeeUser.getGender(),
-                employeeUser.getPassword(), employeeUser.getStatus(),
+                employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getStatus(),
                 employeeUser.getPhoneNumber(), employeeUser.getEmail(), employeeUser.getRole());
 
         EmployeeUser employeeUser2 = employeeRepository.save(employeeUser1);

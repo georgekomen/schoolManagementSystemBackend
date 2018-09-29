@@ -22,10 +22,6 @@ public class Student extends User implements Serializable {
     @JoinColumn(name = "admission_id")
     private Admission admission;
 
-    @JsonView(View.StudentDetails.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private Set<StudentClass> studentClasses = new HashSet<>();
-
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
@@ -55,13 +51,5 @@ public class Student extends User implements Serializable {
 
     public void setAdmission(Admission admission) {
         this.admission = admission;
-    }
-
-    public Set<StudentClass> getStudentClasses() {
-        return studentClasses;
-    }
-
-    public void setStudentClasses(Set<StudentClass> studentClasses) {
-        this.studentClasses = studentClasses;
     }
 }
