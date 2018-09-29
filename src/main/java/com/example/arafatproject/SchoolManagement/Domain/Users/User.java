@@ -13,15 +13,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
-import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
+import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -63,9 +61,8 @@ public class User implements Serializable {
     private Student.Gender gender;
 
     @JsonView(View.UserDetails.class)
-    @ManyToOne
-    @JoinColumn(name = "school_id")
-    private School school;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<UserSchools> userSchools = new HashSet<>();
 
     @JsonView(View.UserDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -77,13 +74,12 @@ public class User implements Serializable {
 
 
     public User(String first_name, String middle_name, String last_name,
-                Gender gender, School school, String phoneNumber, String email) {
+                Gender gender, String phoneNumber, String email) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
-        this.school = school;
         this.email = email;
     }
 
@@ -113,14 +109,6 @@ public class User implements Serializable {
 
     public void setGender(Student.Gender gender) {
         this.gender = gender;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
     }
 
     public String getMiddle_name() {
@@ -177,6 +165,14 @@ public class User implements Serializable {
 
     public void setUserInvoices(Set<UserInvoice> userInvoices) {
         this.userInvoices = userInvoices;
+    }
+
+    public Set<UserSchools> getUserSchools() {
+        return userSchools;
+    }
+
+    public void setUserSchools(Set<UserSchools> userSchools) {
+        this.userSchools = userSchools;
     }
 
     public enum Gender {

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
+import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
 import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.example.arafatproject.SchoolManagement.Domain.View;
@@ -24,13 +25,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "fingerprint/{student_id}/{fingerType}/{action}", method = RequestMethod.POST)
+    @RequestMapping(value = "fingerprint/{studentId}/school/{schoolId}/{fingerType}/{action}",
+            method = RequestMethod.POST)
     public String uploadFingerprint(
             @PathVariable("fingerType") Identification.IdentificationType fingerType,
             @PathVariable("action") ActionType action,
-            @PathVariable("student_id") Student student,
+            @PathVariable("studentId") Long schoolId,
+            @PathVariable("schoolId") Student student,
             MultipartFile file) throws IOException {
-        return userService.uploadFingerprint(student, fingerType, action, file);
+        return userService.uploadFingerprint(student, fingerType, action, file, schoolId);
     }
 
     @RequestMapping(value = "new_student", method = RequestMethod.POST)
@@ -41,6 +44,11 @@ public class UserController {
     @RequestMapping(value = "new_user_identification", method = RequestMethod.POST)
     public Identification newIdentification(@RequestBody Identification identification) {
         return userService.newIdentification(identification);
+    }
+
+    @RequestMapping(value = "new_user_school", method = RequestMethod.POST)
+    public UserSchools newUserSchool(@RequestBody UserSchools userSchools) {
+        return userService.newUserSchool(userSchools);
     }
 
     @JsonView(View.StudentDetails.class)

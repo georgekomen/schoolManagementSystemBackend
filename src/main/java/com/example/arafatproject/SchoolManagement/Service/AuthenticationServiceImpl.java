@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import static com.example.arafatproject.SchoolManagement.Specifications.grantSpecification.getGrantBySpecification;
@@ -55,7 +54,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public _Grant newGrant(_Grant grant) {
-        _Grant grant1 = new _Grant(grant.getName(), grant.getEmployeeUser(), grant.getPermission());
+        _Grant grant1 = new _Grant(grant.getName(), grant.getEmployeeUser(), grant.getPermission(), grant.getSchool());
 
         return grantRepository.save(grant1);
     }

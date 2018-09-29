@@ -43,9 +43,9 @@ public class EmployeeUser extends User implements Serializable {
 
     }
 
-    public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender, School school,
+    public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender,
                         String password, EmployeeStatus status, String phone, String email) {
-        super(first_name, middle_name, last_name, gender, school, phone, email);
+        super(first_name, middle_name, last_name, gender, phone, email);
         this.password = password;
         this.status = status;
     }

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,10 +29,15 @@ public class _Grant implements Serializable {
     @JoinColumn(name = "permission_id")
     private Permission permission;
 
-    public _Grant(String name, EmployeeUser employeeUser, Permission permission) {
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    private School school;
+
+    public _Grant(String name, EmployeeUser employeeUser, Permission permission, School school) {
         this.name = name;
         this.employeeUser = employeeUser;
         this.permission = permission;
+        this.school = school;
     }
 
     public _Grant() {
@@ -70,4 +76,11 @@ public class _Grant implements Serializable {
         this.permission = permission;
     }
 
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
 }

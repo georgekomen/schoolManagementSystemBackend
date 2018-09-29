@@ -10,9 +10,11 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
+import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
 import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import com.example.arafatproject.SchoolManagement.Repository.IdentificationRepository;
+import com.example.arafatproject.SchoolManagement.Repository.UserSchoolRepository;
 import com.example.arafatproject.SchoolManagement.Repository.Users.EmployeeRepository;
 import com.example.arafatproject.SchoolManagement.Repository.Users.StudentRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
@@ -42,19 +44,22 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private UserSchoolRepository userSchoolRepository;
+
     @Value("${bucketName}")
     private String bucketName;
     private Storage storage = StorageOptions.getDefaultInstance().getService();
 
     @Override
-    public String uploadFingerprint(Student student, Identification.IdentificationType fingerType, UserController.ActionType action, MultipartFile file) throws IOException {
+    public String uploadFingerprint(Student student, Identification.IdentificationType fingerType, UserController.ActionType action, MultipartFile file, Long schoolId) throws IOException {
         switch (action) {
             case Enroll:
                 List<Acl> acls = new ArrayList<>();
                 acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
                 Blob blob =
                         storage.create(
-                                BlobInfo.newBuilder(bucketName, student.getSchool().getId().toString() +
+                                BlobInfo.newBuilder(bucketName, schoolId.toString() +
                                         "/fingerprints/" + student.getId().toString() + "/" +
                                         fingerType).setAcl(acls).build(), file.getInputStream());
                 // add to student identifications
@@ -93,7 +98,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Student newStudent(Student student) {
         Student student1 = new Student(student.getFirst_name(), student.getMiddle_name(), student.getLast_name(),
-                student.getGender(), student.getSchool(), student.getPhoneNumber(),
+                student.getGender(), student.getPhoneNumber(),
                 student.getEmail(), student.getCourse(), student.getAdmission());
         return studentRepository.save(student1);
     }
@@ -106,7 +111,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public EmployeeUser newEmployee(EmployeeUser employeeUser) {
         EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
-                employeeUser.getLast_name(), employeeUser.getGender(), employeeUser.getSchool(),
+                employeeUser.getLast_name(), employeeUser.getGender(),
                 employeeUser.getPassword(), employeeUser.getStatus(),
                 employeeUser.getPhoneNumber(), employeeUser.getEmail());
 
@@ -131,5 +136,13 @@ public class UserServiceImpl implements UserService {
         Identification identification1 = new Identification(identification.getUser(), identification.getType(),
                 identification.getValue());
         return identificationRepository.save(identification1);
+    }
+
+    @Override
+    public UserSchools newUserSchool(UserSchools userSchools) {
+        UserSchools userSchools1 = new UserSchools(userSchools.getStatus(),
+                userSchools.getUser(), userSchools.getSchool());
+
+        return userSchoolRepository.save(userSchools1);
     }
 }

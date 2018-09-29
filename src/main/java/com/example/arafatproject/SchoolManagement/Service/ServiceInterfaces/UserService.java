@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
+import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.Users.EmployeeUser;
 import com.example.arafatproject.SchoolManagement.Domain.Users.Student;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {
-    String uploadFingerprint(Student studentId, Identification.IdentificationType fingerType, UserController.ActionType action, MultipartFile file) throws IOException;
+    String uploadFingerprint(Student studentId, Identification.IdentificationType fingerType, UserController.ActionType action, MultipartFile file, Long schoolId) throws IOException;
 
     Student newStudent(Student student);
 
@@ -22,4 +23,6 @@ public interface UserService {
     List<EmployeeUser> getEmployees(Pageable pageable);
 
     Identification newIdentification(Identification identification);
+
+    UserSchools newUserSchool(UserSchools userSchools);
 }
