@@ -121,6 +121,12 @@ public class UserServiceImpl implements UserService {
             Identification identification = new Identification(employeeUser2, id.getType(), id.getValue());
             identificationRepository.save(identification);
         });
+
+        employeeUser.getUserSchools().forEach(sch -> {
+            UserSchools userSchools = new UserSchools(sch.getStatus(), sch.getUser(), sch.getSchool());
+            userSchoolRepository.save(userSchools);
+        });
+
         employeeUser.setId(employeeUser2.getId());
 
         return employeeUser;
