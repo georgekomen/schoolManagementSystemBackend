@@ -55,6 +55,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     public ClassInvoice newClassInvoice(ClassInvoice classInvoice) {
         ClassInvoice classInvoice1 = new ClassInvoice(classInvoice.getName(), classInvoice.getClass1(),
                 classInvoice.getInvoice_amount());
+        //TODO - loop through all users in this class and invoice them this
         return classInvoiceRepository.save(classInvoice1);
     }
 }
