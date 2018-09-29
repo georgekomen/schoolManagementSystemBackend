@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
         EmployeeUser employeeUser1 = new EmployeeUser(employeeUser.getFirst_name(), employeeUser.getMiddle_name(),
                 employeeUser.getLast_name(), employeeUser.getGender(),
                 employeeUser.getPassword(), employeeUser.getStatus(),
-                employeeUser.getPhoneNumber(), employeeUser.getEmail());
+                employeeUser.getPhoneNumber(), employeeUser.getEmail(), employeeUser.getRole());
 
         EmployeeUser employeeUser2 = employeeRepository.save(employeeUser1);
 
@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
         });
 
         employeeUser.getUserSchools().forEach(sch -> {
-            UserSchools userSchools = new UserSchools(sch.getStatus(), sch.getUser(), sch.getSchool());
+            UserSchools userSchools = new UserSchools(UserSchools.Status.ACTIVE, employeeUser2, sch.getSchool());
             userSchoolRepository.save(userSchools);
         });
 

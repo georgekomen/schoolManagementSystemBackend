@@ -12,7 +12,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
-import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,8 +43,8 @@ public class EmployeeUser extends User implements Serializable {
     }
 
     public EmployeeUser(String first_name, String middle_name, String last_name, Gender gender,
-                        String password, EmployeeStatus status, String phone, String email) {
-        super(first_name, middle_name, last_name, gender, phone, email);
+                        String password, EmployeeStatus status, String phone, String email, Role role) {
+        super(first_name, middle_name, last_name, gender, phone, email, role);
         this.password = password;
         this.status = status;
     }

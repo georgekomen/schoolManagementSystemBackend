@@ -99,7 +99,7 @@ public class UserSchools {
         this.date_created = date_created;
     }
 
-    private enum Status {
+    public enum Status {
         ACTIVE, INACTIVE
     }
 }

@@ -11,8 +11,6 @@ import javax.persistence.OneToMany;
 
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
-import com.example.arafatproject.SchoolManagement.Domain.Identification;
-import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain.View;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -38,7 +36,7 @@ public class Student extends User implements Serializable {
 
     public Student(String first_name, String middle_name, String last_name,
                    Gender gender, String phone, String email, Course course, Admission admission) {
-        super(first_name, middle_name, last_name, gender, phone, email);
+        super(first_name, middle_name, last_name, gender, phone, email, Role.STUDENT);
         this.course = course;
         this.admission = admission;
     }

@@ -33,7 +33,7 @@ public class _Class implements Serializable {
     @Enumerated(EnumType.STRING)
     private Term term;
 
-    private String academicYear;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "school_id")
@@ -51,7 +51,11 @@ public class _Class implements Serializable {
 
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date expected_end_date;
+    private Date start_date;
+
+    @Column(columnDefinition = "DATETIME", nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date end_date;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
     private Set<Invoice> invoices = new HashSet<>();
@@ -61,12 +65,13 @@ public class _Class implements Serializable {
     }
 
     public _Class(School school, Course course,
-                  Date expected_end_date, Term term, String academicYear) {
+                  Date end_date, Term term, String name, Date start_date) {
         this.school = school;
         this.course = course;
-        this.expected_end_date = expected_end_date;
+        this.end_date = end_date;
         this.term = term;
-        this.academicYear = academicYear;
+        this.name = name;
+        this.start_date = start_date;
     }
 
     public Long getId() {
@@ -101,12 +106,12 @@ public class _Class implements Serializable {
         this.date_created = date_created;
     }
 
-    public Date getExpected_end_date() {
-        return expected_end_date;
+    public Date getEnd_date() {
+        return end_date;
     }
 
-    public void setExpected_end_date(Date expected_end_date) {
-        this.expected_end_date = expected_end_date;
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
     }
 
     public Term getTerm() {
@@ -117,12 +122,12 @@ public class _Class implements Serializable {
         this.term = term;
     }
 
-    public String getAcademicYear() {
-        return academicYear;
+    public String getName() {
+        return name;
     }
 
-    public void setAcademicYear(String academicYear) {
-        this.academicYear = academicYear;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Invoice> getInvoices() {
@@ -131,6 +136,14 @@ public class _Class implements Serializable {
 
     public void setInvoices(Set<Invoice> invoices) {
         this.invoices = invoices;
+    }
+
+    public Date getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
     }
 
     public enum Term {

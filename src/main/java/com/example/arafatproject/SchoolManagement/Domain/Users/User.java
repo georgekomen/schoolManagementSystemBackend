@@ -35,6 +35,10 @@ public class User implements Serializable {
     private Long id;
 
     @JsonView(View.UserDetails.class)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @JsonView(View.UserDetails.class)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME", nullable = true)
@@ -74,13 +78,14 @@ public class User implements Serializable {
 
 
     public User(String first_name, String middle_name, String last_name,
-                Gender gender, String phoneNumber, String email) {
+                Gender gender, String phoneNumber, String email, Role role) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.email = email;
+        this.role = role;
     }
 
     public User(){
@@ -175,7 +180,26 @@ public class User implements Serializable {
         this.userSchools = userSchools;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public enum Gender {
         Male, Female
+    }
+
+    public enum Role {
+        PRINCIPAL,
+        DEPUTY_PRINCIPAL,
+        FINANCE_MANAGER,
+        HEAD_OF_DEPARTMENT,
+        DEPUTY_HEAD_OF_DEPARTMENT,
+        TEACHER,
+        CLASS_TEACHER,
+        STUDENT
     }
 }
