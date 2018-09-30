@@ -111,7 +111,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public StudentClass newStudentClass(StudentClass studentClass) {
-        StudentClass studentClass1 = new StudentClass(studentClass.getUser(), studentClass.getDate_joined(),
+        StudentClass studentClass1 = new StudentClass(studentClass.getUser(),
                 studentClass.getClass1());
         return studentClassRepository.save(studentClass1);
     }

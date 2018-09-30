@@ -13,10 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 public class StudentClass implements Serializable {
@@ -30,6 +33,8 @@ public class StudentClass implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonView(View.UserDetails.class)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -41,9 +46,8 @@ public class StudentClass implements Serializable {
     private _Class class1;
 
 
-    public StudentClass(User user, Date date_joined, _Class class1) {
+    public StudentClass(User user, _Class class1) {
         this.user = user;
-        this.date_joined = date_joined;
         this.class1 = class1;
     }
 

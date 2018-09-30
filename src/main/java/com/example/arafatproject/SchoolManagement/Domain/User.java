@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -34,7 +35,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @JsonView(View.UserDetails.class)
@@ -81,11 +82,6 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @JsonView(View.StudentDetails.class)
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
-
     @JsonView(View.EmployeeDetails.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<_Grant> grants = new HashSet<>();
@@ -109,7 +105,7 @@ public class User implements Serializable {
 
     public User(String first_name, String middle_name, String last_name,
                 Gender gender, String phoneNumber, String email, Role role,
-                Status status, Course course) {
+                Status status) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
@@ -118,7 +114,6 @@ public class User implements Serializable {
         this.email = email;
         this.role = role;
         this.status = status;
-        this.course = course;
     }
 
     public User(){
@@ -227,14 +222,6 @@ public class User implements Serializable {
 
     public void setGrants(Set<_Grant> grants) {
         this.grants = grants;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
     }
 
     public Set<Identification> getIdentifications() {

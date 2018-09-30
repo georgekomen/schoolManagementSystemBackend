@@ -10,11 +10,13 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
+import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.User;
 import com.example.arafatproject.SchoolManagement.Repository.IdentificationRepository;
 import com.example.arafatproject.SchoolManagement.Repository.UserSchoolRepository;
 import com.example.arafatproject.SchoolManagement.Repository.UserRepository;
+import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
@@ -41,6 +43,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserSchoolRepository userSchoolRepository;
+
+    @Autowired
+    private SchoolService schoolService;
 
     @Value("${bucketName}")
     private String bucketName;
@@ -95,18 +100,23 @@ public class UserServiceImpl implements UserService {
         User user1 = new User(user.getFirst_name(), user.getMiddle_name(),
                 user.getLast_name(), user.getGender(),
                 user.getPhoneNumber(), user.getEmail(), user.getRole(),
-                user.getStatus(), user.getCourse());
+                user.getStatus());
 
         User user2 = userRepository.save(user1);
 
         user.getIdentifications().forEach(id -> {
             Identification identification = new Identification(user2, id.getType(), id.getValue());
-            identificationRepository.save(identification);
+            newIdentification(identification);
         });
 
         user.getUserSchools().forEach(sch -> {
             UserSchools userSchools = new UserSchools(UserSchools.Status.ACTIVE, user2, sch.getSchool());
             userSchoolRepository.save(userSchools);
+        });
+
+        user.getStudentClasses().forEach(cs -> {
+            StudentClass studentClass = new StudentClass(user2, cs.getClass1());
+            schoolService.newStudentClass(studentClass);
         });
 
         user.setId(user2.getId());
