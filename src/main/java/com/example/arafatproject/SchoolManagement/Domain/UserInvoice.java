@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.Nullable;
 
 @Entity
 @EntityListeners({AuditingEntityListener.class})
@@ -33,12 +34,17 @@ public class UserInvoice implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Nullable
+    @ManyToOne
+    @JoinColumn(name="class_invoice_id")
+    private ClassInvoice classInvoice;//general invoice
+
     @JsonView(View.UserDetails.class)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date date_created;
+    private Date invoice_date;
 
     @JsonView(View.UserDetails.class)
     private Long invoice_amount;
@@ -59,10 +65,11 @@ public class UserInvoice implements Serializable {
     public UserInvoice() {
     }
 
-    public UserInvoice(Long invoice_amount, InvoiceTo invoiceTo, User user) {
+    public UserInvoice(Long invoice_amount, InvoiceTo invoiceTo, User user, ClassInvoice classInvoice) {
         this.invoice_amount = invoice_amount;
         this.invoiceTo = invoiceTo;
         this.user = user;
+        this.classInvoice = classInvoice;
     }
 
     public Long getId() {
@@ -73,12 +80,12 @@ public class UserInvoice implements Serializable {
         this.id = id;
     }
 
-    public Date getDate_created() {
-        return date_created;
+    public Date getInvoice_date() {
+        return invoice_date;
     }
 
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
+    public void setInvoice_date(Date invoice_date) {
+        this.invoice_date = invoice_date;
     }
 
     public Long getInvoice_amount() {
@@ -111,6 +118,15 @@ public class UserInvoice implements Serializable {
 
     public void setUserReceipts(Set<UserReceipt> userReceipts) {
         this.userReceipts = userReceipts;
+    }
+
+    @Nullable
+    public ClassInvoice getClassInvoice() {
+        return classInvoice;
+    }
+
+    public void setClassInvoice(@Nullable ClassInvoice classInvoice) {
+        this.classInvoice = classInvoice;
     }
 
     public enum InvoiceTo {

@@ -83,11 +83,6 @@ public class User implements Serializable {
 
     @JsonView(View.StudentDetails.class)
     @ManyToOne
-    @JoinColumn(name = "admission_id")
-    private Admission admission;
-
-    @JsonView(View.StudentDetails.class)
-    @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
 
@@ -114,7 +109,7 @@ public class User implements Serializable {
 
     public User(String first_name, String middle_name, String last_name,
                 Gender gender, String phoneNumber, String email, Role role,
-                Status status, Admission admission, Course course) {
+                Status status, Course course) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
@@ -123,7 +118,6 @@ public class User implements Serializable {
         this.email = email;
         this.role = role;
         this.status = status;
-        this.admission = admission;
         this.course = course;
     }
 
@@ -241,14 +235,6 @@ public class User implements Serializable {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public Admission getAdmission() {
-        return admission;
-    }
-
-    public void setAdmission(Admission admission) {
-        this.admission = admission;
     }
 
     public Set<Identification> getIdentifications() {

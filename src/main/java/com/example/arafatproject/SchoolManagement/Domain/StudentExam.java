@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.Nullable;
 
 @Entity
 public class StudentExam {
@@ -23,22 +23,20 @@ public class StudentExam {
     @JoinColumn(name="user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "exam_id")
-    private Exam exam;
+    private String name;
 
-    @JsonIgnore
+    @Nullable
     @ManyToOne
-    @JoinColumn(name = "student_class_id")
-    private StudentClass studentClass;
+    @JoinColumn(name = "class_exam_id")
+    private ClassExam classExam;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentExam")
-    private Set<ExamSubjectResult> examSubjectResults = new HashSet<>();
+    private Set<StudentExamResult> studentExamResults = new HashSet<>();
 
-    public StudentExam(User user, Exam exam, StudentClass studentClass) {
+    public StudentExam(User user, ClassExam classExam, String name) {
         this.user = user;
-        this.exam = exam;
-        this.studentClass = studentClass;
+        this.classExam = classExam;
+        this.name = name;
     }
 
     public StudentExam() {
@@ -53,12 +51,13 @@ public class StudentExam {
         this.user = user;
     }
 
-    public Exam getExam() {
-        return exam;
+    @Nullable
+    public ClassExam getClassExam() {
+        return classExam;
     }
 
-    public void setExam(Exam exam) {
-        this.exam = exam;
+    public void setClassExam(@Nullable ClassExam classExam) {
+        this.classExam = classExam;
     }
 
     public Long getId() {
@@ -69,19 +68,19 @@ public class StudentExam {
         this.id = id;
     }
 
-    public StudentClass getStudentClass() {
-        return studentClass;
+    public Set<StudentExamResult> getStudentExamResults() {
+        return studentExamResults;
     }
 
-    public void setStudentClass(StudentClass studentClass) {
-        this.studentClass = studentClass;
+    public void setStudentExamResults(Set<StudentExamResult> studentExamResults) {
+        this.studentExamResults = studentExamResults;
     }
 
-    public Set<ExamSubjectResult> getExamSubjectResults() {
-        return examSubjectResults;
+    public String getName() {
+        return name;
     }
 
-    public void setExamSubjectResults(Set<ExamSubjectResult> examSubjectResults) {
-        this.examSubjectResults = examSubjectResults;
+    public void setName(String name) {
+        this.name = name;
     }
 }

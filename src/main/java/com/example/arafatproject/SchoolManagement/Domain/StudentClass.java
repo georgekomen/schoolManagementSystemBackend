@@ -40,10 +40,6 @@ public class StudentClass implements Serializable {
     @JoinColumn(name = "class_id")
     private _Class class1;
 
-    @JsonView(View.UserDetails.class)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentClass")
-    private Set<StudentExam> studentExams = new HashSet<>();
-
 
     public StudentClass(User user, Date date_joined, _Class class1) {
         this.user = user;
@@ -84,13 +80,5 @@ public class StudentClass implements Serializable {
 
     public void setClass1(_Class class1) {
         this.class1 = class1;
-    }
-
-    public Set<StudentExam> getStudentExams() {
-        return studentExams;
-    }
-
-    public void setStudentExams(Set<StudentExam> studentExams) {
-        this.studentExams = studentExams;
     }
 }

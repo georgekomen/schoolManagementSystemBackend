@@ -2,9 +2,9 @@ package com.example.arafatproject.SchoolManagement.Service;
 
 import java.util.List;
 
-import com.example.arafatproject.SchoolManagement.Domain.Exam;
-import com.example.arafatproject.SchoolManagement.Domain.ExamSubject;
-import com.example.arafatproject.SchoolManagement.Domain.ExamSubjectResult;
+import com.example.arafatproject.SchoolManagement.Domain.ClassExam;
+import com.example.arafatproject.SchoolManagement.Domain.ClassSubject;
+import com.example.arafatproject.SchoolManagement.Domain.StudentExamResult;
 import com.example.arafatproject.SchoolManagement.Domain.StudentExam;
 import com.example.arafatproject.SchoolManagement.Repository.ExamRepository;
 import com.example.arafatproject.SchoolManagement.Repository.ExamSubjectRepository;
@@ -30,46 +30,46 @@ public class ExamServiceImpl implements ExamService {
     private StudentExamRepository studentExamRepository;
 
     @Override
-    public Exam newExam(Exam exam) {
-        Exam exam1 = new Exam(exam.getCourse(), exam.getSchool(), exam.getSitting_date());
+    public ClassExam newExam(ClassExam classExam) {
+        ClassExam classExam1 = new ClassExam(classExam.getClass1(), classExam.getSitting_date(), classExam.getName());
 
-        return examRepository.save(exam1);
+        return examRepository.save(classExam1);
     }
 
     @Override
-    public ExamSubject newExamSubject(ExamSubject examSubject) {
-        ExamSubject examSubject1 = new ExamSubject(examSubject.getName(), examSubject.getPass_mark(),
-                examSubject.getExam());
+    public ClassSubject newExamSubject(ClassSubject classSubject) {
+        ClassSubject classSubject1 = new ClassSubject(classSubject.getSubject(), classSubject.getClass1());
 
-        return examSubjectRepository.save(examSubject1);
+        return examSubjectRepository.save(classSubject1);
     }
 
     @Override
-    public ExamSubjectResult newExamSubjectResult(ExamSubjectResult examSubjectResult) {
-        ExamSubjectResult examSubjectResult1 = new ExamSubjectResult(examSubjectResult.getExamSubject(),
-                examSubjectResult.getUser(), examSubjectResult.getResult_mark(), examSubjectResult.getStudentExam());
+    public StudentExamResult newExamSubjectResult(StudentExamResult studentExamResult) {
+        StudentExamResult studentExamResult1 = new StudentExamResult(studentExamResult.getSubject(), studentExamResult.getUser(),
+                studentExamResult.getResult_mark(), studentExamResult.getStudentExam());
 
-        return subjectExamResultsRepository.save(examSubjectResult1);
+        return subjectExamResultsRepository.save(studentExamResult1);
     }
 
     @Override
-    public List<Exam> getExams(Pageable pageable) {
+    public List<ClassExam> getExams(Pageable pageable) {
         return examRepository.findAll(pageable).getContent();
     }
 
     @Override
-    public List<ExamSubject> getExamsSubjects(Pageable pageable) {
+    public List<ClassSubject> getExamsSubjects(Pageable pageable) {
         return examSubjectRepository.findAll(pageable).getContent();
     }
 
     @Override
-    public List<ExamSubjectResult> getExamResults(Pageable pageable) {
+    public List<StudentExamResult> getExamResults(Pageable pageable) {
         return subjectExamResultsRepository.findAll(pageable).getContent();
     }
 
     @Override
     public StudentExam newStudentExam(StudentExam studentExam) {
-        StudentExam studentExam1 = new StudentExam(studentExam.getUser(), studentExam.getExam(), studentExam.getStudentClass());
+        StudentExam studentExam1 = new StudentExam(studentExam.getUser(), studentExam.getClassExam(), studentExam.getName());
+
         return studentExamRepository.save(studentExam1);
     }
 

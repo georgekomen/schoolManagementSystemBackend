@@ -2,9 +2,9 @@ package com.example.arafatproject.SchoolManagement.Controller;
 
 import java.util.List;
 
-import com.example.arafatproject.SchoolManagement.Domain.Exam;
-import com.example.arafatproject.SchoolManagement.Domain.ExamSubject;
-import com.example.arafatproject.SchoolManagement.Domain.ExamSubjectResult;
+import com.example.arafatproject.SchoolManagement.Domain.ClassExam;
+import com.example.arafatproject.SchoolManagement.Domain.ClassSubject;
+import com.example.arafatproject.SchoolManagement.Domain.StudentExamResult;
 import com.example.arafatproject.SchoolManagement.Domain.StudentExam;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class ExamController {
     private ExamService examService;
 
     @RequestMapping(value = "new_exam", method = RequestMethod.POST)
-    public Exam newExam(@RequestBody Exam exam) {
-        return examService.newExam(exam);
+    public ClassExam newExam(@RequestBody ClassExam classExam) {
+        return examService.newExam(classExam);
     }
 
     @RequestMapping(value = "new_student_exam", method = RequestMethod.POST)
@@ -31,27 +31,27 @@ public class ExamController {
     }
 
     @RequestMapping(value = "new_exam_subject", method = RequestMethod.POST)
-    public ExamSubject newExam(@RequestBody ExamSubject examSubject) {
-        return examService.newExamSubject(examSubject);
+    public ClassSubject newExam(@RequestBody ClassSubject classSubject) {
+        return examService.newExamSubject(classSubject);
     }
 
     @RequestMapping(value = "new_exam_subject_result", method = RequestMethod.POST)
-    public ExamSubjectResult newExam(@RequestBody ExamSubjectResult examSubjectResult) {
-        return examService.newExamSubjectResult(examSubjectResult);
+    public StudentExamResult newExam(@RequestBody StudentExamResult studentExamResult) {
+        return examService.newExamSubjectResult(studentExamResult);
     }
 
     @RequestMapping(value = "get_exams", method = RequestMethod.GET)
-    public List<Exam> getExams(Pageable pageable) {
+    public List<ClassExam> getExams(Pageable pageable) {
         return examService.getExams(pageable);
     }
 
     @RequestMapping(value = "get_exam_subjects", method = RequestMethod.GET)
-    public List<ExamSubject> getExamsSubjects(Pageable pageable) {
+    public List<ClassSubject> getExamsSubjects(Pageable pageable) {
         return examService.getExamsSubjects(pageable);
     }
 
     @RequestMapping(value = "get_exam_subjects_results", method = RequestMethod.GET)
-    public List<ExamSubjectResult> getExamResults(Pageable pageable) {
+    public List<StudentExamResult> getExamResults(Pageable pageable) {
         return examService.getExamResults(pageable);
     }
 

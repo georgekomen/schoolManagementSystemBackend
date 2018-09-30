@@ -92,7 +92,7 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public _Class newClass(_Class class1) {
         _Class class2 = new _Class(class1.getSchool(), class1.getCourse(), class1.getEnd_date(),
-                class1.getTerm(), class1.getName(), class1.getStart_date());
+                class1.getTerm(), class1.getName(), class1.getStart_date(), class1.getAdmission());
 
         _Class class3 = classRepository.save(class2);
 

@@ -27,7 +27,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public UserInvoice newInvoice(UserInvoice userInvoice) {
         UserInvoice userInvoice1 = new UserInvoice(userInvoice.getInvoice_amount(),
-                userInvoice.getInvoiceTo(), userInvoice.getUser());
+                userInvoice.getInvoiceTo(), userInvoice.getUser(), userInvoice.getClassInvoice());
 
         return userInvoiceRepository.save(userInvoice1);
     }

@@ -2,24 +2,24 @@ package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
 import java.util.List;
 
-import com.example.arafatproject.SchoolManagement.Domain.Exam;
-import com.example.arafatproject.SchoolManagement.Domain.ExamSubject;
-import com.example.arafatproject.SchoolManagement.Domain.ExamSubjectResult;
+import com.example.arafatproject.SchoolManagement.Domain.ClassExam;
+import com.example.arafatproject.SchoolManagement.Domain.ClassSubject;
+import com.example.arafatproject.SchoolManagement.Domain.StudentExamResult;
 import com.example.arafatproject.SchoolManagement.Domain.StudentExam;
 import org.springframework.data.domain.Pageable;
 
 public interface ExamService {
-    Exam newExam(Exam exam);
+    ClassExam newExam(ClassExam classExam);
 
-    ExamSubject newExamSubject(ExamSubject examSubject);
+    ClassSubject newExamSubject(ClassSubject classSubject);
 
-    ExamSubjectResult newExamSubjectResult(ExamSubjectResult examSubjectResult);
+    StudentExamResult newExamSubjectResult(StudentExamResult studentExamResult);
 
-    List<Exam> getExams(Pageable pageable);
+    List<ClassExam> getExams(Pageable pageable);
 
-    List<ExamSubject> getExamsSubjects(Pageable pageable);
+    List<ClassSubject> getExamsSubjects(Pageable pageable);
 
-    List<ExamSubjectResult> getExamResults(Pageable pageable);
+    List<StudentExamResult> getExamResults(Pageable pageable);
 
     StudentExam newStudentExam(StudentExam studentExam);
 

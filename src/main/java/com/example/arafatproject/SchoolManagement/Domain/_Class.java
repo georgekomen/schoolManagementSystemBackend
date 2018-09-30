@@ -43,11 +43,9 @@ public class _Class implements Serializable {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(columnDefinition = "DATETIME", nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date date_created;
+    @ManyToOne
+    @JoinColumn(name="admission_id")
+    private Admission admission;
 
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -60,18 +58,26 @@ public class _Class implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
     private Set<ClassInvoice> classInvoices = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
+    private Set<ClassSubject> classSubjects = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
+    private Set<ClassExam> classExams = new HashSet<>();
+
+
     public _Class() {
 
     }
 
     public _Class(School school, Course course,
-                  Date end_date, Term term, String name, Date start_date) {
+                  Date end_date, Term term, String name, Date start_date, Admission admission) {
         this.school = school;
         this.course = course;
         this.end_date = end_date;
         this.term = term;
         this.name = name;
         this.start_date = start_date;
+        this.admission = admission;
     }
 
     public Long getId() {
@@ -96,14 +102,6 @@ public class _Class implements Serializable {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public Date getDate_created() {
-        return date_created;
-    }
-
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
     }
 
     public Date getEnd_date() {
@@ -144,6 +142,30 @@ public class _Class implements Serializable {
 
     public void setStart_date(Date start_date) {
         this.start_date = start_date;
+    }
+
+    public Set<ClassSubject> getClassSubjects() {
+        return classSubjects;
+    }
+
+    public void setClassSubjects(Set<ClassSubject> classSubjects) {
+        this.classSubjects = classSubjects;
+    }
+
+    public Set<ClassExam> getClassExams() {
+        return classExams;
+    }
+
+    public void setClassExams(Set<ClassExam> classExams) {
+        this.classExams = classExams;
+    }
+
+    public Admission getAdmission() {
+        return admission;
+    }
+
+    public void setAdmission(Admission admission) {
+        this.admission = admission;
     }
 
     public enum Term {

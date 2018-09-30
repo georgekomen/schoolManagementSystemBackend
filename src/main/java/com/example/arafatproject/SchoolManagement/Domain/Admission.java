@@ -27,12 +27,6 @@ public class Admission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(columnDefinition = "DATETIME", nullable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date date_created;
-
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date admission_date;
@@ -50,14 +44,6 @@ public class Admission {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getDate_created() {
-        return date_created;
-    }
-
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
     }
 
     public Date getAdmission_date() {

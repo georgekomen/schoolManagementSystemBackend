@@ -12,14 +12,14 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class ExamSubjectResult implements Serializable {
+public class StudentExamResult implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "exam_subject_id")
-    private ExamSubject examSubject;
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -32,14 +32,14 @@ public class ExamSubjectResult implements Serializable {
     @JoinColumn(name="student_exam_id")
     private StudentExam studentExam;
 
-    public ExamSubjectResult(ExamSubject examSubject, User user, Long result_mark, StudentExam studentExam) {
-        this.examSubject = examSubject;
+    public StudentExamResult(Subject subject, User user, Long result_mark, StudentExam studentExam) {
+        this.subject = subject;
         this.user = user;
         this.result_mark = result_mark;
         this.studentExam = studentExam;
     }
 
-    public ExamSubjectResult() {
+    public StudentExamResult() {
 
     }
 
@@ -52,14 +52,6 @@ public class ExamSubjectResult implements Serializable {
         this.id = id;
     }
 
-    public ExamSubject getExamSubject() {
-        return examSubject;
-    }
-
-    public void setExamSubject(ExamSubject examSubject) {
-        this.examSubject = examSubject;
-    }
-
     public User getUser() {
         return user;
     }
@@ -68,19 +60,27 @@ public class ExamSubjectResult implements Serializable {
         this.user = user;
     }
 
-    public Long getResult_mark() {
-        return result_mark;
-    }
-
-    public void setResult_mark(Long result_mark) {
-        this.result_mark = result_mark;
-    }
-
     public StudentExam getStudentExam() {
         return studentExam;
     }
 
     public void setStudentExam(StudentExam studentExam) {
         this.studentExam = studentExam;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public Long getResult_mark() {
+        return result_mark;
+    }
+
+    public void setResult_mark(Long result_mark) {
+        this.result_mark = result_mark;
     }
 }

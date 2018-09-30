@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -27,15 +28,18 @@ public class ClassInvoice {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date date_created;
+    private Date invoice_date;
 
     private String name;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;
 
     private Long invoice_amount;
+
+    //..........................
 
     public Long getId() {
         return id;
@@ -71,12 +75,12 @@ public class ClassInvoice {
         this.name = name;
     }
 
-    public Date getDate_created() {
-        return date_created;
+    public Date getInvoice_date() {
+        return invoice_date;
     }
 
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
+    public void setInvoice_date(Date invoice_date) {
+        this.invoice_date = invoice_date;
     }
 
     public Long getInvoice_amount() {

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Subject implements Serializable {
@@ -16,10 +18,23 @@ public class Subject implements Serializable {
 
     private String subjectCode;
 
+    @ManyToOne
+    @JoinColumn(name="school_id")
+    private School school;
 
-    public Subject(String name, String subjectCode) {
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    private _Class class1;
+
+    private Long pass_mark;
+
+
+    public Subject(String name, String subjectCode, School school, _Class class1, Long pass_mark) {
         this.name = name;
         this.subjectCode = subjectCode;
+        this.school = school;
+        this.class1 = class1;
+        this.pass_mark = pass_mark;
     }
 
     public Subject() {
@@ -49,5 +64,29 @@ public class Subject implements Serializable {
 
     public void setSubjectCode(String subjectCode) {
         this.subjectCode = subjectCode;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    public _Class getClass1() {
+        return class1;
+    }
+
+    public void setClass1(_Class class1) {
+        this.class1 = class1;
+    }
+
+    public Long getPass_mark() {
+        return pass_mark;
+    }
+
+    public void setPass_mark(Long pass_mark) {
+        this.pass_mark = pass_mark;
     }
 }
