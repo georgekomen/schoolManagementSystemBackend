@@ -2,9 +2,18 @@ package com.example.arafatproject.SchoolManagement.Domain;
 
 public interface View {
     interface All {
+
     }
 
-    interface UserDetails extends All {
+    interface ExamDetails extends All {
+
+    }
+
+    interface InvoiceDetails extends All {
+
+    }
+
+    interface UserDetails extends InvoiceDetails, ExamDetails {
 
     }
 
