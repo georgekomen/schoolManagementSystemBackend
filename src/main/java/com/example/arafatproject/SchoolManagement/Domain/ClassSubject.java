@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class ClassSubject implements Serializable {
@@ -20,7 +21,7 @@ public class ClassSubject implements Serializable {
     @JoinColumn(name="subject_id")
     private Subject subject;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;

@@ -21,7 +21,6 @@ import javax.persistence.TemporalType;
 
 import com.example.arafatproject.SchoolManagement.Domain.Authentication._Grant;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
@@ -41,6 +40,10 @@ public class User implements Serializable {
     @JsonView(View.UserDetails.class)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @ManyToOne
+    @JoinColumn(name="admission_id")
+    private Admission admission;
 
     @JsonView(View.UserDetails.class)
     @CreatedDate
@@ -105,7 +108,7 @@ public class User implements Serializable {
 
     public User(String first_name, String middle_name, String last_name,
                 Gender gender, String phoneNumber, String email, Role role,
-                Status status) {
+                Status status, Admission admission) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
@@ -114,6 +117,7 @@ public class User implements Serializable {
         this.email = email;
         this.role = role;
         this.status = status;
+        this.admission = admission;
     }
 
     public User(){
@@ -262,6 +266,14 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Admission getAdmission() {
+        return admission;
+    }
+
+    public void setAdmission(Admission admission) {
+        this.admission = admission;
     }
 
     public enum Gender {

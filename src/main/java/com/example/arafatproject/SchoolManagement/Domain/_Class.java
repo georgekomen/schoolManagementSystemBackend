@@ -47,10 +47,6 @@ public class _Class implements Serializable {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @ManyToOne
-    @JoinColumn(name="admission_id")
-    private Admission admission;
-
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date start_date;
@@ -74,14 +70,13 @@ public class _Class implements Serializable {
     }
 
     public _Class(School school, Course course,
-                  Date end_date, Term term, String name, Date start_date, Admission admission) {
+                  Date end_date, Term term, String name, Date start_date) {
         this.school = school;
         this.course = course;
         this.end_date = end_date;
         this.term = term;
         this.name = name;
         this.start_date = start_date;
-        this.admission = admission;
     }
 
     public Long getId() {
@@ -162,14 +157,6 @@ public class _Class implements Serializable {
 
     public void setClassExams(Set<ClassExam> classExams) {
         this.classExams = classExams;
-    }
-
-    public Admission getAdmission() {
-        return admission;
-    }
-
-    public void setAdmission(Admission admission) {
-        this.admission = admission;
     }
 
     public enum Term {

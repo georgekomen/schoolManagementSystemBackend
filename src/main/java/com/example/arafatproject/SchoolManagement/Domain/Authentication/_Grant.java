@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class _Grant implements Serializable {
@@ -24,7 +25,7 @@ public class _Grant implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "permission_id")
     private Permission permission;

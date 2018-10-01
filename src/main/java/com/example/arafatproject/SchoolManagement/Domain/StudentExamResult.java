@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class StudentExamResult implements Serializable {
@@ -27,7 +28,7 @@ public class StudentExamResult implements Serializable {
 
     private Long result_mark;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name="student_exam_id")
     private StudentExam studentExam;
