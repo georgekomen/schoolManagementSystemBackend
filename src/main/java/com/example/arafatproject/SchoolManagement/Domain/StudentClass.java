@@ -27,7 +27,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @EntityListeners({AuditingEntityListener.class})
 public class StudentClass implements Serializable {
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -37,14 +37,14 @@ public class StudentClass implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonView(view.listView.class)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonView(View.UserDetails.class)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date_joined;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;

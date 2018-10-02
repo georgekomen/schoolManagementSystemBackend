@@ -1,0 +1,15 @@
+package com.example.arafatproject.SchoolManagement.Domain;
+
+public interface view {
+    interface All {
+
+    }
+
+    interface listView extends All {
+
+    }
+
+    interface detailsView extends listView {
+
+    }
+}

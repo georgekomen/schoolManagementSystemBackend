@@ -6,14 +6,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.example.arafatproject.SchoolManagement.Domain.view;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 public class Permission implements Serializable {
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(view.listView.class)
     private String name;
 
+    @JsonView(view.listView.class)
     private String description;
 
     public Permission(String name, String description) {

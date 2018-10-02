@@ -2,6 +2,7 @@ package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
@@ -20,4 +21,6 @@ public interface UserService {
     Identification newIdentification(Identification identification);
 
     UserSchools newUserSchool(UserSchools userSchools);
+
+    Optional<User> getUser(Long userId);
 }

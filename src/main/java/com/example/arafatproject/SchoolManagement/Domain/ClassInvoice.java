@@ -15,32 +15,34 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners({AuditingEntityListener.class})
 public class ClassInvoice {
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(view.listView.class)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date invoice_date;
 
+    @JsonView(view.listView.class)
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;
 
     private Long invoice_amount;
-
-    //..........................
 
     public Long getId() {
         return id;

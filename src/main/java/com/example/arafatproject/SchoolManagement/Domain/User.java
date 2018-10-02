@@ -29,7 +29,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @EntityListeners({AuditingEntityListener.class})
 public class User implements Serializable {
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -37,71 +37,72 @@ public class User implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name="admission_id")
     private Admission admission;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date_created;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     private String first_name;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     private String middle_name;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     private String last_name;
 
-    @JsonView(View.EmployeeDetails.class)
+    @JsonView(view.listView.class)
     private String email;
 
-    @JsonView(View.EmployeeDetails.class)
+    @JsonView(view.listView.class)
     private String phoneNumber;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @JsonView(View.EmployeeDetails.class)
+    @JsonView(view.listView.class)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date last_login;
 
-    @JsonView(View.EmployeeDetails.class)
+    @JsonView(view.listView.class)
     private Long login_attempts;
 
-    @JsonView(View.EmployeeDetails.class)
+    @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @JsonView(View.EmployeeDetails.class)
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<_Grant> grants = new HashSet<>();
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<UserSchools> userSchools = new HashSet<>();
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Identification> identifications = new HashSet<>();
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<UserInvoice> userInvoices = new HashSet<>();
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<StudentClass> studentClasses = new HashSet<>();
 

@@ -20,6 +20,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -27,40 +28,47 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @EntityListeners({AuditingEntityListener.class})
 public class _Class implements Serializable {
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
     private Term term;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     private String name;
 
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
 
+    @JsonView(view.listView.class)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date start_date;
 
+    @JsonView(view.listView.class)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date end_date;
 
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
     private Set<ClassInvoice> classInvoices = new HashSet<>();
 
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
     private Set<ClassSubject> classSubjects = new HashSet<>();
 
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
     private Set<ClassExam> classExams = new HashSet<>();
 

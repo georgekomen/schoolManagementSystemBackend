@@ -10,18 +10,22 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.lang.Nullable;
 
 @Entity
 public class StudentSubject implements Serializable{
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name="subject_id")
     private Subject subject;
 
+    @JsonView(view.listView.class)
     @Nullable
     @ManyToOne
     @JoinColumn(name="class_subject_id")

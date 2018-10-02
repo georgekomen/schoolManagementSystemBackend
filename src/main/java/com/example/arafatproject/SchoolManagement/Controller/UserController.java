@@ -2,11 +2,12 @@ package com.example.arafatproject.SchoolManagement.Controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.User;
-import com.example.arafatproject.SchoolManagement.Domain.View;
+import com.example.arafatproject.SchoolManagement.Domain.view;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,17 +46,23 @@ public class UserController {
         return userService.newUserSchool(userSchools);
     }
 
-    @JsonView(View.EmployeeDetails.class)
-    @RequestMapping(value = "new_user", method = RequestMethod.POST)
+    @JsonView(view.detailsView.class)
     public User newUsers(@RequestBody User user) {
         return userService.newUser(user);
     }
 
-    @JsonView(View.EmployeeDetails.class)
+    @JsonView(view.listView.class)
     @RequestMapping(value = "get_users", method = RequestMethod.GET)
     public List<User> getUsers(Pageable pageable) {
         return userService.getUsers(pageable);
     }
+
+    @JsonView(view.detailsView.class)
+    @RequestMapping(value = "get_user/{userId}", method = RequestMethod.GET)
+    public Optional<User> getUser(@PathVariable("userId")Long userId) {
+        return userService.getUser(userId);
+    }
+
 
     public enum ActionType {
         Verify,

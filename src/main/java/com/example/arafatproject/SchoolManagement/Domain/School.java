@@ -2,12 +2,16 @@ package com.example.arafatproject.SchoolManagement.Domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -19,20 +23,24 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @EntityListeners({AuditingEntityListener.class})
 public class School implements Serializable {
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     private String name;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date_registered;
+
+    @JsonView(view.detailsView.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "school")
+    private Set<Course> courses = new HashSet<>();
 
     public School(String name) {
         this.name = name;
@@ -63,5 +71,13 @@ public class School implements Serializable {
 
     public void setDate_registered(Date date_registered) {
         this.date_registered = date_registered;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }

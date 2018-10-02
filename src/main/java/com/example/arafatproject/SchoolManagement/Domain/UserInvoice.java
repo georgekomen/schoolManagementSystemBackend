@@ -30,27 +30,28 @@ import org.springframework.lang.Nullable;
 @Entity
 @EntityListeners({AuditingEntityListener.class})
 public class UserInvoice implements Serializable {
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(view.listView.class)
     @Nullable
     @ManyToOne
     @JoinColumn(name="class_invoice_id")
     private ClassInvoice classInvoice;//general invoice
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date invoice_date;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     private Long invoice_amount;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
     private InvoiceTo invoiceTo;
 
@@ -59,7 +60,7 @@ public class UserInvoice implements Serializable {
     @JoinColumn(name="user_id")
     private User user;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userInvoice")
     private Set<UserReceipt> userReceipts = new HashSet<>();
 

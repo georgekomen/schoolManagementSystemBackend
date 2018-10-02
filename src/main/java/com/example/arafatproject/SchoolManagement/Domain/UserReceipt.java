@@ -15,24 +15,30 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 public class UserReceipt implements Serializable {
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
     private PaymentMode payment_mode;
 
+    @JsonView(view.listView.class)
     @Column(columnDefinition = "DATETIME", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @CreatedDate
     private Date payment_date;
 
+    @JsonView(view.listView.class)
     private Double amount;
 
+    @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
     private PayTo payTo;
 

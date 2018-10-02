@@ -8,24 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 public class Subject implements Serializable {
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(view.listView.class)
     private String name;
 
+    @JsonView(view.listView.class)
     private String subjectCode;
 
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name="school_id")
     private School school;
 
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;
 
+    @JsonView(view.listView.class)
     private Long pass_mark;
 
 

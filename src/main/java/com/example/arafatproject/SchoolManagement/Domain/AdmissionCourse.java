@@ -10,18 +10,21 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class AdmissionCourse implements Serializable {
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name = "admission_id")
     private Admission admission;
 
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;

@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Identification implements Serializable {
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -26,11 +26,11 @@ public class Identification implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
     private IdentificationType type;
 
-    @JsonView(View.UserDetails.class)
+    @JsonView(view.listView.class)
     private String value;
 
     public Identification(User user, IdentificationType type, String value) {

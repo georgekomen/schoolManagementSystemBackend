@@ -11,25 +11,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.lang.Nullable;
 
 @Entity
 public class StudentExam {
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
 
+    @JsonView(view.listView.class)
     private String name;
 
+    @JsonView(view.listView.class)
     @Nullable
     @ManyToOne
     @JoinColumn(name = "class_exam_id")
     private ClassExam classExam;
 
+    @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentExam")
     private Set<StudentExamResult> studentExamResults = new HashSet<>();
 

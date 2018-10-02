@@ -10,18 +10,21 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class ClassSubject implements Serializable {
+    @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name="subject_id")
     private Subject subject;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;

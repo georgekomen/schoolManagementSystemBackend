@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
@@ -142,5 +143,10 @@ public class UserServiceImpl implements UserService {
                 userSchools.getUser(), userSchools.getSchool());
 
         return userSchoolRepository.save(userSchools1);
+    }
+
+    @Override
+    public Optional<User> getUser(Long userId) {
+        return userRepository.findById(userId);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
@@ -34,4 +35,10 @@ public interface SchoolService {
     StudentClass newStudentClass(StudentClass studentClass);
 
     List<StudentClass> getStudentClasses(Pageable pageable);
+
+    Optional<School> getSchool(Long schoolId);
+
+    Optional<Course> getCourse(Long courseId);
+
+    Optional<_Class> getClass1(Long classId);
 }

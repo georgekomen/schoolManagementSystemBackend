@@ -1,6 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
@@ -8,9 +9,12 @@ import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain._Class;
+import com.example.arafatproject.SchoolManagement.Domain.view;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,9 +31,16 @@ public class SchoolController {
         return schoolService.newschool(school);
     }
 
+    @JsonView(view.listView.class)
     @RequestMapping(value = "get_schools", method = RequestMethod.GET)
     public List<School> getSchools(Pageable pageable) {
         return schoolService.getAllSchools(pageable);
+    }
+
+    @JsonView(view.detailsView.class)
+    @RequestMapping(value = "get_school/{schoolId}", method = RequestMethod.GET)
+    public Optional<School> getSchool(@PathVariable("schoolId") Long schoolId) {
+        return schoolService.getSchool(schoolId);
     }
 
     @RequestMapping(value = "new_admission", method = RequestMethod.POST)
@@ -42,11 +53,13 @@ public class SchoolController {
         return schoolService.newAdmissionCourse(admissionCourse);
     }
 
+    @JsonView(view.listView.class)
     @RequestMapping(value = "get_admissions", method = RequestMethod.GET)
     public List<Admission> getAdmissions(Pageable pageable) {
         return schoolService.getAdmissions(pageable);
     }
 
+    @JsonView(view.listView.class)
     @RequestMapping(value = "get_admissions_courses", method = RequestMethod.GET)
     public List<AdmissionCourse> getAdmissionCourses(Pageable pageable) {
         return schoolService.getAdmissionCourses(pageable);
@@ -57,9 +70,16 @@ public class SchoolController {
         return schoolService.newCourse(course);
     }
 
+    @JsonView(view.listView.class)
     @RequestMapping(value = "get_courses", method = RequestMethod.GET)
     public List<Course> getAllCourses(Pageable pageable) {
         return schoolService.getAllCourses(pageable);
+    }
+
+    @JsonView(view.detailsView.class)
+    @RequestMapping(value = "get_course/{courseId}", method = RequestMethod.GET)
+    public Optional<Course> getAllCourses(@PathVariable("courseId")Long courseId) {
+        return schoolService.getCourse(courseId);
     }
 
     @RequestMapping(value = "new_class", method = RequestMethod.POST)
@@ -72,11 +92,19 @@ public class SchoolController {
         return schoolService.newStudentClass(studentClass);
     }
 
+    @JsonView(view.listView.class)
     @RequestMapping(value = "get_classes", method = RequestMethod.GET)
     public List<_Class> getAllClasses(Pageable pageable){
         return schoolService.getAllClasses(pageable);
     }
 
+    @JsonView(view.detailsView.class)
+    @RequestMapping(value = "get_class/{classId}", method = RequestMethod.GET)
+    public Optional<_Class> getClass(@PathVariable("classId")Long classId){
+        return schoolService.getClass1(classId);
+    }
+
+    @JsonView(view.listView.class)
     @RequestMapping(value = "get_student_classes", method = RequestMethod.GET)
     public List<StudentClass> getStudentClasses(Pageable pageable){
         return schoolService.getStudentClasses(pageable);

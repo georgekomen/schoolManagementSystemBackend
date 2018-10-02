@@ -1,6 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
@@ -119,5 +120,20 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public List<StudentClass> getStudentClasses(Pageable pageable) {
         return studentClassRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public Optional<School> getSchool(Long schoolId) {
+        return schoolRepository.findById(schoolId);
+    }
+
+    @Override
+    public Optional<Course> getCourse(Long courseId) {
+        return courseRepository.findById(courseId);
+    }
+
+    @Override
+    public Optional<_Class> getClass1(Long classId) {
+        return classRepository.findById(classId);
     }
 }
