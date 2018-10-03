@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,10 @@ import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.Scho
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import static com.example.arafatproject.SchoolManagement.Specifications.classSpecification.getClassSpecification;
+import static com.example.arafatproject.SchoolManagement.Specifications.courseSpecification.getCourseSpecification;
+import static org.springframework.data.jpa.domain.Specifications.where;
 
 @Service
 public class SchoolServiceImpl implements SchoolService {
@@ -86,8 +91,8 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
-    public List<Course> getAllCourses(Pageable pageable) {
-        return courseRepository.findAll(pageable).getContent();
+    public List<Course> getAllCourses(Pageable pageable, Long schoolId) {
+        return courseRepository.findAll(where(getCourseSpecification(schoolId)), pageable).getContent();
     }
 
     @Override
@@ -106,8 +111,8 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
-    public List<_Class> getAllClasses(Pageable pageable) {
-        return classRepository.findAll(pageable).getContent();
+    public List<_Class> getAllClasses(Pageable pageable, Long courseId, Date start_date) {
+        return classRepository.findAll(where(getClassSpecification(courseId, start_date)), pageable).getContent();
     }
 
     @Override

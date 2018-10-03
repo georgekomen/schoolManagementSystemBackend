@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,11 +27,11 @@ public interface SchoolService {
 
     Course newCourse(Course course);
 
-    List<Course> getAllCourses(Pageable pageable);
+    List<Course> getAllCourses(Pageable pageable, Long schoolId);
 
     _Class newClass(_Class class1);
 
-    List<_Class> getAllClasses(Pageable pageable);
+    List<_Class> getAllClasses(Pageable pageable, Long courseId, Date start_date);
 
     StudentClass newStudentClass(StudentClass studentClass);
 

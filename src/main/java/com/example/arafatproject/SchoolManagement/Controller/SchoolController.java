@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,13 +12,16 @@ import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain._Class;
 import com.example.arafatproject.SchoolManagement.Domain.view;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -72,8 +76,8 @@ public class SchoolController {
 
     @JsonView(view.listView.class)
     @RequestMapping(value = "get_courses", method = RequestMethod.GET)
-    public List<Course> getAllCourses(Pageable pageable) {
-        return schoolService.getAllCourses(pageable);
+    public List<Course> getAllCourses(Pageable pageable, @RequestParam(name="schoolId", required = false)Long schoolId) {
+        return schoolService.getAllCourses(pageable, schoolId);
     }
 
     @JsonView(view.detailsView.class)
@@ -94,8 +98,9 @@ public class SchoolController {
 
     @JsonView(view.listView.class)
     @RequestMapping(value = "get_classes", method = RequestMethod.GET)
-    public List<_Class> getAllClasses(Pageable pageable){
-        return schoolService.getAllClasses(pageable);
+    public List<_Class> getAllClasses(Pageable pageable, @RequestParam(name="courseId", required = false)Long courseId,
+                                      @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")@RequestParam(name="year", required = false)Date start_date){
+        return schoolService.getAllClasses(pageable, courseId, start_date);
     }
 
     @JsonView(view.detailsView.class)
