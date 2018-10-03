@@ -37,7 +37,7 @@ public class ClassInvoice {
     @JsonView(view.listView.class)
     private String name;
 
-    @JsonView(view.listView.class)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;

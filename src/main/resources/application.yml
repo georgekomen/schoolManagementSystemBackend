@@ -2,7 +2,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-     ddl-auto: create
+     ddl-auto: validate
   datasource:
     url:  jdbc:mysql://35.229.104.163:9003/arafatproject
     driverClassName: com.mysql.jdbc.Driver

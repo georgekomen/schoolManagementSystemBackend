@@ -24,7 +24,7 @@ public class ClassSubject implements Serializable {
     @JoinColumn(name="subject_id")
     private Subject subject;
 
-    @JsonView(view.listView.class)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;

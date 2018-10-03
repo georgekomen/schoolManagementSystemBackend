@@ -19,7 +19,7 @@ public class AdmissionCourse implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonView(view.listView.class)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "admission_id")
     private Admission admission;

@@ -22,12 +22,12 @@ public class _Grant implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonView(view.listView.class)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name = "permission_id")
     private Permission permission;
