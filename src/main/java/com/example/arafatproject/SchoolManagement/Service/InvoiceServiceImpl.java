@@ -41,7 +41,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     public UserReceipt newPayment(UserReceipt userReceipt) {
         UserReceipt userReceipt1 = new UserReceipt(userReceipt.getPayment_mode(),
                 userReceipt.getPayment_date(), userReceipt.getAmount(), userReceipt.getPayTo(),
-                userReceipt.getUser(), userReceipt.getUserInvoice());
+                userReceipt.getUserInvoice());
 
         return studentRepository.save(userReceipt1);
     }

@@ -40,11 +40,6 @@ public class _Class implements Serializable {
     @JsonView(view.listView.class)
     private String name;
 
-    @JsonView(view.listView.class)
-    @ManyToOne
-    @JoinColumn(name = "school_id")
-    private School school;
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "course_id")
@@ -77,9 +72,8 @@ public class _Class implements Serializable {
 
     }
 
-    public _Class(School school, Course course,
+    public _Class(Course course,
                   Date end_date, Term term, String name, Date start_date) {
-        this.school = school;
         this.course = course;
         this.end_date = end_date;
         this.term = term;
@@ -93,14 +87,6 @@ public class _Class implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
     }
 
     public Course getCourse() {

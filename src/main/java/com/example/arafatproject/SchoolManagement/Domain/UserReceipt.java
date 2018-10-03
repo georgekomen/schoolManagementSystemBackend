@@ -47,11 +47,6 @@ public class UserReceipt implements Serializable {
     @JoinColumn(name = "invoice_id")
     private UserInvoice userInvoice;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
     public Long getId() {
         return id;
     }
@@ -84,26 +79,16 @@ public class UserReceipt implements Serializable {
         this.amount = amount;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-
     public UserReceipt() {
 
     }
 
-    public UserReceipt(PaymentMode payment_mode, Date payment_date, Double amount, PayTo payTo, User user,
+    public UserReceipt(PaymentMode payment_mode, Date payment_date, Double amount, PayTo payTo,
                        UserInvoice userInvoice) {
         this.payment_mode = payment_mode;
         this.payment_date = payment_date;
         this.amount = amount;
         this.payTo = payTo;
-        this.user = user;
         this.userInvoice = userInvoice;
     }
 
