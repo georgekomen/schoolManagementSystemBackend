@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+// for employees having rights above class
 @Entity
 @EntityListeners({AuditingEntityListener.class})
 public class UserSchools {

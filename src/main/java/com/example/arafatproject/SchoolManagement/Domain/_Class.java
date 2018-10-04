@@ -16,13 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -36,6 +33,10 @@ public class _Class implements Serializable {
     @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
     private Term term;
+
+    @JsonView(view.listView.class)
+    @Enumerated(EnumType.STRING)
+    private ClassStatus status;
 
     @JsonView(view.listView.class)
     private String name;
@@ -73,12 +74,13 @@ public class _Class implements Serializable {
     }
 
     public _Class(Course course,
-                  Date end_date, Term term, String name, Date start_date) {
+                  Date end_date, Term term, String name, Date start_date, ClassStatus status) {
         this.course = course;
         this.end_date = end_date;
         this.term = term;
         this.name = name;
         this.start_date = start_date;
+        this.status = status;
     }
 
     public Long getId() {
@@ -153,7 +155,19 @@ public class _Class implements Serializable {
         this.classExams = classExams;
     }
 
+    public ClassStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ClassStatus status) {
+        this.status = status;
+    }
+
     public enum Term {
         ONE, TWO, THREE
+    }
+
+    public enum ClassStatus {
+        ONGOING, ENDED
     }
 }

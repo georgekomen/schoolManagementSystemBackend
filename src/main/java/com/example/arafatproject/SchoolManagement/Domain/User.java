@@ -84,7 +84,7 @@ public class User implements Serializable {
 
     @JsonView(view.listView.class)
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private UserStatus status;
 
     @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -109,7 +109,7 @@ public class User implements Serializable {
 
     public User(String first_name, String middle_name, String last_name,
                 Gender gender, String phoneNumber, String email, Role role,
-                Status status, Admission admission) {
+                UserStatus status, Admission admission) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
@@ -213,11 +213,11 @@ public class User implements Serializable {
         this.login_attempts = login_attempts;
     }
 
-    public Status getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 
@@ -281,7 +281,7 @@ public class User implements Serializable {
         Male, Female
     }
 
-    public enum Status {
+    public enum UserStatus {
         ACTIVE, INACTIVE
     }
 
