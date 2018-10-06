@@ -14,6 +14,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.User;
+import com.example.arafatproject.SchoolManagement.Domain._Class;
 import com.example.arafatproject.SchoolManagement.Repository.IdentificationRepository;
 import com.example.arafatproject.SchoolManagement.Repository.UserSchoolRepository;
 import com.example.arafatproject.SchoolManagement.Repository.UserRepository;
@@ -30,8 +31,12 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import static com.example.arafatproject.SchoolManagement.Specifications.userSpecification.getUserBySpecification;
+import static org.springframework.data.jpa.domain.Specifications.where;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -126,8 +131,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsers(Pageable pageable) {
-        return userRepository.findAll(pageable).getContent();
+    public List<User> getUsers(Pageable pageable, _Class class1) {
+        return userRepository.findAll(where(getUserBySpecification(class1)), pageable).getContent();
     }
 
     @Override

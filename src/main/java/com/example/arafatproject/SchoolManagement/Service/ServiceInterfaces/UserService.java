@@ -8,6 +8,7 @@ import com.example.arafatproject.SchoolManagement.Controller.UserController;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.User;
+import com.example.arafatproject.SchoolManagement.Domain._Class;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +17,7 @@ public interface UserService {
 
     User newUser(User employeeUser);
 
-    List<User> getUsers(Pageable pageable);
+    List<User> getUsers(Pageable pageable, _Class class1);
 
     Identification newIdentification(Identification identification);
 

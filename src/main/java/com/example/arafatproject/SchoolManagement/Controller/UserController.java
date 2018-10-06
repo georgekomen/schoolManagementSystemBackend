@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.example.arafatproject.SchoolManagement.Domain.Identification;
 import com.example.arafatproject.SchoolManagement.Domain.UserSchools;
 import com.example.arafatproject.SchoolManagement.Domain.User;
+import com.example.arafatproject.SchoolManagement.Domain._Class;
 import com.example.arafatproject.SchoolManagement.Domain.view;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,8 +56,10 @@ public class UserController {
 
     @JsonView(view.listView.class)
     @RequestMapping(value = "get_users", method = RequestMethod.GET)
-    public List<User> getUsers(Pageable pageable) {
-        return userService.getUsers(pageable);
+    public List<User> getUsers(Pageable pageable,
+                               @RequestParam(value = "class", required = false
+                               )_Class class1) {
+        return userService.getUsers(pageable, class1);
     }
 
     @JsonView(view.detailsView.class)
