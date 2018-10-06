@@ -68,6 +68,10 @@ public class _Class implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
     private Set<ClassExam> classExams = new HashSet<>();
 
+    @JsonView(view.detailsView.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "class1")
+    private Set<Stream> streams = new HashSet<>();
+
 
     public _Class() {
 
@@ -161,6 +165,14 @@ public class _Class implements Serializable {
 
     public void setStatus(ClassStatus status) {
         this.status = status;
+    }
+
+    public Set<Stream> getStreams() {
+        return streams;
+    }
+
+    public void setStreams(Set<Stream> streams) {
+        this.streams = streams;
     }
 
     public enum Term {

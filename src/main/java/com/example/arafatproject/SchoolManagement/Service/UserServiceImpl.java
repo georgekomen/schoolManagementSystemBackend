@@ -116,7 +116,7 @@ public class UserServiceImpl implements UserService {
         });
 
         user.getStudentClasses().forEach(cs -> {
-            StudentClass studentClass = new StudentClass(user2, cs.getClass1());
+            StudentClass studentClass = new StudentClass(user2, cs.getClass1(), cs.getStream());
             schoolService.newStudentClass(studentClass);
         });
 
