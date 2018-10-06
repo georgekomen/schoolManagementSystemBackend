@@ -25,23 +25,17 @@ public class Subject implements Serializable {
 
     @JsonView(view.listView.class)
     @ManyToOne
-    @JoinColumn(name="school_id")
-    private School school;
-
-    @JsonView(view.listView.class)
-    @ManyToOne
-    @JoinColumn(name = "class_id")
-    private _Class class1;
+    @JoinColumn(name="course_id")
+    private Course course;
 
     @JsonView(view.listView.class)
     private Long pass_mark;
 
 
-    public Subject(String name, String subjectCode, School school, _Class class1, Long pass_mark) {
+    public Subject(String name, String subjectCode, Course course, Long pass_mark) {
         this.name = name;
         this.subjectCode = subjectCode;
-        this.school = school;
-        this.class1 = class1;
+        this.course = course;
         this.pass_mark = pass_mark;
     }
 
@@ -74,27 +68,19 @@ public class Subject implements Serializable {
         this.subjectCode = subjectCode;
     }
 
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
-    }
-
-    public _Class getClass1() {
-        return class1;
-    }
-
-    public void setClass1(_Class class1) {
-        this.class1 = class1;
-    }
-
     public Long getPass_mark() {
         return pass_mark;
     }
 
     public void setPass_mark(Long pass_mark) {
         this.pass_mark = pass_mark;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

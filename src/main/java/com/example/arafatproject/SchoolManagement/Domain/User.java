@@ -106,6 +106,10 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<StudentClass> studentClasses = new HashSet<>();
 
+    @JsonView(view.detailsView.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<StudentExam> studentExams = new HashSet<>();
+
 
     public User(String first_name, String middle_name, String last_name,
                 Gender gender, String phoneNumber, String email, Role role,
@@ -275,6 +279,14 @@ public class User implements Serializable {
 
     public void setAdmission(Admission admission) {
         this.admission = admission;
+    }
+
+    public Set<StudentExam> getStudentExams() {
+        return studentExams;
+    }
+
+    public void setStudentExams(Set<StudentExam> studentExams) {
+        this.studentExams = studentExams;
     }
 
     public enum Gender {

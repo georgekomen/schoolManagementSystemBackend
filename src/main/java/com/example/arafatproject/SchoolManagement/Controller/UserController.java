@@ -47,7 +47,8 @@ public class UserController {
     }
 
     @JsonView(view.detailsView.class)
-    public User newUsers(@RequestBody User user) {
+    @RequestMapping(value = "new_user", method = RequestMethod.POST)
+    public User newUser(@RequestBody User user) {
         return userService.newUser(user);
     }
 
