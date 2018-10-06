@@ -100,14 +100,7 @@ public class SchoolServiceImpl implements SchoolService {
         _Class class2 = new _Class(class1.getCourse(), class1.getEnd_date(),
                 class1.getTerm(), class1.getName(), class1.getStart_date(), _Class.ClassStatus.ONGOING);
 
-        _Class class3 = classRepository.save(class2);
-
-        class1.getClassInvoices().forEach(ci -> {
-            ci.setClass1(class3);
-            invoiceService.newClassInvoice(ci);
-        });
-
-        return class3;
+        return classRepository.save(class2);
     }
 
     @Override

@@ -108,26 +108,7 @@ public class UserServiceImpl implements UserService {
                 user.getPhoneNumber(), user.getEmail(), user.getRole(),
                 User.UserStatus.ACTIVE, user.getAdmission());
 
-        User user2 = userRepository.save(user1);
-
-        user.getIdentifications().forEach(id -> {
-            Identification identification = new Identification(user2, id.getType(), id.getValue());
-            newIdentification(identification);
-        });
-
-        user.getUserSchools().forEach(sch -> {
-            UserSchools userSchools = new UserSchools(UserSchools.Status.ACTIVE, user2, sch.getSchool());
-            userSchoolRepository.save(userSchools);
-        });
-
-        user.getStudentClasses().forEach(cs -> {
-            StudentClass studentClass = new StudentClass(user2, cs.getClass1(), cs.getStream());
-            schoolService.newStudentClass(studentClass);
-        });
-
-        user.setId(user2.getId());
-
-        return user;
+        return userRepository.save(user1);
     }
 
     @Override
