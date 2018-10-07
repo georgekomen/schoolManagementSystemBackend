@@ -30,10 +30,9 @@ public class StudentExam {
     private String name;
 
     @JsonView(view.listView.class)
-    @Nullable
     @ManyToOne
     @JoinColumn(name = "class_exam_id")
-    private ClassExam classExam;
+    private ClassExam classExam;//general exam, can be null for custom
 
     @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentExam")
@@ -57,12 +56,11 @@ public class StudentExam {
         this.user = user;
     }
 
-    @Nullable
     public ClassExam getClassExam() {
         return classExam;
     }
 
-    public void setClassExam(@Nullable ClassExam classExam) {
+    public void setClassExam(ClassExam classExam) {
         this.classExam = classExam;
     }
 

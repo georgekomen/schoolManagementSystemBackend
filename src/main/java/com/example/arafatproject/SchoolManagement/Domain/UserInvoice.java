@@ -36,7 +36,6 @@ public class UserInvoice implements Serializable {
     private Long id;
 
     @JsonView(view.listView.class)
-    @Nullable
     @ManyToOne
     @JoinColumn(name="class_invoice_id")
     private ClassInvoice classInvoice;//general invoice
@@ -122,12 +121,11 @@ public class UserInvoice implements Serializable {
         this.userReceipts = userReceipts;
     }
 
-    @Nullable
     public ClassInvoice getClassInvoice() {
         return classInvoice;
     }
 
-    public void setClassInvoice(@Nullable ClassInvoice classInvoice) {
+    public void setClassInvoice(ClassInvoice classInvoice) {
         this.classInvoice = classInvoice;
     }
 

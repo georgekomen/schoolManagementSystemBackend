@@ -26,10 +26,9 @@ public class StudentSubject implements Serializable{
     private Subject subject;
 
     @JsonView(view.listView.class)
-    @Nullable
     @ManyToOne
     @JoinColumn(name="class_subject_id")
-    private ClassSubject classSubject;
+    private ClassSubject classSubject;//general class subject, can be null for custom
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
@@ -62,12 +61,11 @@ public class StudentSubject implements Serializable{
         this.subject = subject;
     }
 
-    @Nullable
     public ClassSubject getClassSubject() {
         return classSubject;
     }
 
-    public void setClassSubject(@Nullable ClassSubject classSubject) {
+    public void setClassSubject(ClassSubject classSubject) {
         this.classSubject = classSubject;
     }
 
