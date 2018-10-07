@@ -9,6 +9,7 @@ import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.ClassInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
+import com.example.arafatproject.SchoolManagement.Domain.Stream;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
 import com.example.arafatproject.SchoolManagement.Domain._Class;
@@ -18,6 +19,7 @@ import com.example.arafatproject.SchoolManagement.Repository.ClassInvoiceReposit
 import com.example.arafatproject.SchoolManagement.Repository.CourseRepository;
 import com.example.arafatproject.SchoolManagement.Repository.ClassRepository;
 import com.example.arafatproject.SchoolManagement.Repository.SchoolRepository;
+import com.example.arafatproject.SchoolManagement.Repository.StreamRepository;
 import com.example.arafatproject.SchoolManagement.Repository.StudentClassRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
@@ -54,6 +56,9 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Autowired
     private ClassInvoiceRepository classInvoiceRepository;
+
+    @Autowired
+    private StreamRepository streamRepository;
 
     @Override
     public School newschool(School school) {
@@ -155,5 +160,11 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public Optional<_Class> getClass1(Long classId) {
         return classRepository.findById(classId);
+    }
+
+    @Override
+    public Stream newStream(Stream stream) {
+        Stream stream1 = new Stream(stream.getName(), stream.getClass1());
+        return streamRepository.save(stream1);
     }
 }

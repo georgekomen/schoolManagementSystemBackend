@@ -8,6 +8,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
+import com.example.arafatproject.SchoolManagement.Domain.Stream;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain._Class;
 import com.example.arafatproject.SchoolManagement.Domain.view;
@@ -34,6 +35,12 @@ public class SchoolController {
     public School newSchool(@RequestBody School school) {
         return schoolService.newschool(school);
     }
+
+    @RequestMapping(value = "new_stream", method = RequestMethod.POST)
+    public Stream newStream(@RequestBody Stream stream) {
+        return schoolService.newStream(stream);
+    }
+
 
     @JsonView(view.listView.class)
     @RequestMapping(value = "get_schools", method = RequestMethod.GET)

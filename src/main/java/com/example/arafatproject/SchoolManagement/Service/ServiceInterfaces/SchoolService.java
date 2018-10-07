@@ -8,6 +8,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
+import com.example.arafatproject.SchoolManagement.Domain.Stream;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain._Class;
 import org.springframework.data.domain.Pageable;
@@ -42,4 +43,6 @@ public interface SchoolService {
     Optional<Course> getCourse(Long courseId);
 
     Optional<_Class> getClass1(Long classId);
+
+    Stream newStream(Stream stream);
 }
