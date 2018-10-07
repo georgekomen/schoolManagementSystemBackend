@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
+// TODO - add class teacher
 @Entity
 @EntityListeners({AuditingEntityListener.class})
 public class _Class implements Serializable {

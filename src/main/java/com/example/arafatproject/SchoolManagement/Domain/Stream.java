@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
-
+// TODO - add stream teacher
 @Entity
 public class Stream implements Serializable {
     @JsonView(view.listView.class)
