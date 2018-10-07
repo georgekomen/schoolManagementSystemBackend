@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserSchools newUserSchool(UserSchools userSchools) {
-        UserSchools userSchools1 = new UserSchools(userSchools.getStatus(),
+        UserSchools userSchools1 = new UserSchools(UserSchools.Status.ACTIVE,
                 userSchools.getUser(), userSchools.getSchool());
 
         return userSchoolRepository.save(userSchools1);
