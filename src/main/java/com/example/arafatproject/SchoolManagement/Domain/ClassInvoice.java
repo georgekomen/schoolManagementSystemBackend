@@ -1,6 +1,9 @@
 package com.example.arafatproject.SchoolManagement.Domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -44,6 +48,10 @@ public class ClassInvoice {
 
     @JsonView(view.listView.class)
     private Long invoice_amount;
+
+    @JsonView(view.classToStudentInvoice.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classInvoice")
+    private Set<UserInvoice> userInvoices = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -93,5 +101,13 @@ public class ClassInvoice {
 
     public void setInvoice_amount(Long invoice_amount) {
         this.invoice_amount = invoice_amount;
+    }
+
+    public Set<UserInvoice> getUserInvoices() {
+        return userInvoices;
+    }
+
+    public void setUserInvoices(Set<UserInvoice> userInvoices) {
+        this.userInvoices = userInvoices;
     }
 }

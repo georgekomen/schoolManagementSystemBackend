@@ -65,7 +65,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         ClassInvoice classInvoice2 = classInvoiceRepository.save(classInvoice1);
 
-        //loop through all users in this class and invoice them this
+        // loop through all users in this class and invoice them this
         List<User> userList = userService.getUsers(new PageRequest(1000000, 1000000), classInvoice2.getClass1());
 
         userList.forEach(user -> {

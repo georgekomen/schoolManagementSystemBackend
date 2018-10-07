@@ -6,12 +6,15 @@ import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
+import com.example.arafatproject.SchoolManagement.Domain.ClassInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
+import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
 import com.example.arafatproject.SchoolManagement.Domain._Class;
 import com.example.arafatproject.SchoolManagement.Repository.AdmissionCourseRepository;
 import com.example.arafatproject.SchoolManagement.Repository.AdmissionRepository;
+import com.example.arafatproject.SchoolManagement.Repository.ClassInvoiceRepository;
 import com.example.arafatproject.SchoolManagement.Repository.CourseRepository;
 import com.example.arafatproject.SchoolManagement.Repository.ClassRepository;
 import com.example.arafatproject.SchoolManagement.Repository.SchoolRepository;
@@ -48,6 +51,9 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Autowired
     private InvoiceService invoiceService;
+
+    @Autowired
+    private ClassInvoiceRepository classInvoiceRepository;
 
     @Override
     public School newschool(School school) {
@@ -112,7 +118,21 @@ public class SchoolServiceImpl implements SchoolService {
     public StudentClass newStudentClass(StudentClass studentClass) {
         StudentClass studentClass1 = new StudentClass(studentClass.getUser(),
                 studentClass.getClass1(), studentClass.getStream());
-        return studentClassRepository.save(studentClass1);
+
+        StudentClass studentClass2 = studentClassRepository.save(studentClass1);
+
+        // find invoices for this class and invoice this student
+        studentClass2.getClass1().getClassInvoices().forEach(classInvoice -> {
+            UserInvoice userInvoice = new UserInvoice(
+                    classInvoice.getInvoice_amount(),
+                    UserInvoice.InvoiceTo.SCHOOL_TO_USER,
+                    studentClass2.getUser(),
+                    classInvoice);
+
+            invoiceService.newUserInvoice(userInvoice);
+        });
+
+        return studentClass2;
     }
 
     @Override
