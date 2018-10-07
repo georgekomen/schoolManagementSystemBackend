@@ -36,6 +36,11 @@ public class SchoolController {
         return schoolService.newschool(school);
     }
 
+    @RequestMapping(value = "get_streams", method = RequestMethod.GET)
+    public List<Stream> getStreams(@RequestParam(value = "classId")_Class class1, Pageable pageable) {
+        return schoolService.getStreams(class1, pageable);
+    }
+
     @RequestMapping(value = "new_stream", method = RequestMethod.POST)
     public Stream newStream(@RequestBody Stream stream) {
         return schoolService.newStream(stream);

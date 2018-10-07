@@ -167,4 +167,9 @@ public class SchoolServiceImpl implements SchoolService {
         Stream stream1 = new Stream(stream.getName(), stream.getClass1());
         return streamRepository.save(stream1);
     }
+
+    @Override
+    public List<Stream> getStreams(_Class class1, Pageable pageable) {
+        return streamRepository.findByClass(class1, pageable);
+    }
 }

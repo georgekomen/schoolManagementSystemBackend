@@ -45,4 +45,6 @@ public interface SchoolService {
     Optional<_Class> getClass1(Long classId);
 
     Stream newStream(Stream stream);
+
+    List<Stream> getStreams(_Class class1, Pageable pageable);
 }
