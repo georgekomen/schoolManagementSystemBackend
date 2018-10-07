@@ -38,7 +38,7 @@ public class UserInvoice implements Serializable {
     @JsonView(view.listView.class)
     @ManyToOne
     @JoinColumn(name="class_invoice_id")
-    private ClassInvoice classInvoice;//general invoice
+    private ClassInvoice classInvoice;//general class invoice, can be null for custom
 
     @JsonView(view.listView.class)
     @CreatedDate
