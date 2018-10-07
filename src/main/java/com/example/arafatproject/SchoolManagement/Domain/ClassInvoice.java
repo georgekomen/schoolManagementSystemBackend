@@ -42,6 +42,7 @@ public class ClassInvoice {
     @JoinColumn(name = "class_id")
     private _Class class1;
 
+    @JsonView(view.listView.class)
     private Long invoice_amount;
 
     public Long getId() {

@@ -1,15 +1,19 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.ClassInvoice;
+import com.example.arafatproject.SchoolManagement.Domain.User;
 import com.example.arafatproject.SchoolManagement.Domain.UserInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.UserReceipt;
 import com.example.arafatproject.SchoolManagement.Repository.ClassInvoiceRepository;
 import com.example.arafatproject.SchoolManagement.Repository.UserInvoiceRepository;
 import com.example.arafatproject.SchoolManagement.Repository.StudentPaymentRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
+import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +28,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     private ClassInvoiceRepository classInvoiceRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Override
-    public UserInvoice newInvoice(UserInvoice userInvoice) {
+    public UserInvoice newUserInvoice(UserInvoice userInvoice) {
         UserInvoice userInvoice1 = new UserInvoice(userInvoice.getInvoice_amount(),
                 userInvoice.getInvoiceTo(), userInvoice.getUser(), userInvoice.getClassInvoice());
 
@@ -55,7 +62,22 @@ public class InvoiceServiceImpl implements InvoiceService {
     public ClassInvoice newClassInvoice(ClassInvoice classInvoice) {
         ClassInvoice classInvoice1 = new ClassInvoice(classInvoice.getName(), classInvoice.getClass1(),
                 classInvoice.getInvoice_amount());
-        //TODO - loop through all users in this class and invoice them this
-        return classInvoiceRepository.save(classInvoice1);
+
+        ClassInvoice classInvoice2 = classInvoiceRepository.save(classInvoice1);
+
+        //loop through all users in this class and invoice them this
+        List<User> userList = userService.getUsers(new PageRequest(1000000, 1000000), classInvoice2.getClass1());
+
+        userList.forEach(user -> {
+            UserInvoice userInvoice = new UserInvoice(
+                    classInvoice2.getInvoice_amount(),
+                    UserInvoice.InvoiceTo.SCHOOL_TO_USER,
+                    user,
+                    classInvoice2);
+
+            newUserInvoice(userInvoice);
+        });
+
+        return classInvoice2;
     }
 }

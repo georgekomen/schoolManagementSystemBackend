@@ -8,7 +8,7 @@ import com.example.arafatproject.SchoolManagement.Domain.UserReceipt;
 import org.springframework.data.domain.Pageable;
 
 public interface InvoiceService {
-    UserInvoice newInvoice(UserInvoice userInvoice);
+    UserInvoice newUserInvoice(UserInvoice userInvoice);
 
     List<UserInvoice> getAllInvoices(Pageable pageable);
 
