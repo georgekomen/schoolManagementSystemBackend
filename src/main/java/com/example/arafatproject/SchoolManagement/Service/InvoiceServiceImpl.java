@@ -1,6 +1,5 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.ClassInvoice;
@@ -34,7 +33,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public UserInvoice newUserInvoice(UserInvoice userInvoice) {
         UserInvoice userInvoice1 = new UserInvoice(userInvoice.getInvoice_amount(),
-                userInvoice.getInvoiceTo(), userInvoice.getUser(), userInvoice.getClassInvoice());
+                userInvoice.getInvoiceTo(), userInvoice.getUser(), userInvoice.getClassInvoice(), userInvoice.getName());
 
         return userInvoiceRepository.save(userInvoice1);
     }
@@ -73,7 +72,8 @@ public class InvoiceServiceImpl implements InvoiceService {
                     classInvoice2.getInvoice_amount(),
                     UserInvoice.InvoiceTo.SCHOOL_TO_USER,
                     user,
-                    classInvoice2);
+                    classInvoice2,
+                    classInvoice2.getName());
 
             newUserInvoice(userInvoice);
         });

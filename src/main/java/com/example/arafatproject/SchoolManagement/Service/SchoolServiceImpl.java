@@ -1,6 +1,5 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -129,7 +128,8 @@ public class SchoolServiceImpl implements SchoolService {
                     classInvoice.getInvoice_amount(),
                     UserInvoice.InvoiceTo.SCHOOL_TO_USER,
                     studentClass2.getUser(),
-                    classInvoice);
+                    classInvoice,
+                    classInvoice.getName());
 
             invoiceService.newUserInvoice(userInvoice);
         });

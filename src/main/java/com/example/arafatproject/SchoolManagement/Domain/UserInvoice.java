@@ -20,12 +20,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.lang.Nullable;
 
 @Entity
 @EntityListeners({AuditingEntityListener.class})
@@ -39,6 +37,9 @@ public class UserInvoice implements Serializable {
     @ManyToOne
     @JoinColumn(name="class_invoice_id")
     private ClassInvoice classInvoice;//general class invoice, can be null for custom
+
+    @JsonView(view.listView.class)
+    private String name;
 
     @JsonView(view.listView.class)
     @CreatedDate
@@ -66,11 +67,12 @@ public class UserInvoice implements Serializable {
     public UserInvoice() {
     }
 
-    public UserInvoice(Long invoice_amount, InvoiceTo invoiceTo, User user, ClassInvoice classInvoice) {
+    public UserInvoice(Long invoice_amount, InvoiceTo invoiceTo, User user, ClassInvoice classInvoice, String name) {
         this.invoice_amount = invoice_amount;
         this.invoiceTo = invoiceTo;
         this.user = user;
         this.classInvoice = classInvoice;
+        this.name = name;
     }
 
     public Long getId() {
@@ -127,6 +129,14 @@ public class UserInvoice implements Serializable {
 
     public void setClassInvoice(ClassInvoice classInvoice) {
         this.classInvoice = classInvoice;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public enum InvoiceTo {
