@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -121,8 +122,9 @@ public class SchoolServiceImpl implements SchoolService {
 
         StudentClass studentClass2 = studentClassRepository.save(studentClass1);
 
-        // find invoices for this class and invoice this student
-        studentClass2.getClass1().getClassInvoices().forEach(classInvoice -> {
+        List<ClassInvoice> classInvoiceList = classInvoiceRepository.findByClass(studentClass2.getClass1());
+
+        classInvoiceList.forEach(classInvoice -> {
             UserInvoice userInvoice = new UserInvoice(
                     classInvoice.getInvoice_amount(),
                     UserInvoice.InvoiceTo.SCHOOL_TO_USER,
