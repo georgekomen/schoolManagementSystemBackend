@@ -11,10 +11,13 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.example.arafatproject.SchoolManagement.Domain.Region.Subcounty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
@@ -38,12 +41,22 @@ public class School implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date_registered;
 
+    @JsonView(view.listView.class)
+    @ManyToOne
+    @JoinColumn(name = "subcounty_id")
+    private Subcounty subcounty;
+
+    @JsonView(view.listView.class)
+    private String logoUrl;
+
     @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "school")
     private Set<Course> courses = new HashSet<>();
 
-    public School(String name) {
+    public School(String name, Subcounty subcounty, String logoUrl) {
         this.name = name;
+        this.subcounty = subcounty;
+        this.logoUrl = logoUrl;
     }
 
     public School() {
@@ -79,5 +92,21 @@ public class School implements Serializable {
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    public Subcounty getSubcounty() {
+        return subcounty;
+    }
+
+    public void setSubcounty(Subcounty subcounty) {
+        this.subcounty = subcounty;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

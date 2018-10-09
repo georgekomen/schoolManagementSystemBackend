@@ -62,7 +62,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public School newschool(School school) {
-        School school1 = new School(school.getName());
+        School school1 = new School(school.getName(), subcounty, logoUrl);
         return schoolRepository.save(school1);
     }
 
