@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
+import com.example.arafatproject.SchoolManagement.Domain.Region.SubCounty;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.Stream;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
@@ -55,8 +56,9 @@ public class SchoolController {
 
     @JsonView(view.listView.class)
     @RequestMapping(value = "get_schools", method = RequestMethod.GET)
-    public List<School> getSchools(Pageable pageable) {
-        return schoolService.getAllSchools(pageable);
+    public List<School> getSchools(Pageable pageable,
+                                   @RequestParam(value = "subCounty", required = false)SubCounty subCounty) {
+        return schoolService.getAllSchools(pageable, subCounty);
     }
 
     @JsonView(view.detailsView.class)

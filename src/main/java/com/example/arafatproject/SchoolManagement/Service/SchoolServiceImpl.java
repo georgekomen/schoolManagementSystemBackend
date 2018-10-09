@@ -10,6 +10,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.ClassInvoice;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
+import com.example.arafatproject.SchoolManagement.Domain.Region.SubCounty;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.Stream;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
@@ -81,8 +82,12 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
     @Override
-    public List<School> getAllSchools(Pageable pageable) {
-        return schoolRepository.findAll(pageable).getContent();
+    public List<School> getAllSchools(Pageable pageable, SubCounty subCounty) {
+        if (subCounty == null) {
+            return schoolRepository.findAll(pageable).getContent();
+        } else {
+            return schoolRepository.getBySubcounty(subCounty, pageable);
+        }
     }
 
     @Override

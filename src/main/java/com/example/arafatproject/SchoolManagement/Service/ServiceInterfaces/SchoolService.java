@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.example.arafatproject.SchoolManagement.Domain.Admission;
 import com.example.arafatproject.SchoolManagement.Domain.AdmissionCourse;
 import com.example.arafatproject.SchoolManagement.Domain.Course;
+import com.example.arafatproject.SchoolManagement.Domain.Region.SubCounty;
 import com.example.arafatproject.SchoolManagement.Domain.School;
 import com.example.arafatproject.SchoolManagement.Domain.Stream;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
@@ -18,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface SchoolService {
     School newschool(School school);
 
-    List<School> getAllSchools(Pageable pageable);
+    List<School> getAllSchools(Pageable pageable, SubCounty subCounty);
 
     Admission newAdmission(Admission admission);
 
