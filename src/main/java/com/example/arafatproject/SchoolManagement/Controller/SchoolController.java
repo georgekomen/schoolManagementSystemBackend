@@ -38,8 +38,8 @@ public class SchoolController {
         return schoolService.newschool(school);
     }
 
-    @RequestMapping(value = "upload_school_logo", method = RequestMethod.POST)
-    public Optional<School> uploadSchoolLogo(MultipartFile file, @RequestParam(value = "schoolId")School school) throws IOException {
+    @RequestMapping(value = "upload_school_logo/{schoolId}", method = RequestMethod.POST)
+    public Optional<School> uploadSchoolLogo(MultipartFile file, @PathVariable(value = "schoolId")School school) throws IOException {
         return schoolService.setSchoolLogo(file, school);
     }
 
