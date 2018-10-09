@@ -25,7 +25,7 @@ public class County {
     @JsonView(view.listView.class)
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(view.upTreeView.class)
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;

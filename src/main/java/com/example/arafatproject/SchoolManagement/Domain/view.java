@@ -16,4 +16,8 @@ public interface view {
     interface classToStudentInvoice extends listView {
 
     }
+
+    interface upTreeView extends listView {
+
+    }
 }

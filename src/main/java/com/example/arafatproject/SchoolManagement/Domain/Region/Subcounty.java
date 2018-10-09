@@ -21,7 +21,7 @@ public class Subcounty {
     @JsonView(view.listView.class)
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(view.upTreeView.class)
     @ManyToOne
     @JoinColumn(name = "county_id")
     private County county;
