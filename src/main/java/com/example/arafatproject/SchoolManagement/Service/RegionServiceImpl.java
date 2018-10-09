@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.Optional;
+
 import com.example.arafatproject.SchoolManagement.Domain.Region.Country;
 import com.example.arafatproject.SchoolManagement.Domain.Region.County;
 import com.example.arafatproject.SchoolManagement.Domain.Region.Subcounty;
@@ -37,5 +39,10 @@ public class RegionServiceImpl implements RegionService {
     public Subcounty newSubCounty(Subcounty subcounty) {
         Subcounty subcounty1 = new Subcounty(subcounty.getName(), subcounty.getCounty());
         return subcountyRepository.save(subcounty1);
+    }
+
+    @Override
+    public Optional<Subcounty> getSubcounty(Long subcountyId) {
+        return subcountyRepository.findById(subcountyId);
     }
 }
