@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,6 @@ import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain._Class;
 import com.example.arafatproject.SchoolManagement.Domain.view;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value = "school")
@@ -34,6 +35,11 @@ public class SchoolController {
     @RequestMapping(value = "new_school", method = RequestMethod.POST)
     public School newSchool(@RequestBody School school) {
         return schoolService.newschool(school);
+    }
+
+    @RequestMapping(value = "upload_school_logo", method = RequestMethod.POST)
+    public Optional<School> uploadSchoolLogo(MultipartFile file, @RequestParam(value = "schoolId")School school) throws IOException {
+        return schoolService.setSchoolLogo(file, school);
     }
 
     @RequestMapping(value = "get_streams", method = RequestMethod.GET)

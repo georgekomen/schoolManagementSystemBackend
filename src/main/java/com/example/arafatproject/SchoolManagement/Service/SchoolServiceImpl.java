@@ -1,5 +1,7 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,9 +25,16 @@ import com.example.arafatproject.SchoolManagement.Repository.StreamRepository;
 import com.example.arafatproject.SchoolManagement.Repository.StudentClassRepository;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.InvoiceService;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.SchoolService;
+import com.google.cloud.storage.Acl;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import static com.example.arafatproject.SchoolManagement.Specifications.classSpecification.getClassSpecification;
 import static com.example.arafatproject.SchoolManagement.Specifications.courseSpecification.getCourseSpecification;
@@ -60,9 +69,14 @@ public class SchoolServiceImpl implements SchoolService {
     @Autowired
     private StreamRepository streamRepository;
 
+    @Value("${bucketName}")
+    private String bucketName;
+
+    private Storage storage = StorageOptions.getDefaultInstance().getService();
+
     @Override
     public School newschool(School school) {
-        School school1 = new School(school.getName(), school.getSubcounty(), school.getLogoUrl());
+        School school1 = new School(school.getName(), school.getSubcounty());
         return schoolRepository.save(school1);
     }
 
@@ -171,5 +185,19 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public List<Stream> getStreams(_Class class1, Pageable pageable) {
         return streamRepository.findByClass(class1, pageable);
+    }
+
+    @Override
+    public Optional<School> setSchoolLogo(MultipartFile file, School school) throws IOException {
+        List<Acl> acls = new ArrayList<>();
+        acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
+        Blob blob = storage.create(
+                BlobInfo.newBuilder(bucketName,
+                        school.getId().toString() +
+                                "/logo/").setAcl(acls).build(),
+                file.getInputStream());
+        school.setLogoUrl(blob.getMediaLink());
+        schoolRepository.save(school);
+        return schoolRepository.findById(school.getId());
     }
 }

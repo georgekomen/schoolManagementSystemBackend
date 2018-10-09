@@ -63,11 +63,12 @@ public class UserServiceImpl implements UserService {
             case Enroll:
                 List<Acl> acls = new ArrayList<>();
                 acls.add(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
-                Blob blob =
-                        storage.create(
-                                BlobInfo.newBuilder(bucketName, schoolId.toString() +
+                Blob blob = storage.create(
+                                BlobInfo.newBuilder(bucketName,
+                                        schoolId.toString() +
                                         "/fingerprints/" + user.getId().toString() + "/" +
-                                        fingerType).setAcl(acls).build(), file.getInputStream());
+                                        fingerType).setAcl(acls).build(),
+                                        file.getInputStream());
                 // add to student identifications
                 Identification identification = new Identification(user, fingerType, blob.getMediaLink());
                 identificationRepository.save(identification);

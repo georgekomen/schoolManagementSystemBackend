@@ -53,10 +53,9 @@ public class School implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "school")
     private Set<Course> courses = new HashSet<>();
 
-    public School(String name, Subcounty subcounty, String logoUrl) {
+    public School(String name, Subcounty subcounty) {
         this.name = name;
         this.subcounty = subcounty;
-        this.logoUrl = logoUrl;
     }
 
     public School() {

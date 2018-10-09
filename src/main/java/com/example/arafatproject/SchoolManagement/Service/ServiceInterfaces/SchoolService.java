@@ -1,5 +1,6 @@
 package com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Stream;
 import com.example.arafatproject.SchoolManagement.Domain.StudentClass;
 import com.example.arafatproject.SchoolManagement.Domain._Class;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface SchoolService {
     School newschool(School school);
@@ -47,4 +49,6 @@ public interface SchoolService {
     Stream newStream(Stream stream);
 
     List<Stream> getStreams(_Class class1, Pageable pageable);
+
+    Optional<School> setSchoolLogo(MultipartFile file, School schoolId) throws IOException;
 }
