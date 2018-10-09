@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.example.arafatproject.SchoolManagement.Domain.Region.Subcounty;
+import com.example.arafatproject.SchoolManagement.Domain.Region.SubCounty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedDate;
@@ -43,8 +43,8 @@ public class School implements Serializable {
 
     @JsonView(view.listView.class)
     @ManyToOne
-    @JoinColumn(name = "subcounty_id")
-    private Subcounty subcounty;
+    @JoinColumn(name = "subCounty_id")
+    private SubCounty subCounty;
 
     @JsonView(view.listView.class)
     private String logoUrl;
@@ -53,9 +53,9 @@ public class School implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "school")
     private Set<Course> courses = new HashSet<>();
 
-    public School(String name, Subcounty subcounty) {
+    public School(String name, SubCounty subCounty) {
         this.name = name;
-        this.subcounty = subcounty;
+        this.subCounty = subCounty;
     }
 
     public School() {
@@ -93,12 +93,12 @@ public class School implements Serializable {
         this.courses = courses;
     }
 
-    public Subcounty getSubcounty() {
-        return subcounty;
+    public SubCounty getSubCounty() {
+        return subCounty;
     }
 
-    public void setSubcounty(Subcounty subcounty) {
-        this.subcounty = subcounty;
+    public void setSubCounty(SubCounty subCounty) {
+        this.subCounty = subCounty;
     }
 
     public String getLogoUrl() {

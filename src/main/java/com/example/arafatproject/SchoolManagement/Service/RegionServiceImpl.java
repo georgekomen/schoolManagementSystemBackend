@@ -1,10 +1,11 @@
 package com.example.arafatproject.SchoolManagement.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.arafatproject.SchoolManagement.Domain.Region.Country;
 import com.example.arafatproject.SchoolManagement.Domain.Region.County;
-import com.example.arafatproject.SchoolManagement.Domain.Region.Subcounty;
+import com.example.arafatproject.SchoolManagement.Domain.Region.SubCounty;
 import com.example.arafatproject.SchoolManagement.Repository.Region.CountryRepository;
 import com.example.arafatproject.SchoolManagement.Repository.Region.CountyRepository;
 import com.example.arafatproject.SchoolManagement.Repository.Region.SubcountyRepository;
@@ -36,13 +37,28 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public Subcounty newSubCounty(Subcounty subcounty) {
-        Subcounty subcounty1 = new Subcounty(subcounty.getName(), subcounty.getCounty());
-        return subcountyRepository.save(subcounty1);
+    public SubCounty newSubCounty(SubCounty subCounty) {
+        SubCounty subCounty1 = new SubCounty(subCounty.getName(), subCounty.getCounty());
+        return subcountyRepository.save(subCounty1);
     }
 
     @Override
-    public Optional<Subcounty> getSubcounty(Long subcountyId) {
+    public Optional<SubCounty> getSubCounty(Long subcountyId) {
         return subcountyRepository.findById(subcountyId);
+    }
+
+    @Override
+    public List<County> getCounties(Country country) {
+        return countyRepository.findByCountry(country);
+    }
+
+    @Override
+    public List<SubCounty> getSubCounties(County county) {
+        return subcountyRepository.findByCounty(county);
+    }
+
+    @Override
+    public List<Country> getCountries() {
+        return countryRepository.findAll();
     }
 }

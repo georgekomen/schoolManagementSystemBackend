@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
-public class Subcounty {
+public class SubCounty {
     @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,12 +26,12 @@ public class Subcounty {
     @JoinColumn(name = "county_id")
     private County county;
 
-    public Subcounty(String name, County county) {
+    public SubCounty(String name, County county) {
         this.name = name;
         this.county = county;
     }
 
-    public Subcounty() {
+    public SubCounty() {
 
     }
 

@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.example.arafatproject.SchoolManagement.Domain.view;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -32,7 +31,7 @@ public class County {
 
     @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "county")
-    private Set<Subcounty> subcounties = new HashSet<>();
+    private Set<SubCounty> subCounties = new HashSet<>();
 
 
     public County(String name, Country country) {
@@ -68,11 +67,11 @@ public class County {
         this.country = country;
     }
 
-    public Set<Subcounty> getSubcounties() {
-        return subcounties;
+    public Set<SubCounty> getSubCounties() {
+        return subCounties;
     }
 
-    public void setSubcounties(Set<Subcounty> subcounties) {
-        this.subcounties = subcounties;
+    public void setSubCounties(Set<SubCounty> subCounties) {
+        this.subCounties = subCounties;
     }
 }
