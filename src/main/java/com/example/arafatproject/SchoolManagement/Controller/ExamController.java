@@ -4,14 +4,17 @@ import java.util.List;
 
 import com.example.arafatproject.SchoolManagement.Domain.ClassExam;
 import com.example.arafatproject.SchoolManagement.Domain.ClassSubject;
+import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.StudentExamResult;
 import com.example.arafatproject.SchoolManagement.Domain.StudentExam;
+import com.example.arafatproject.SchoolManagement.Domain.Subject;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -59,4 +62,16 @@ public class ExamController {
     public List<StudentExam> getStudentExams(Pageable pageable) {
         return examService.getStudentExams(pageable);
     }
+
+    @RequestMapping(value = "get_subjects", method = RequestMethod.GET)
+    public List<Subject> getSubjects(Pageable pageable,
+                                     @RequestParam(value = "course", required = false)Course course) {
+        return examService.getSubjects(pageable, course);
+    }
+
+    @RequestMapping(value = "new_subject", method = RequestMethod.POST)
+    public Subject newSubject(@RequestBody Subject subject) {
+        return examService.newSubject(subject);
+    }
+
 }
