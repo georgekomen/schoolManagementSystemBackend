@@ -23,7 +23,7 @@ public class Subject implements Serializable {
     @JsonView(view.listView.class)
     private String subjectCode;
 
-    @JsonView(view.listView.class)
+    @JsonView(view.upTreeView.class)
     @ManyToOne
     @JoinColumn(name="course_id")
     private Course course;

@@ -25,7 +25,7 @@ public class Course implements Serializable {
     @JsonView(view.listView.class)
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(view.upTreeView.class)
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
@@ -33,6 +33,10 @@ public class Course implements Serializable {
     @JsonView(view.detailsView.class)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private Set<_Class> classes = new HashSet<>();
+
+    @JsonView(view.detailsView.class)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+    private Set<Subject> subjects = new HashSet<>();
 
     public Course() {
 
@@ -73,5 +77,13 @@ public class Course implements Serializable {
 
     public void setClasses(Set<_Class> classes) {
         this.classes = classes;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 }
