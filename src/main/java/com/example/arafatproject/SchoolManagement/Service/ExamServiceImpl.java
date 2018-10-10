@@ -8,6 +8,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.StudentExamResult;
 import com.example.arafatproject.SchoolManagement.Domain.StudentExam;
 import com.example.arafatproject.SchoolManagement.Domain.Subject;
+import com.example.arafatproject.SchoolManagement.Repository.ClassSubjectRepository;
 import com.example.arafatproject.SchoolManagement.Repository.ExamRepository;
 import com.example.arafatproject.SchoolManagement.Repository.ExamSubjectRepository;
 import com.example.arafatproject.SchoolManagement.Repository.StudentExamRepository;
@@ -34,6 +35,9 @@ public class ExamServiceImpl implements ExamService {
 
     @Autowired
     private SubjectReposiory subjectReposiory;
+
+    @Autowired
+    private ClassSubjectRepository classSubjectRepository;
 
     @Override
     public ClassExam newExam(ClassExam classExam) {
@@ -102,5 +106,13 @@ public class ExamServiceImpl implements ExamService {
             return subjectReposiory.findByCourse(course, pageable);
         }
 
+    }
+
+    @Override
+    public ClassSubject newClassSubject(ClassSubject classSubject) {
+        ClassSubject classSubject1 = new ClassSubject(classSubject.getSubject(),
+                classSubject.getClass1());
+
+        return classSubjectRepository.save(classSubject1);
     }
 }

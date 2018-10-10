@@ -30,4 +30,6 @@ public interface ExamService {
     Subject newSubject(Subject subject);
 
     List<Subject> getSubjects(Pageable pageable, Course course);
+
+    ClassSubject newClassSubject(ClassSubject classSubject);
 }
