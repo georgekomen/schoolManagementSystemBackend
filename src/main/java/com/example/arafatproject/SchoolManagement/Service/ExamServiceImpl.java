@@ -55,7 +55,7 @@ public class ExamServiceImpl implements ExamService {
                 classExam2.getClass1());
 
         userList.forEach(user -> {
-            StudentExam studentExam = new StudentExam(user, classExam2, classExam2.getName());
+            StudentExam studentExam = new StudentExam(user, classExam2, classExam2.getName(), classExam2.getSitting_date());
             newStudentExam(studentExam);
         });
         return classExam2;
@@ -93,7 +93,7 @@ public class ExamServiceImpl implements ExamService {
 
     @Override
     public StudentExam newStudentExam(StudentExam studentExam) {
-        StudentExam studentExam1 = new StudentExam(studentExam.getUser(), studentExam.getClassExam(), studentExam.getName());
+        StudentExam studentExam1 = new StudentExam(studentExam.getUser(), studentExam.getClassExam(), studentExam.getName(), studentExam.getSitting_date());
         StudentExam studentExam2 = studentExamRepository.save(studentExam1);
 
         // get class subjects and add student exam results entries
