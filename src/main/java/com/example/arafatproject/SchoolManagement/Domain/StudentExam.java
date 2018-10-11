@@ -21,6 +21,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 public class StudentExam {
+    // TODO - add class to student exam
     @JsonView(view.listView.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
