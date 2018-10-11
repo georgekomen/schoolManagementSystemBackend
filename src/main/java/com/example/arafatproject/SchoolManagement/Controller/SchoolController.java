@@ -44,6 +44,7 @@ public class SchoolController {
         return schoolService.setSchoolLogo(file, school);
     }
 
+    @JsonView(view.upTreeView.class)
     @RequestMapping(value = "get_streams", method = RequestMethod.GET)
     public List<Stream> getStreams(@RequestParam(value = "classId")_Class class1, Pageable pageable) {
         return schoolService.getStreams(class1, pageable);

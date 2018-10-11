@@ -21,7 +21,7 @@ public class Stream implements Serializable {
     @JsonView(view.listView.class)
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(view.upTreeView.class)
     @ManyToOne
     @JoinColumn(name = "class_id")
     private _Class class1;
