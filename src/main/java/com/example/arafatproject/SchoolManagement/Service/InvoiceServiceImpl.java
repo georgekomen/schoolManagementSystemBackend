@@ -33,7 +33,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public UserInvoice newUserInvoice(UserInvoice userInvoice) {
         UserInvoice userInvoice1 = new UserInvoice(userInvoice.getInvoice_amount(),
-                userInvoice.getInvoiceTo(), userInvoice.getUser(), userInvoice.getClassInvoice(), userInvoice.getName());
+                UserInvoice.InvoiceTo.SCHOOL_TO_USER, userInvoice.getUser(), userInvoice.getClassInvoice(), userInvoice.getName());
 
         return userInvoiceRepository.save(userInvoice1);
     }
