@@ -21,7 +21,7 @@ public class StudentExam {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonView(view.listView.class)
+    @JsonView(view.upTreeView.class)
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;

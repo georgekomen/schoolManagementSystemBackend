@@ -25,9 +25,9 @@ public class ExamController {
     @Autowired
     private ExamService examService;
 
-    @RequestMapping(value = "new_exam", method = RequestMethod.POST)
-    public ClassExam newExam(@RequestBody ClassExam classExam) {
-        return examService.newExam(classExam);
+    @RequestMapping(value = "new_class_exam", method = RequestMethod.POST)
+    public ClassExam newClassExam(@RequestBody ClassExam classExam) {
+        return examService.newClassExam(classExam);
     }
 
     @RequestMapping(value = "new_student_exam", method = RequestMethod.POST)
@@ -41,8 +41,8 @@ public class ExamController {
     }
 
     @RequestMapping(value = "new_exam_subject_result", method = RequestMethod.POST)
-    public StudentExamResult newExam(@RequestBody StudentExamResult studentExamResult) {
-        return examService.newExamSubjectResult(studentExamResult);
+    public StudentExamResult newStudentExamResult(@RequestBody StudentExamResult studentExamResult) {
+        return examService.newStudentExamResult(studentExamResult);
     }
 
     @RequestMapping(value = "get_exams", method = RequestMethod.GET)

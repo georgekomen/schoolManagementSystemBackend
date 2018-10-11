@@ -11,11 +11,11 @@ import com.example.arafatproject.SchoolManagement.Domain.Subject;
 import org.springframework.data.domain.Pageable;
 
 public interface ExamService {
-    ClassExam newExam(ClassExam classExam);
+    ClassExam newClassExam(ClassExam classExam);
 
     ClassSubject newExamSubject(ClassSubject classSubject);
 
-    StudentExamResult newExamSubjectResult(StudentExamResult studentExamResult);
+    StudentExamResult newStudentExamResult(StudentExamResult studentExamResult);
 
     List<ClassExam> getExams(Pageable pageable);
 

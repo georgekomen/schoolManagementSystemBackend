@@ -25,7 +25,7 @@ public class StudentExamResult implements Serializable {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @JsonView(view.listView.class)
+    @JsonView(view.upTreeView.class)
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -33,7 +33,7 @@ public class StudentExamResult implements Serializable {
     @JsonView(view.listView.class)
     private Long result_mark;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonView(view.upTreeView.class)
     @ManyToOne
     @JoinColumn(name="student_exam_id")
     private StudentExam studentExam;

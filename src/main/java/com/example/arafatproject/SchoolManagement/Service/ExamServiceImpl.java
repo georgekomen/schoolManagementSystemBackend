@@ -8,6 +8,7 @@ import com.example.arafatproject.SchoolManagement.Domain.Course;
 import com.example.arafatproject.SchoolManagement.Domain.StudentExamResult;
 import com.example.arafatproject.SchoolManagement.Domain.StudentExam;
 import com.example.arafatproject.SchoolManagement.Domain.Subject;
+import com.example.arafatproject.SchoolManagement.Domain.User;
 import com.example.arafatproject.SchoolManagement.Repository.ClassSubjectRepository;
 import com.example.arafatproject.SchoolManagement.Repository.ExamRepository;
 import com.example.arafatproject.SchoolManagement.Repository.ExamSubjectRepository;
@@ -15,7 +16,9 @@ import com.example.arafatproject.SchoolManagement.Repository.StudentExamReposito
 import com.example.arafatproject.SchoolManagement.Repository.SubjectExamResultsRepository;
 import com.example.arafatproject.SchoolManagement.Repository.SubjectReposiory;
 import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.ExamService;
+import com.example.arafatproject.SchoolManagement.Service.ServiceInterfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -39,11 +42,23 @@ public class ExamServiceImpl implements ExamService {
     @Autowired
     private ClassSubjectRepository classSubjectRepository;
 
-    @Override
-    public ClassExam newExam(ClassExam classExam) {
-        ClassExam classExam1 = new ClassExam(classExam.getClass1(), classExam.getSitting_date(), classExam.getName());
+    @Autowired
+    private UserService userService;
 
-        return examRepository.save(classExam1);
+    @Override
+    public ClassExam newClassExam(ClassExam classExam) {
+        ClassExam classExam1 = new ClassExam(classExam.getClass1(), classExam.getSitting_date(), classExam.getName());
+        ClassExam classExam2 = examRepository.save(classExam1);
+
+        // loop through student in this class and add them a student exam
+        List<User> userList = userService.getUsers(new PageRequest(1000000, 1000000),
+                classExam2.getClass1());
+
+        userList.forEach(user -> {
+            StudentExam studentExam = new StudentExam(user, classExam2, classExam2.getName());
+            newStudentExam(studentExam);
+        });
+        return classExam2;
     }
 
     @Override
@@ -54,7 +69,7 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public StudentExamResult newExamSubjectResult(StudentExamResult studentExamResult) {
+    public StudentExamResult newStudentExamResult(StudentExamResult studentExamResult) {
         StudentExamResult studentExamResult1 = new StudentExamResult(studentExamResult.getSubject(), studentExamResult.getUser(),
                 studentExamResult.getResult_mark(), studentExamResult.getStudentExam());
 
@@ -79,8 +94,17 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public StudentExam newStudentExam(StudentExam studentExam) {
         StudentExam studentExam1 = new StudentExam(studentExam.getUser(), studentExam.getClassExam(), studentExam.getName());
+        StudentExam studentExam2 = studentExamRepository.save(studentExam1);
 
-        return studentExamRepository.save(studentExam1);
+        // get class subjects and add student exam results entries
+        List<ClassSubject> classSubjectList = classSubjectRepository.findByClass(studentExam2.getClassExam().getClass1());
+
+        classSubjectList.forEach(classSubject -> {
+            StudentExamResult studentExamResult = new StudentExamResult(classSubject.getSubject(),
+                    studentExam2.getUser(), null, studentExam2);
+            newStudentExamResult(studentExamResult);
+        });
+        return studentExam2;
     }
 
     @Override
