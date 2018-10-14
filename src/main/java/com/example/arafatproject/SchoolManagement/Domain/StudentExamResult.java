@@ -25,11 +25,6 @@ public class StudentExamResult implements Serializable {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @JsonView(view.upTreeView.class)
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @JsonView(view.listView.class)
     private Long result_mark;
 
@@ -38,9 +33,8 @@ public class StudentExamResult implements Serializable {
     @JoinColumn(name="student_exam_id")
     private StudentExam studentExam;
 
-    public StudentExamResult(Subject subject, User user, Long result_mark, StudentExam studentExam) {
+    public StudentExamResult(Subject subject, Long result_mark, StudentExam studentExam) {
         this.subject = subject;
-        this.user = user;
         this.result_mark = result_mark;
         this.studentExam = studentExam;
     }
@@ -56,14 +50,6 @@ public class StudentExamResult implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public StudentExam getStudentExam() {

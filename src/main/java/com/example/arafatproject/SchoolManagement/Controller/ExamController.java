@@ -55,11 +55,12 @@ public class ExamController {
         return examService.getExamsSubjects(pageable);
     }
 
-    @RequestMapping(value = "get_exam_subjects_results", method = RequestMethod.GET)
+    @RequestMapping(value = "get_exam_student_results", method = RequestMethod.GET)
     public List<StudentExamResult> getExamResults(Pageable pageable) {
         return examService.getExamResults(pageable);
     }
 
+    @JsonView(view.detailsView.class)
     @RequestMapping(value = "get_student_exams", method = RequestMethod.GET)
     public List<StudentExam> getStudentExams(Pageable pageable) {
         return examService.getStudentExams(pageable);

@@ -70,7 +70,7 @@ public class ExamServiceImpl implements ExamService {
 
     @Override
     public StudentExamResult newStudentExamResult(StudentExamResult studentExamResult) {
-        StudentExamResult studentExamResult1 = new StudentExamResult(studentExamResult.getSubject(), studentExamResult.getUser(),
+        StudentExamResult studentExamResult1 = new StudentExamResult(studentExamResult.getSubject(),
                 studentExamResult.getResult_mark(), studentExamResult.getStudentExam());
 
         return subjectExamResultsRepository.save(studentExamResult1);
@@ -101,7 +101,7 @@ public class ExamServiceImpl implements ExamService {
 
         classSubjectList.forEach(classSubject -> {
             StudentExamResult studentExamResult = new StudentExamResult(classSubject.getSubject(),
-                    studentExam2.getUser(), null, studentExam2);
+                     null, studentExam2);
             newStudentExamResult(studentExamResult);
         });
         return studentExam2;
