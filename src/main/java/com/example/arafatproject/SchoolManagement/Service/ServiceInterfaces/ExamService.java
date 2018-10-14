@@ -25,7 +25,7 @@ public interface ExamService {
 
     StudentExam newStudentExam(StudentExam studentExam);
 
-    List<StudentExam> getStudentExams(Pageable pageable);
+    List<StudentExam> getStudentExams(Pageable pageable, ClassExam classExamId);
 
     Subject newSubject(Subject subject);
 

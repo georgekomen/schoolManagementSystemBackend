@@ -62,8 +62,9 @@ public class ExamController {
 
     @JsonView(view.detailsView.class)
     @RequestMapping(value = "get_student_exams", method = RequestMethod.GET)
-    public List<StudentExam> getStudentExams(Pageable pageable) {
-        return examService.getStudentExams(pageable);
+    public List<StudentExam> getStudentExams(Pageable pageable,
+                                             @RequestParam(value = "classExam", required = false)ClassExam classExam) {
+        return examService.getStudentExams(pageable, classExam);
     }
 
     @JsonView(view.listView.class)

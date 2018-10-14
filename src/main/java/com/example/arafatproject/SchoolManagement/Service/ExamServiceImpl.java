@@ -108,8 +108,12 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public List<StudentExam> getStudentExams(Pageable pageable) {
-        return studentExamRepository.findAll(pageable).getContent();
+    public List<StudentExam> getStudentExams(Pageable pageable, ClassExam classExam) {
+        if (classExam == null) {
+            return studentExamRepository.findAll(pageable).getContent();
+        } else {
+            return studentExamRepository.findByClassExam(classExam, pageable);
+        }
     }
 
     @Override
