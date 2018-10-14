@@ -51,6 +51,17 @@ public class StudentExam {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentExam")
     private Set<StudentExamResult> studentExamResults = new HashSet<>();
 
+    // return data from a function
+    @JsonView(view.detailsView.class)
+    private User user() {
+        User user1 = new User();
+        user1.setId(this.user.getId());
+        user1.setFirst_name(this.user.getFirst_name());
+        user1.setMiddle_name(this.user.getMiddle_name());
+        user1.setLast_name(this.user.getLast_name());
+        return user1;
+    }
+
     public StudentExam(User user, ClassExam classExam, String name, Date sitting_date) {
         this.user = user;
         this.classExam = classExam;
